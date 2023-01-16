@@ -16,12 +16,17 @@ import { CreateZaal } from './components/Admin/Zalen/CreateZaal';
 import { CreatePlanning } from './components/Admin/Planning/CreatePlanning';
 import { PlanningsOverzicht } from './components/Admin/Planning/PlanningsOverzicht';
 import { Plannen } from './components/Admin/Planning/Plannen';
+import StoelReservatie from './components/StoelReservatie/StoelReservatie';
 
 const AppRoutes = [
     {
         
         index: true,
         element: <Home />    
+    },
+    {
+        path: '/stoelreservatie',
+        element: <StoelReservatie/>
     },
     {
         path: '/voorstellingen',
@@ -84,6 +89,7 @@ const AppRoutes = [
         path: '/admin/planning/update',
         element: <Plannen />
     },
+    
 ];
 
 export default AppRoutes;

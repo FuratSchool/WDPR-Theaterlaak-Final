@@ -403,3 +403,6 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+.vscode/launch.json
+.gitignore
+.vscode/tasks.json
