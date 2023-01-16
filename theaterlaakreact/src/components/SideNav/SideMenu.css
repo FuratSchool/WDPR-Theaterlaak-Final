@@ -1,0 +1,9 @@
+﻿.custom-nav {
+    min-height: 400px;
+}
+
+.box-img {
+    width: 100px !important;
+    height: 75px;
+    border-radius: 5px;
+}

@@ -1,0 +1,31 @@
+.card-Reservering {
+    min-height: 353px;
+    height: fit-content;
+    width: fit-content;
+    border-color: #212529;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    .card-Reservering:hover {
+        background-color: #212529;
+        color: white;
+    }
+
+.card__titleText {
+    font-weight: bold;
+    font-size: 2.25rem;
+    line-height: 0.90em;
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.card__bodyText {
+    font-weight: lighter;
+    font-size: 1.5rem;
+}
+
+.modal__prijs {
+    font-size: 2.5em;
+}

@@ -1,0 +1,43 @@
+.linksMenu {
+    box-sizing: border-box;
+}
+
+.userTitel {
+    font-size: 4.5rem;
+    display: inline-block;
+    margin: 0;
+}
+
+.userNavigatie {
+    display: inline-block;
+    font-size: 2.25rem;
+    list-style: none;
+    margin: 0;
+}
+
+    .userNavigatie li {
+        margin: 0;
+    }
+
+.menu {
+    position: relative;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+}
+
+.theaterImage {
+    position: relative;
+    width: 100%;
+}
+
+.click {
+    color: #212529;
+    text-decoration: none;
+}
+
+    .click:hover {
+        color: #212529;
+        text-decoration: underline;
+    }

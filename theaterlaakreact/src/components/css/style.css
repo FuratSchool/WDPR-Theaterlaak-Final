@@ -1,0 +1,67 @@
+﻿.jumbotron-Height {
+    height: 500px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-homepage {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 100;
+}
+
+.darker-card {
+    background-color: rgb(116,110,218,1) !important;
+    color: white;
+}
+
+.btn-custom {
+    border-radius: 25px !important;
+}
+
+.btn-purple {
+    background-color: rgb(116,110,218,1) !important;
+    border-color: rgb(116,110,218,1) !important;
+}
+
+.btn-outline-purple:hover {
+    color: white !important;
+    background-color: rgb(116,110,218,1) !important;
+}
+
+.btn-outline-purple {
+    color: rgb(116,110,218,1) !important;
+    border-color: rgb(116,110,218,1) !important;
+}
+
+
+.btn-grad:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.card-custom {
+    border-radius: 0 !important;
+}
+
+.card-border-gradient {
+    border-style: solid;
+    border-width: 2px;
+    border-image: linear-gradient(to top, rgb(255, 255, 255, 1) 1%, rgb(116,110,218, 1) 50%, rgb(255, 255, 255, 1) 100%) 1 100% 2 / 3px stretch;
+}
+
+.Search-Section {
+    height: 400px;
+    width: 100%;
+    background-color: #f0f0f0;
+}
+
+.calendar {
+    text-align: center;
+    width: 800px;
+    height: 200px;
+    padding-top: 50px;
+}
