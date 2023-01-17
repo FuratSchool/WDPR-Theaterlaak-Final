@@ -7,22 +7,27 @@
             {
                 "StoelId": 1,
                 "StoelNr": 1
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 2,
                 "StoelNr": 2
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 3,
                 "StoelNr": 3
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 4,
                 "StoelNr": 4
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 5,
                 "StoelNr": 5
+                ,"status": "beschikbaar"
             }
         ]
     },
@@ -34,22 +39,27 @@
             {
                 "StoelId": 6,
                 "StoelNr": 1
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 7,
                 "StoelNr": 2
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 8,
                 "StoelNr": 3
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 9,
                 "StoelNr": 4
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 10,
                 "StoelNr": 5
+                ,"status": "beschikbaar"
             }
         ]
     },
@@ -61,58 +71,72 @@
             {
                 "StoelId": 11,
                 "StoelNr": 1
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 12,
                 "StoelNr": 2
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 13,
                 "StoelNr": 3
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 14,
                 "StoelNr": 4
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 15,
                 "StoelNr": 5
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 16,
                 "StoelNr": 6
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 17,
                 "StoelNr": 7
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 18,
                 "StoelNr": 8
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 19,
                 "StoelNr": 9
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 20,
                 "StoelNr": 10
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 21,
                 "StoelNr": 11
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 22,
                 "StoelNr": 12
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 23,
                 "StoelNr": 13
+                ,"status": "beschikbaar"
             },
             {
                 "StoelId": 24,
                 "StoelNr": 14
+                ,"status": "beschikbaar"
             }
 
         ]

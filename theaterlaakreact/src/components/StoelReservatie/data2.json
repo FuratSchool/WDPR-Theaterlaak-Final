@@ -1,0 +1,28 @@
+{
+  "Stoel": [
+    {
+      "StoelId": 1,
+      "StoelNr": 1,
+      "RangNr": 1,
+      "status": "beschikbaar"
+    },
+    {
+      "StoelId": 2,
+      "StoelNr": 2,
+      "RangNr": 1,
+      "status": "beschikbaar"
+    },
+    {
+      "StoelId": 3,
+      "StoelNr": 4,
+      "RangNr": 2,
+      "status": "beschikbaar"
+    },
+    {
+      "StoelId": 4,
+      "StoelNr": 4,
+      "RangNr": 3,
+      "status": "beschikbaar"
+    }
+  ]
+}

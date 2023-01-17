@@ -1,32 +1,11 @@
-import React,{useState} from 'react'
-import {Button, Input} from 'reactstrap'
-import GereserveerdeStoelen from './GereserveerdeStoelen'
+import React from 'react'
 
-
-const Stoel = (props) => {
-  const [isDisabled, setDisabled] = useState(false);
-
-  const handleClick = () =>{
-    setDisabled(true);
-    //remove from stoelenLijst
-    //move to gereserveerdeStoelenLijst
-  }
+const Stoel = () => {
   return (
-    <>
-      <div className="d-inline-flex m-1">
-      <Button
-        color='light' 
-        className='border-dark'
-        onClick={handleClick}
-        disabled={isDisabled}
-        >
-      {props.stoel.StoelNr}<div className='mx-2'></div></Button>
-      </div>
-      
-    
-    </>
+    <div>
+      x
+    </div>
   )
-  
 }
 
 export default Stoel
