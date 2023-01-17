@@ -5,7 +5,7 @@
         "Capaciteit": 5,
         "Stoelen": [
             {
-                "StoelId": 1,
+                "StoelId": 600,
                 "StoelNr": 1
                 ,"status": "beschikbaar"
             },

@@ -7,7 +7,7 @@ import StoelSelectie from "./StoelSelectie";
 const StoelReservatie = () => {
   const [stoelen, setStoelen] = useState(data);
   const [gereserveerdestoelen, setGereserveerdeStoelen] = useState([]);
-  const [mijnstoelen, mijnStoelen] = useState([]);
+
 
   // useEffect(()=>{
   //   gereserveerdestoelen.forEach(element => {
@@ -19,7 +19,12 @@ const StoelReservatie = () => {
   // )
 
   const rangen = stoelen.map((stoel) => (
-    <Rang stoelen={stoelen} onClicksetStoelen={setStoelen}onClickGereseerveerd={setGereserveerdeStoelen} propOne={stoel} />
+    <Rang 
+    stoelen={stoelen} 
+    onClicksetStoelen={setStoelen}
+    onClickSetGereseerveerd={setGereserveerdeStoelen}
+    onClickgereserveerdestoelen={gereserveerdestoelen}
+    propOne={stoel} />
   ));
 
   return (
