@@ -6,7 +6,7 @@ const [knop, setKnop] = useState(false)
 
 const handleOnClick = (e) =>{
   setKnop(!knop)
-  props.onClickSetGereseerveerd(current =>[...current,<Button color="primary"><div className="mx-2"></div>{e}</Button>])
+  props.onClickSetGereseerveerd(current =>[...current,<Button color="primary"><div className="mx-2"></div>stoel: {e} {}</Button>])
 }
 
   return (
@@ -16,9 +16,8 @@ const handleOnClick = (e) =>{
     onClick={()=>handleOnClick(props.stoel.StoelId)}
     action
     >
-    {props.stoel.StoelId}
+    <p>stoel: {props.stoel.StoelId}</p>
     </ListGroupItem>
-    
     </>
   )
 }
