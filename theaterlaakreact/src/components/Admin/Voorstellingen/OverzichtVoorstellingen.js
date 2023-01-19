@@ -1,7 +1,7 @@
 ﻿import React, { Component } from "react";
 import { SideNav } from "../../SideNav/SideNav";
 
-export class OverzichtVoorstelling extends Component {
+export class OverzichtVoorstellingen extends Component {
   constructor(props) {
     super(props);
 

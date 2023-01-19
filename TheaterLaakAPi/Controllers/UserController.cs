@@ -12,49 +12,59 @@ namespace TheaterLaakAPi.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+
         private readonly JwtService _jwtService;
 
-        public UserController(UserManager<IdentityUser> userManager, JwtService jwtService)
+        public UserController(
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            JwtService jwtService
+        )
         {
             _userManager = userManager;
+            _signInManager = signInManager;
             _jwtService = jwtService;
         }
 
-        // POST: api/User
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        [Route("Register")]
+        public async Task<IActionResult> Register(UserRegister userRegister)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var user = new ApplicationUser
+                {
+                    Email = userRegister.Email,
+                    UserName = userRegister.UserName,
+                    PasswordHash = userRegister.Password,
+                };
+                var result = await _userManager.CreateAsync(user, user.PasswordHash);
+                return result.Succeeded ? StatusCode(201) : new BadRequestObjectResult(result);
             }
-
-            var result = await _userManager.CreateAsync(
-                new IdentityUser() { UserName = user.UserName, Email = user.Email },
-                user.Password
-            );
-
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            user.Password = null;
-            return Created("", user);
+            return BadRequest("Bad credentials");
         }
 
-        // GET: api/User/username
-        [HttpGet("{username}")]
-        public async Task<ActionResult<User>> GetUser(string username)
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login(UserLogin userLogin)
         {
-            IdentityUser user = await _userManager.FindByNameAsync(username);
-
-            if (user == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
-            }
+                var result = await _signInManager.PasswordSignInAsync(
+                    userLogin.Email,
+                    userLogin.Password,
+                    false,
+                    false
+                );
 
-            return new User { UserName = user.UserName, Email = user.Email };
+                if (result.Succeeded)
+                {
+                    Console.WriteLine("User Logged in");
+                    return Ok();
+                }
+            }
+            return Unauthorized();
         }
 
         // POST: api/User/BearerToken
