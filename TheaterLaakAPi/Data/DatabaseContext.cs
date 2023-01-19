@@ -22,5 +22,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
         public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; } = default!;
         public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; } = default!;
+        public DbSet<Betaling> Betaling { get; set; } = default!;
+        public DbSet<Succes> Succes { get; set; } = default!;
 
     }

@@ -16,6 +16,27 @@ namespace TheaterLaakAPi.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
 
+            modelBuilder.Entity("Betaling", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("amount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("isBetaald")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("url")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Betaling");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -208,6 +229,20 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Succes", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("reference")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Succes");
+                });
+
             modelBuilder.Entity("TheaterLaakAPi.Models.Voorstelling", b =>
                 {
                     b.Property<int>("Id")
@@ -229,6 +264,9 @@ namespace TheaterLaakAPi.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("prijs")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.ToTable("Voorstelling");
@@ -241,11 +279,9 @@ namespace TheaterLaakAPi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("SoortZaal")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
