@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 //dit wil ik uiteindelijk in de navigatie bar erbij hebben zodat als je op winkelwagen klikt dit opent.
 //verder functioneel uitbreiden met dat tickets ook worden toegevoegd in de winkelwagen etc.etc.
 
 export function Winkelwagen(args) {
-    const [modal, setModal] = useState(false);
+    const [tickets, setTickets] = useState("Uw winkelwagen is leeg.")
 
+    const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
     return (
@@ -15,21 +17,19 @@ export function Winkelwagen(args) {
                 Winkelwagen
       </Button>
             <Modal isOpen={modal} toggle={toggle} {...args}>
-                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+                <ModalHeader toggle={toggle}>Winkelwagen</ModalHeader>
                 <ModalBody>
-                    <p>Tickets in je winkelwagen:</p>
-                    <p>Hans Zimmerman</p>
-                    <p>€0</p>
-                    <Button color="danger" onClick={toggle}>
-                        Verwijder ticket
-          </Button>{' '}
-                    <br />
-                    <h1>totaalprijs: €0</h1>
+                    {tickets}
+                    
+                   
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={toggle}>
+                <Button color="danger" onClick={toggle}>
+                        Verwijder Tickets
+          </Button>
+                    <Link type="button" class='btn-primary' to={"/afrekenen"} onClick={toggle}>
                         Afrekenen
-          </Button>{' '}
+          </Link>
                 </ModalFooter>
             </Modal>
         </div>
