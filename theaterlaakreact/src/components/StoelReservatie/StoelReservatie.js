@@ -5,13 +5,14 @@ import Rang from "./Rang";
 import Datum from './Datum';
 import axios from 'axios';
 
+
 const StoelReservatie = () => {
 
 
   
   const [stoelen, setStoelen] = useState(data);
   const [gereserveerdestoelen, setGereserveerdeStoelen] = useState([]);
-  const [voorstellingDatum, setVoorstellingDarum] = useState([]);
+  const [voorstellingDatum, setVoorstellingDarum] = useState([1,2,3]);
   const [datumSelected, setDatumSelected] = useState(null);
 
   const [apiData, setApiData] =  useState([]);
@@ -26,13 +27,6 @@ const StoelReservatie = () => {
       console.log(err)
     })
   }
-
- 
-
- 
-
-
-  
 
 
 

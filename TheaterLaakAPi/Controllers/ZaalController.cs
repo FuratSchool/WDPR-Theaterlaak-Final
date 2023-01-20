@@ -30,16 +30,15 @@ namespace TheaterLaakAPi.Controllers
                         where vst.VoorstellingId == id
 
                         select new{
-                            voorstellingId = vst.VoorstellingId,
                             zaalnr = zaal.ZaalId,
                             zaalnaam= zaal.Title,
+                            voorstellingId = vst.VoorstellingId,
                             voorstellingnaam= vst.Title,
+                            rangId = rang.RangId,
                             rangNr = rang.RangNr,
+                            stoelid = stoel.StoelId,
                             stoelnr = stoel.StoelNr
                         };
-
-            
-
             return Ok(query);
         }
 

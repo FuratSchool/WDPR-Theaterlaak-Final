@@ -17,6 +17,7 @@ const Rang = (props) => {
      />)
      
 
+
   return (
     <>
       <div className="row my-3">
