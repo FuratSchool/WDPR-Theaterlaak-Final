@@ -17,10 +17,24 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
         protected override void  OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
  
         }
 
-        public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; } = default!;
-        public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; } = default!;
+        public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstellingen { get; set; }
+        public DbSet<TheaterLaakAPi.Models.Zaal> Zalen { get; set; }
+        public DbSet<TheaterLaakAPi.Models.Admin> Admins { get; set; }
+        public DbSet<TheaterLaakAPi.Models.ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<TheaterLaakAPi.Models.Artiest> Artiesten { get; set; }
+        public DbSet<TheaterLaakAPi.Models.Donateur> Donateurs { get; set; }
+        public DbSet<TheaterLaakAPi.Models.Groep> Groepen  { get; set; }
+
+        public DbSet<TheaterLaakAPi.Models.Medewerker> Medewerkers { get; set; }
+        public DbSet<TheaterLaakAPi.Models.Rang> Rangen { get; set; }
+        public DbSet<TheaterLaakAPi.Models.Reservering> Reserveringen { get; set; }
+        public DbSet<TheaterLaakAPi.Models.Stoel> Stoelen { get; set; }
+        
+
+
 
     }
