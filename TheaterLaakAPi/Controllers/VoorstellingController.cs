@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TheaterLaakAPi.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace TheaterLaakAPi.Controllers
 {
@@ -21,26 +20,52 @@ namespace TheaterLaakAPi.Controllers
             _context = context;
         }
 
+
+
+        [HttpGet]
+        [Route("/info/{id}")]
+        public async Task<ActionResult<IEnumerable<Zaal>>> getVoorstellingInfo(int id)
+        {
+            var query = from zaal in _context.Zaal 
+                        from vst in _context.Voorstelling
+                        from rang in _context.Rang
+                        from stoel in _context.Stoel
+                        where zaal.ZaalId == vst.ZaalId
+                        where rang.ZaalId == zaal.ZaalId
+                        where stoel.RangId == rang.RangId
+                        where vst.VoorstellingId == id
+
+                        select new{
+                            voorstellingId = vst.VoorstellingId,
+                            zaalnr = zaal.ZaalId,
+                            zaalnaam= zaal.Title,
+                            voorstellingnaam= vst.Title,
+                            rangNr = rang.RangNr,
+                            stoelnr = stoel.StoelNr
+                        };
+
+            
+            return Ok(query);
+        }
         // GET: api/Voorstelling
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Voorstelling>>> GetVoorstelling()
         {
-            if (_context.Voorstelling == null)
-            {
-                return NotFound();
-            }
+          if (_context.Voorstelling == null)
+          {
+              return NotFound();
+          }
             return await _context.Voorstelling.ToListAsync();
         }
 
         // GET: api/Voorstelling/5
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<Voorstelling>> GetVoorstelling(int id)
         {
-            if (_context.Voorstelling == null)
-            {
-                return NotFound();
-            }
+          if (_context.Voorstelling == null)
+          {
+              return NotFound();
+          }
             var voorstelling = await _context.Voorstelling.FindAsync(id);
 
             if (voorstelling == null)
@@ -56,7 +81,7 @@ namespace TheaterLaakAPi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVoorstelling(int id, Voorstelling voorstelling)
         {
-            if (id != voorstelling.Id)
+            if (id != voorstelling.VoorstellingId)
             {
                 return BadRequest();
             }
@@ -87,18 +112,14 @@ namespace TheaterLaakAPi.Controllers
         [HttpPost]
         public async Task<ActionResult<Voorstelling>> PostVoorstelling(Voorstelling voorstelling)
         {
-            if (_context.Voorstelling == null)
-            {
-                return Problem("Entity set 'DBContext.Voorstelling'  is null.");
-            }
+          if (_context.Voorstelling == null)
+          {
+              return Problem("Entity set 'DatabaseContext.Voorstelling'  is null.");
+          }
             _context.Voorstelling.Add(voorstelling);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(
-                nameof(GetVoorstelling),
-                new { id = voorstelling.Id },
-                voorstelling
-            );
+            return CreatedAtAction("GetVoorstelling", new { id = voorstelling.VoorstellingId }, voorstelling);
         }
 
         // DELETE: api/Voorstelling/5
@@ -123,7 +144,7 @@ namespace TheaterLaakAPi.Controllers
 
         private bool VoorstellingExists(int id)
         {
-            return (_context.Voorstelling?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Voorstelling?.Any(e => e.VoorstellingId == id)).GetValueOrDefault();
         }
     }
 }
