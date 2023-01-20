@@ -1,14 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { Button, CloseButton } from "reactstrap";
+import { Button, CloseButton, ButtonGroup } from "reactstrap";
 import data from "./data.json";
 import Rang from "./Rang";
 import Datum from './Datum';
+import axios from 'axios';
 
 const StoelReservatie = () => {
+
+
   
   const [stoelen, setStoelen] = useState(data);
   const [gereserveerdestoelen, setGereserveerdeStoelen] = useState([]);
-  const [voorstellingDatum, setVoorstellingDarum] = useState(data);
+  const [voorstellingDatum, setVoorstellingDarum] = useState([]);
+  const [datumSelected, setDatumSelected] = useState(null);
+
+  const [apiData, setApiData] =  useState([]);
+
+  const getVoorstelling = () =>{
+    axios.get('http://localhost:5044/api/Voorstelling/1')
+    .then(res => {
+      console.log(res.data)
+      setApiData(res.data.content)
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  }
+
+ 
+
+ 
+
+
+  
+
+
 
   const resetStoelLists = () => {
     window.location.reload(false);
@@ -17,8 +43,9 @@ const StoelReservatie = () => {
 
 
 
-  const rangen = stoelen.map((stoel) => (
+  const rangen = stoelen.map((stoel, index) => (
     <Rang
+      key={index}
       stoelen={stoelen}
       onClicksetStoelen={setStoelen}
       onClickSetGereseerveerd={setGereserveerdeStoelen}
@@ -27,15 +54,29 @@ const StoelReservatie = () => {
     />
   ));
 
+  const datums = voorstellingDatum.map((item, index) =>(
+  <Datum
+  key={index}
+  datum={item} 
+  datumSelected={datumSelected} 
+  setDatumSelected={setDatumSelected}
+
+  />))
+
 
   return (
     <>
+    <button onClick={()=>getVoorstelling()}>get data</button>
+    <p>{apiData}</p>
+    
       <div className="container">
         <div className="row justify-content-center ">
           <div className="col-6">{rangen}</div>
           <div className="col">
             <div className="row sticky-top mt-5">
-              <div><Datum/></div>
+              <ButtonGroup>
+              {datums}
+              </ButtonGroup>
               <p>Mijn Gereserveerde stoelen:</p>
               <div className="row justify-content-end">
                 <div className="col d-inline-flex flex-wrap my-2 gap-2">

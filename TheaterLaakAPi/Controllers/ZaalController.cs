@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TheaterLaakAPi.Models;
@@ -21,45 +16,63 @@ namespace TheaterLaakAPi.Controllers
         }
 
         // GET: api/Zaal
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Zaal>>> GetZaal()
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<Zaal>>> GetZaal(int id)
         {
-          if (_context.Zaal == null)
-          {
-              return NotFound();
-          }
-            return await _context.Zaal.ToListAsync();
+
+            var query = from zaal in _context.Zaal 
+                        from vst in _context.Voorstelling
+                        from rang in _context.Rang
+                        from stoel in _context.Stoel
+                        where zaal.ZaalId == vst.ZaalId
+                        where rang.ZaalId == zaal.ZaalId
+                        where stoel.RangId == rang.RangId
+                        where vst.VoorstellingId == id
+
+                        select new{
+                            voorstellingId = vst.VoorstellingId,
+                            zaalnr = zaal.ZaalId,
+                            zaalnaam= zaal.Title,
+                            voorstellingnaam= vst.Title,
+                            rangNr = rang.RangNr,
+                            stoelnr = stoel.StoelNr
+                        };
+
+            
+
+            return Ok(query);
         }
+
 
         // GET: api/Zaal/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Zaal>> GetZaal(int id)
-        {
-          if (_context.Zaal == null)
-          {
-              return NotFound();
-          }
-            var Zaal = await _context.Zaal.FindAsync(id);
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<Zaal>> GetZaal(int id)
+        // {
+        //     if (_context.Zaal == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     var zaal = await _context.Zaal.FindAsync(id);
 
-            if (Zaal == null)
-            {
-                return NotFound();
-            }
+        //     if (zaal == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-            return Zaal;
-        }
+        //     return zaal;
+        // }
 
         // PUT: api/Zaal/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutZaal(int id, Zaal Zaal)
+        public async Task<IActionResult> PutZaal(int id, Zaal zaal)
         {
-            if (id != Zaal.Id)
+            if (id != zaal.ZaalId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(Zaal).State = EntityState.Modified;
+            _context.Entry(zaal).State = EntityState.Modified;
 
             try
             {
@@ -83,16 +96,16 @@ namespace TheaterLaakAPi.Controllers
         // POST: api/Zaal
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Zaal>> PostZaal(Zaal Zaal)
+        public async Task<ActionResult<Zaal>> PostZaal(Zaal zaal)
         {
-          if (_context.Zaal == null)
-          {
-              return Problem("Entity set 'DBContext.Zaal'  is null.");
-          }
-            _context.Zaal.Add(Zaal);
+            if (_context.Zaal == null)
+            {
+                return Problem("Entity set 'DatabaseContext.Zaal'  is null.");
+            }
+            _context.Zaal.Add(zaal);
             await _context.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetZaal), new { id = Zaal.Id }, Zaal);
+            return CreatedAtAction("GetZaal", new { id = zaal.ZaalId }, zaal);
         }
 
         // DELETE: api/Zaal/5
@@ -103,13 +116,13 @@ namespace TheaterLaakAPi.Controllers
             {
                 return NotFound();
             }
-            var Zaal = await _context.Zaal.FindAsync(id);
-            if (Zaal == null)
+            var zaal = await _context.Zaal.FindAsync(id);
+            if (zaal == null)
             {
                 return NotFound();
             }
 
-            _context.Zaal.Remove(Zaal);
+            _context.Zaal.Remove(zaal);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -117,7 +130,7 @@ namespace TheaterLaakAPi.Controllers
 
         private bool ZaalExists(int id)
         {
-            return (_context.Zaal?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Zaal?.Any(e => e.ZaalId == id)).GetValueOrDefault();
         }
     }
 }

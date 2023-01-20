@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import { Button, ButtonGroup } from "reactstrap";
+import { Button } from "reactstrap";
 
-const Datum = () => {
-  const [rSelected, setRSelected] = useState([]);
-  const alleVoorstellingen= () =>{
-    setRSelected()
+const Datum = (props) => {
+  
+  
 
-  }
   return (
     <>
       <Button
+        className="pr-5"
+        key={props.Key}
         color="primary"
         outline
-        onClick={() => alleVoorstellingen()}
-        active={rSelected === 1}
+        onClick={() => props.setDatumSelected(props.datum)}
+        active={props.datumSelected === props.datum}
         >
-      datum xx
+      {props.datum}
       </Button>
     </>
   );

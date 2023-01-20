@@ -7,9 +7,23 @@ using TheaterLaakAPi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using SignalRChat.Hubs;
 
+using SignalRChat.Hubs;
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("http://example.com", //uiteindelijk de azure sites hierbij voegen.
+                                                  "http://www.example2.com") //hier ook.
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyOrigin()
+                                                  .AllowAnyMethod();
+                          });
+});
 
 
 builder.Services.AddSignalR();
@@ -18,6 +32,10 @@ builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
+
+// builder.Services.AddDbContext<DbContext, DatabaseContext>(
+//     opt => opt.UseInMemoryDatabase("Data Source=mydb.db")
+// );
 builder.Services.AddDbContext<DbContext, DatabaseContext>(
     opt => opt.UseSqlite("Data Source=mydb.db")
 );
@@ -85,6 +103,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

@@ -9,8 +9,9 @@ const Rang = (props) => {
   const [item, setItem] = useState(props.propOne);
   const [beschikbareStoelen, setBeschikbareStoelen] = useState(props.propOne.Stoelen);
 
-  const stoelenLijst = beschikbareStoelen.map(s =>
+  const stoelenLijst = beschikbareStoelen.map((s, index) =>
     <Stoel
+    key={index}
      stoel={s}
      onClickSetGereseerveerd={props.onClickSetGereseerveerd}
      />)
