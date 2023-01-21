@@ -23,20 +23,18 @@ public class DatabaseContext : IdentityDbContext<IdentityUser>
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<Rang>()
-        .HasOne(x => x.Zaal)
-        .WithMany(x => x.Rangen);
         
         builder.Entity<Stoel>()
         .HasOne(x => x.Rang)
         .WithMany(x => x.Stoelen);
 
-        builder.Entity<Voorstelling>()
-        .HasOne(x => x.Zaal)
-        .WithMany(x => x.Voorstellingen);
+        builder.Entity<Stoel>()
+        .HasMany(x => x.Reserveringen)
+        .WithMany(x => x.Stoelen)
+        .UsingEntity(j => j.ToTable("Ticket"));
 
 
-        //builder.Seed();
+        builder.Seed();
 
     }
 
