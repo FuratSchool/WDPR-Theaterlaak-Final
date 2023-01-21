@@ -18,7 +18,7 @@ const StoelReservatie = () => {
   const [apiData, setApiData] =  useState([]);
 
   const getVoorstelling = () =>{
-    axios.get('http://localhost:5044/api/Voorstelling/1')
+    axios.get('https://localhost:7202/bestelling/1')
     .then(res => {
       console.log(res.data)
       setApiData(res.data.content)

@@ -16,14 +16,14 @@ public class DatabaseContext : IdentityDbContext<IdentityUser>
 
     public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; }
     public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; }
-    public DbSet<TheaterLaakAPi.Models.Stoel>Stoel { get; set; }
+    public DbSet<TheaterLaakAPi.Models.Stoel> Stoel { get; set; }
     public DbSet<TheaterLaakAPi.Models.Rang> Rang { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        
+
         builder.Entity<Stoel>()
         .HasOne(x => x.Rang)
         .WithMany(x => x.Stoelen);
@@ -33,6 +33,9 @@ public class DatabaseContext : IdentityDbContext<IdentityUser>
         .WithMany(x => x.Stoelen)
         .UsingEntity(j => j.ToTable("Ticket"));
 
+        builder.Entity<Reservering>()
+        .HasOne(x => x.ApplicationUser)
+        .WithMany(x => x.Reserveringen);
 
         builder.Seed();
 

@@ -20,8 +20,8 @@ public static class ModelBuilderExtensions
 
         builder.Entity<Voorstelling>().HasData(
             new Voorstelling { VoorstellingId = 1, Titel = "kat", Tijd = new DateTime(2023, 1, 1), Beschrijving = "miauw", Prijs = 15.00, StartDatum = new DateTime(2023, 1, 1), EindDatum = new DateTime(2023, 1, 1), ZaalId = 1 },
-            new Voorstelling { VoorstellingId = 2, Titel = "kat", Tijd = new DateTime(2023, 1, 1), Beschrijving = "miauw", Prijs = 15.00, StartDatum = new DateTime(2023, 1, 1), EindDatum = new DateTime(2023, 1, 1), ZaalId = 1 },
-            new Voorstelling { VoorstellingId = 3, Titel = "kat", Tijd = new DateTime(2023, 1, 1), Beschrijving = "miauw", Prijs = 15.00, StartDatum = new DateTime(2023, 1, 1), EindDatum = new DateTime(2023, 1, 1), ZaalId = 1 }
+            new Voorstelling { VoorstellingId = 2, Titel = "hond", Tijd = new DateTime(2023, 2, 1), Beschrijving = "woef", Prijs = 15.00, StartDatum = new DateTime(2023, 2, 1), EindDatum = new DateTime(2023, 2, 1), ZaalId = 1 },
+            new Voorstelling { VoorstellingId = 3, Titel = "luipaard", Tijd = new DateTime(2023, 3, 1), Beschrijving = "growl", Prijs = 15.00, StartDatum = new DateTime(2023, 3, 1), EindDatum = new DateTime(2023, 3, 1), ZaalId = 2 }
         );
 
         builder.Entity<Rang>().HasData(
@@ -47,6 +47,20 @@ public static class ModelBuilderExtensions
 
             new Stoel { StoelId = 9, StoelNr = 1, isInvalide = 0, RangId = 5 }
         );
+
+        builder.Entity<Reservering>().HasData(
+        new { ReserveringId = 1, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 1, VoorstellingId = 1 },
+        new { ReserveringId = 2, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 2, VoorstellingId = 1 },
+        new { ReserveringId = 3, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 3, VoorstellingId = 1 },
+        new { ReserveringId = 4, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 2 },
+        new { ReserveringId = 5, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 5, VoorstellingId = 2 }
+        );
+
+
+
+
+
+
 
     }
 

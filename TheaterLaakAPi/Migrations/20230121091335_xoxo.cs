@@ -311,8 +311,8 @@ namespace TheaterLaakAPi.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ReserveringsDatum = table.Column<DateTime>(type: "TEXT", nullable: false),
                     isBetaald = table.Column<int>(type: "INTEGER", nullable: false),
-                    ApplicationUserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ApplicationUserId1 = table.Column<string>(type: "TEXT", nullable: false),
+                    ApplicationUserId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ApplicationUserId1 = table.Column<string>(type: "TEXT", nullable: true),
                     VoorstellingId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -322,8 +322,7 @@ namespace TheaterLaakAPi.Migrations
                         name: "FK_Reservering_AspNetUsers_ApplicationUserId1",
                         column: x => x.ApplicationUserId1,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Reservering_Voorstelling_VoorstellingId",
                         column: x => x.VoorstellingId,
@@ -383,8 +382,20 @@ namespace TheaterLaakAPi.Migrations
                 values: new object[,]
                 {
                     { 1, "miauw", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 15.0, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "kat", 1 },
-                    { 2, "miauw", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 15.0, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "kat", 1 },
-                    { 3, "miauw", new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 15.0, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "kat", 1 }
+                    { 2, "woef", new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 15.0, new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "hond", 1 },
+                    { 3, "growl", new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 15.0, new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "luipaard", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Reservering",
+                columns: new[] { "ReserveringId", "ApplicationUserId", "ApplicationUserId1", "ReserveringsDatum", "VoorstellingId", "isBetaald" },
+                values: new object[,]
+                {
+                    { 1, 1, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0 },
+                    { 2, 2, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 0 },
+                    { 3, 3, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 },
+                    { 4, 4, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 0 },
+                    { 5, 5, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1 }
                 });
 
             migrationBuilder.InsertData(

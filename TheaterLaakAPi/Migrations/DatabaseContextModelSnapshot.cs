@@ -348,11 +348,10 @@ namespace TheaterLaakAPi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ApplicationUserId")
+                    b.Property<int?>("ApplicationUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ApplicationUserId1")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ReserveringsDatum")
@@ -371,6 +370,48 @@ namespace TheaterLaakAPi.Migrations
                     b.HasIndex("VoorstellingId");
 
                     b.ToTable("Reservering");
+
+                    b.HasData(
+                        new
+                        {
+                            ReserveringId = 1,
+                            ApplicationUserId = 1,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 2,
+                            ApplicationUserId = 2,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 3,
+                            ApplicationUserId = 3,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VoorstellingId = 1,
+                            isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 4,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VoorstellingId = 2,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 5,
+                            ApplicationUserId = 5,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VoorstellingId = 2,
+                            isBetaald = 1
+                        });
                 });
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Stoel", b =>
@@ -503,24 +544,24 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             VoorstellingId = 2,
-                            Beschrijving = "miauw",
-                            EindDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Beschrijving = "woef",
+                            EindDatum = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Prijs = 15.0,
-                            StartDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Tijd = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titel = "kat",
+                            StartDatum = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Tijd = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Titel = "hond",
                             ZaalId = 1
                         },
                         new
                         {
                             VoorstellingId = 3,
-                            Beschrijving = "miauw",
-                            EindDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Beschrijving = "growl",
+                            EindDatum = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Prijs = 15.0,
-                            StartDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Tijd = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titel = "kat",
-                            ZaalId = 1
+                            StartDatum = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Tijd = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Titel = "luipaard",
+                            ZaalId = 2
                         });
                 });
 
@@ -676,9 +717,7 @@ namespace TheaterLaakAPi.Migrations
                 {
                     b.HasOne("TheaterLaakAPi.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Reserveringen")
-                        .HasForeignKey("ApplicationUserId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId1");
 
                     b.HasOne("TheaterLaakAPi.Models.Voorstelling", "Voorstelling")
                         .WithMany("Reserveringen")

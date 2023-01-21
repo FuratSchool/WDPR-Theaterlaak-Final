@@ -8,8 +8,9 @@ public class Reservering
 
     public ICollection<Stoel> Stoelen { get; set; }
 
-    public int ApplicationUserId { get; set; }
-    public ApplicationUser ApplicationUser { get; set; }
+    //null gemaakt voor seeding
+    public int? ApplicationUserId { get; set; }
+    public ApplicationUser? ApplicationUser { get; set; }
 
     public int VoorstellingId { get; set; }
     public Voorstelling Voorstelling { get; set; }
