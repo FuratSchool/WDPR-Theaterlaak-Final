@@ -403,3 +403,7 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+TheaterLaakAPi/0backup/controllers/RangController.cs
+TheaterLaakAPi/0backup/controllers/StoelController.cs
+TheaterLaakAPi/0backup/controllers/VoorstellingController.cs
+TheaterLaakAPi/0backup/controllers/ZaalController.cs
