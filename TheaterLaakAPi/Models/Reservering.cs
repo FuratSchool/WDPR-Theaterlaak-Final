@@ -6,7 +6,8 @@ public class Reservering
     public DateTime ReserveringsDatum { get; set; }
     public int isBetaald { get; set; }
 
-    public ICollection<Stoel> Stoelen { get; set; }
+    public int StoelId { get; set; }
+    public Stoel Stoel { get; set; }
 
     public int ApplicationUserId { get; set; }
     public ApplicationUser ApplicationUser { get; set; }

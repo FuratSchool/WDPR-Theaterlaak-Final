@@ -18,15 +18,6 @@ public class DatabaseContext : IdentityDbContext<IdentityUser>
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<Stoel>()
-        .HasOne(x => x.Rang)
-        .WithMany(x => x.Stoelen);
-
-        builder.Entity<Stoel>()
-        .HasMany(x => x.Reserveringen)
-        .WithMany(x => x.Stoelen)
-        .UsingEntity(j => j.ToTable("Ticket"));
-
 
     }
 
