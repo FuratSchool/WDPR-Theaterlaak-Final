@@ -49,11 +49,11 @@ public static class ModelBuilderExtensions
         );
 
         builder.Entity<Reservering>().HasData(
-        new { ReserveringId = 1, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 1, VoorstellingId = 1 },
-        new { ReserveringId = 2, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 2, VoorstellingId = 1 },
-        new { ReserveringId = 3, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 3, VoorstellingId = 1 },
-        new { ReserveringId = 4, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 2 },
-        new { ReserveringId = 5, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 5, VoorstellingId = 2 }
+        new { ReserveringId = 1, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 1, VoorstellingId = 1, StoelId = 1 },
+        new { ReserveringId = 2, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 2, VoorstellingId = 1, StoelId = 2 },
+        new { ReserveringId = 3, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 3, VoorstellingId = 1, StoelId = 3 },
+        new { ReserveringId = 4, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 2, StoelId = 1 },
+        new { ReserveringId = 5, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 5, VoorstellingId = 2, StoelId = 2 }
         );
 
 
