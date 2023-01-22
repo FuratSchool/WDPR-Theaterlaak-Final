@@ -22,5 +22,5 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
         public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; } = default!;
         public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; } = default!;
-
+        public DbSet<TheaterLaakAPi.Models.Groepen> Groepen { get; set; } = default!;
     }

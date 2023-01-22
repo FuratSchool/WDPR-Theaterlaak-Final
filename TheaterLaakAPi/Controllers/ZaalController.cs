@@ -20,7 +20,7 @@ namespace TheaterLaakAPi.Controllers
             _context = context;
         }
 
-        // GET: api/Zaal
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Zaal>>> GetZaal()
         {
@@ -31,7 +31,6 @@ namespace TheaterLaakAPi.Controllers
             return await _context.Zaal.ToListAsync();
         }
 
-        // GET: api/Zaal/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Zaal>> GetZaal(int id)
         {
@@ -49,8 +48,7 @@ namespace TheaterLaakAPi.Controllers
             return Zaal;
         }
 
-        // PUT: api/Zaal/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutZaal(int id, Zaal Zaal)
         {
@@ -80,8 +78,6 @@ namespace TheaterLaakAPi.Controllers
             return NoContent();
         }
 
-        // POST: api/Zaal
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Zaal>> PostZaal(Zaal Zaal)
         {

@@ -8,6 +8,7 @@ import { Afrekenen } from "./components/Afrekenen";
 import { Cancel } from "./components/Cancel";
 import { Succes } from "./components/Succes";
 import { Winkelwagen } from "./components/Winkelwagen";
+import {Bandpagina1} from "./components/Bandpagina1";
 
 //admin
 import { OverzichtVoorstelling } from './components/Admin/Voorstellingen/Voorstellingen';
@@ -83,6 +84,10 @@ const AppRoutes = [
     {
         path: '/admin/planning/update',
         element: <Plannen />
+    },
+    {
+        path: '/admin/bandpagina',
+        element: <Bandpagina1 />
     },
 ];
 
