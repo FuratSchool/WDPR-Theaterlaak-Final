@@ -1,33 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Button, CloseButton, ButtonGroup } from "reactstrap";
-import data from "./data.json";
 import Rang from "./Rang";
 import Datum from "./Datum";
+import data from "./data.json"
 import axios from "axios";
-
-
 
 const StoelReservatie = () => {
   const [stoelen, setStoelen] = useState(data);
   const [gereserveerdestoelen, setGereserveerdeStoelen] = useState([]);
   const [voorstellingDatum, setVoorstellingDarum] = useState([1, 2, 3]);
   const [datumSelected, setDatumSelected] = useState(null);
-  const [apiData, setApiData] = useState([]);
 
 
-
-  
-
-  const getVoorstelling = () => {
-    axios.get('http://localhost:5044/selectiestoelen/1')
-    .then(res => {
-      console.log(res.data)
-      setApiData(res.data.content)
-    })
-    .catch(err =>{
-      console.log(err)
-    })
-  };
 
   const resetStoelLists = () => {
     window.location.reload(false);
@@ -56,8 +40,7 @@ const StoelReservatie = () => {
 
   return (
     <>
-      <button onClick={() => getVoorstelling()}>get data</button>
-      <p>{apiData}</p>
+      <button>get data</button>
 
       <div className="container">
         <div className="row justify-content-center ">

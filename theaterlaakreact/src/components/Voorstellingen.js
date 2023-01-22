@@ -1,198 +1,42 @@
+import React, { useState, useEffect } from "react";
+import VoorstellingCard from "./VoorstellingCard";
+import FetchVoorstelling from "./FetchVoorstelling";
+import axios from "axios";
 
-import React, { Component } from 'react';
+export const Voorstellingen = () => {
+  const [voorstellingen, setVoorstellingen] = useState([]);
 
-import './css/style.css';
+  useEffect(() => {
+    axios
+      .get("http://localhost:5044/api/Voorstelling")
+      .then(function (response) {
+        // handle success
+        setVoorstellingen(response.data)
+        console.log(response);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  },[]);
 
-export class Voorstellingen extends Component {
-    static displayName = Voorstellingen.name;
-    render() {
-        return (
-            <React.Fragment>
-                <section class="Search-Section mb-3 ">
-                    <div class="container   ">
-                        <div class="card calendar d-flex justify-content-center">
-                            <div class="card-body">
-                                <div class="col-md-6">
-                                    test
-                                        </div>
-                                <div class="col-md-6"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="Alle-voorstellingen mb-3">
-                    <h1 class="fw-lighter">Alle Voorstellingen</h1>
-                    <hr class="fw-lighter"></hr>
-                    <div class="row mb-3">
-                        <div class="col-md-4">
+  const voorstellingLijst = voorstellingen.map((item, index)=>(<div>{item.titel}</div>))
 
-                            <div class="card card-custom card-border-gradient">
-                                <div class="card-image">
-                                    <img src="../images/card-img-1.jpg" class="card-custom card-img-top"></img>
-                                </div>
-                                <div class="container">
-                                    <div class="card-homepage">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <p class="">21</p>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <p class="">12</p>
-                                            </div>
-                                            <div class="col-sm-4 darker-card">
-                                                <p class="">2022</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title font-weight-light">Card title</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae nisl nisi. Proin elementum ante velit, et vehicula nisi porttitor vel. Etiam sed tristique nisi.</p>
-                                    <button type="button" class="btn-custom btn btn-info btn-purple  float-end text-white">Meer info</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-custom card-border-gradient">
-                                <div class="card-image">
-                                    <img src="../images/card-img-2.jpg" class="card-custom card-img-top"></img>
-                                </div>
-                                <div class="container ">
-                                    <div class="card-homepage">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <p class="">21</p>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <p class="">12</p>
-                                            </div>
-                                            <div class="col-sm-4 darker-card">
-                                                <p class="">2022</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae nisl nisi. Proin elementum ante velit, et vehicula nisi porttitor vel. Etiam sed tristique nisi.</p>
-                                    <button type="button" class="btn-custom btn btn-info btn-purple  float-end text-white">Meer info</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-custom card-border-gradient">
-                                <div class="card-image">
-                                    <img src="../images/card-img-3.jpg" class="card-custom card-img-top"></img>
-                                </div>
-                                <div class="container">
-                                    <div class="card-homepage">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <p class="">21</p>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <p class="">12</p>
-                                            </div>
-                                            <div class="col-sm-4 darker-card">
-                                                <p class="">2022</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae nisl nisi. Proin elementum ante velit, et vehicula nisi porttitor vel. Etiam sed tristique nisi.</p>
-                                    <button type="button" class="btn-custom btn btn-info btn-purple  float-end text-white">Meer info</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-
-                            <div class="card card-custom card-border-gradient">
-                                <div class="card-image">
-                                    <img src="../images/card-img-1.jpg" class="card-custom card-img-top"></img>
-                                </div>
-                                <div class="container">
-                                    <div class="card-homepage">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <p class="">21</p>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <p class="">12</p>
-                                            </div>
-                                            <div class="col-sm-4 darker-card">
-                                                <p class="">2022</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title font-weight-light">Card title</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae nisl nisi. Proin elementum ante velit, et vehicula nisi porttitor vel. Etiam sed tristique nisi.</p>
-                                    <button type="button" class="btn-custom btn btn-info btn-purple  float-end text-white">Meer info</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-custom card-border-gradient">
-                                <div class="card-image">
-                                    <img src="../images/card-img-2.jpg" class="card-custom card-img-top"></img>
-                                </div>
-                                <div class="container ">
-                                    <div class="card-homepage">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <p class="">21</p>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <p class="">12</p>
-                                            </div>
-                                            <div class="col-sm-4 darker-card">
-                                                <p class="">2022</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae nisl nisi. Proin elementum ante velit, et vehicula nisi porttitor vel. Etiam sed tristique nisi.</p>
-                                    <button type="button" class="btn-custom btn btn-info btn-purple  float-end text-white">Meer info</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-custom card-border-gradient">
-                                <div class="card-image">
-                                    <img src="../images/card-img-3.jpg" class="card-custom card-img-top"></img>
-                                </div>
-                                <div class="container">
-                                    <div class="card-homepage">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <p class="">21</p>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <p class="">12</p>
-                                            </div>
-                                            <div class="col-sm-4 darker-card">
-                                                <p class="">2022</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae nisl nisi. Proin elementum ante velit, et vehicula nisi porttitor vel. Etiam sed tristique nisi.</p>
-                                    <button type="button" class="btn-custom btn btn-info btn-purple  float-end text-white">Meer info</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </React.Fragment>
-        )
-    }
-}
+  return (
+    <>
+    {voorstellingLijst}
+      <h1 className="fw-lighter">Alle Voorstellingen</h1>
+      <hr className="fw-lighter"></hr>
+      <div className="col-12">
+        <div className="row">
+          <VoorstellingCard />
+          <VoorstellingCard />
+          <VoorstellingCard />
+        </div>
+      </div>
+    </>
+  );
+};

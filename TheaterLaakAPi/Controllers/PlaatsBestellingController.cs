@@ -73,14 +73,16 @@ public class PlaatsBestellingController : ControllerBase
                     where z.ZaalId == r.ZaalId
                     where v.ZaalId == z.ZaalId
                     where v.VoorstellingId == id
+                    group r.RangNr by s.StoelNr into g
 
                     select new
                     {   
-                        rangId = r.RangId,
-                        rangNr = r.RangNr,
-                        stoelId = s.StoelId,
-                        stoelNr = s.StoelNr
+                        
+                        RangNr = g.Key, StoelNr = g.ToList()
+               
                     };
+
+                    string json =  JsonConvert.SerializeObject(query);;
 
                     
 

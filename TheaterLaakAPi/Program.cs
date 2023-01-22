@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-
-using SignalRChat.Hubs;
 using TheaterLaakAPi.Schema;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
