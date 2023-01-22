@@ -317,14 +317,10 @@ namespace TheaterLaakAPi.Migrations
                     b.Property<string>("ApplicationUserId1")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("ReserveringsDatum")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("VoorstellingId")
+                    b.Property<int>("prijs")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("isBetaald")
-                        .HasColumnType("INTEGER");
+                    b.HasKey("Id");
 
                     b.HasKey("ReserveringId");
 

@@ -31,28 +31,35 @@ const voorstellingVoorbeeldArray = [
         id: "1",
         Titel: "Requiem van Mozart",
         Artiest: "Bach choir en Orchestra",
+        Prijs: 10,
     },
     {
         id: "2",
         Titel: "The Best of Joe Hisaishi",
-        Artiest: "String quartet"
+        Artiest: "String quartet",
+        Prijs: 20,
+
     },
     {
         id: "3",
         Titel: "Vivaldi Four Seasons",
-        Artiest: "Vivaldi"
+        Artiest: "Vivaldi",
+        Prijs: 15,
+
     },
     {
         id: "4",
         Titel: "A tribute to Hans Zimmer",
-        Artiest: "Hans Zimmer Candlelight"
+        Artiest: "Hans Zimmer Candlelight",
+        Prijs: 12,
+
     },
 ]
 function getVoorstelling(id){
     let voorstellingData = voorstellingVoorbeeldArray.find(v => v.id === id); 
 
     //als het niet gevonden is wordt undefined gereturned, zou ook zonder de return kunnen maar is duidelijker.
-    if (voorstellingData == undefined){
+    if (voorstellingData === undefined){
     console.log("Voorstelling id " + id + " niet gevonden")
     return undefined;
     }
@@ -96,4 +103,4 @@ const ruimteArray = [
         id: "10",
     },
 ]
-export {zaalArray, ruimteArray, voorstellingVoorbeeldArray, getVoorstelling};
+export {zaalArray, voorstellingVoorbeeldArray, getVoorstelling};

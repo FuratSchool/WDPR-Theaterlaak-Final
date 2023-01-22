@@ -8,8 +8,22 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using TheaterLaakAPi.Services;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("http://example.com", //uiteindelijk de azure sites hierbij voegen.
+                                                  "http://www.example2.com") //hier ook.
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyOrigin()
+                                                  .AllowAnyMethod();
+                          });
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
@@ -83,6 +97,9 @@ app.Use(
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
+
+app.UseCors(MyAllowSpecificOrigins);
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -11,8 +11,9 @@ import {
 import { Link } from "react-router-dom";
 import "./NavMenu.css";
 import "./css/style.css";
-import Winkelwagen from "./Winkelwagen";
+import Winkelwagen from './Winkelwagen/Winkelwagen'
 import Logout from "./Authentication/Logout";
+
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
@@ -68,7 +69,7 @@ export class NavMenu extends Component {
                   <Logout></Logout>
                 </NavItem>
                 <NavItem>
-                  <Winkelwagen></Winkelwagen>
+                <NavLink tag={Link} className="text-dark" to="/Winkelwagen">Winkelwagen</NavLink>
                 </NavItem>
               </ul>
             </Collapse>

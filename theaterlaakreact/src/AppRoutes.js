@@ -7,7 +7,7 @@ import { Voorstelling } from "./components/Voorstelling";
 import { Afrekenen } from "./components/Afrekenen";
 import { Cancel } from "./components/Cancel";
 import { Succes } from "./components/Succes";
-import { Winkelwagen } from "./components/Winkelwagen";
+import { Winkelwagen } from "./components/Winkelwagen/Winkelwagen";
 
 //admin
 import { OverzichtVoorstellingen } from "./components/Admin/Voorstellingen/OverzichtVoorstellingen";
