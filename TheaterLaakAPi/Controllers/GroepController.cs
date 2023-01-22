@@ -21,14 +21,6 @@ namespace TheaterLaakAPi.Controllers
         {
             _context = context;
         }
-            public GroepController(
-            UserManager<ApplicationUser> userManager
-
-        )
-        {
-            _userManager = userManager;
-        }
-
         // GET: api/Groep
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Groep>>> GetGroep()

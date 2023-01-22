@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TheaterLaakAPi.Migrations
 {
     /// <inheritdoc />
-    public partial class doehet : Migration
+    public partial class mergeBomani : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -89,9 +89,9 @@ namespace TheaterLaakAPi.Migrations
                 {
                     GroepId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    GroepNaam = table.Column<string>(type: "TEXT", nullable: false),
+                    GroepNaam = table.Column<string>(type: "TEXT", nullable: true),
                     BandWebsite = table.Column<string>(type: "TEXT", nullable: true),
-                    LogoLink = table.Column<string>(type: "TEXT", nullable: false)
+                    LogoLink = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

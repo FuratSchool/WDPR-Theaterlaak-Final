@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TheaterLaakAPi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230122192124_doehet")]
-    partial class doehet
+    [Migration("20230122194858_mergeBomani")]
+    partial class mergeBomani
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -282,11 +282,9 @@ namespace TheaterLaakAPi.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GroepNaam")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LogoLink")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("GroepId");

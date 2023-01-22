@@ -31,7 +31,6 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("ArtiestGroep");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("Bestelling", b =>
                 {
                     b.Property<int>("id")
@@ -70,8 +69,6 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("Betaling");
                 });
 
-=======
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -121,7 +118,6 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
@@ -194,8 +190,6 @@ namespace TheaterLaakAPi.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-=======
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -275,89 +269,6 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-<<<<<<< HEAD
-=======
-            modelBuilder.Entity("TheaterLaakAPi.Models.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Achternaam")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Voornaam")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
-
-                    b.UseTphMappingStrategy();
-                });
-
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("TheaterLaakAPi.Models.Groep", b =>
                 {
                     b.Property<int>("GroepId")
@@ -368,17 +279,9 @@ namespace TheaterLaakAPi.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GroepNaam")
-<<<<<<< HEAD
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LogoLink")
-                        .IsRequired()
-=======
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LogoLink")
->>>>>>> origin/Authentication-and-Authorization
                         .HasColumnType("TEXT");
 
                     b.HasKey("GroepId");
@@ -405,7 +308,6 @@ namespace TheaterLaakAPi.Migrations
 
                     b.HasIndex("ZaalId");
 
-<<<<<<< HEAD
                     b.ToTable("Rangen");
                 });
 
@@ -442,9 +344,6 @@ namespace TheaterLaakAPi.Migrations
                     b.HasIndex("VoorstellingId");
 
                     b.ToTable("Reserveringen");
-=======
-                    b.ToTable("Rang");
->>>>>>> origin/Authentication-and-Authorization
                 });
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Stoel", b =>
@@ -466,11 +365,7 @@ namespace TheaterLaakAPi.Migrations
 
                     b.HasIndex("RangId");
 
-<<<<<<< HEAD
                     b.ToTable("Stoelen");
-=======
-                    b.ToTable("Stoel");
->>>>>>> origin/Authentication-and-Authorization
                 });
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Voorstelling", b =>
@@ -527,7 +422,6 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("Zaal");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("TheaterLaakAPi.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -550,8 +444,6 @@ namespace TheaterLaakAPi.Migrations
                     b.HasDiscriminator().HasValue("Admin");
                 });
 
-=======
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("TheaterLaakAPi.Models.Artiest", b =>
                 {
                     b.HasBaseType("TheaterLaakAPi.Models.ApplicationUser");
@@ -559,7 +451,6 @@ namespace TheaterLaakAPi.Migrations
                     b.HasDiscriminator().HasValue("Artiest");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("TheaterLaakAPi.Models.Donateur", b =>
                 {
                     b.HasBaseType("TheaterLaakAPi.Models.ApplicationUser");
@@ -577,8 +468,6 @@ namespace TheaterLaakAPi.Migrations
                     b.HasDiscriminator().HasValue("Medewerker");
                 });
 
-=======
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("ArtiestGroep", b =>
                 {
                     b.HasOne("TheaterLaakAPi.Models.Artiest", null)
@@ -605,7 +494,7 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("TheaterLaakAPi.Models.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -614,7 +503,7 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("TheaterLaakAPi.Models.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -629,7 +518,7 @@ namespace TheaterLaakAPi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TheaterLaakAPi.Models.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -638,7 +527,7 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("TheaterLaakAPi.Models.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -656,7 +545,6 @@ namespace TheaterLaakAPi.Migrations
                     b.Navigation("Zaal");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("TheaterLaakAPi.Models.Reservering", b =>
                 {
                     b.HasOne("TheaterLaakAPi.Models.ApplicationUser", "ApplicationUser")
@@ -682,8 +570,6 @@ namespace TheaterLaakAPi.Migrations
                     b.Navigation("Voorstelling");
                 });
 
-=======
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("TheaterLaakAPi.Models.Stoel", b =>
                 {
                     b.HasOne("TheaterLaakAPi.Models.Rang", "Rang")
