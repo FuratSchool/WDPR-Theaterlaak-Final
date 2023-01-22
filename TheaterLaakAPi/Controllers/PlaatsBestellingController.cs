@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using TheaterLaakAPi.Models;
 
 namespace TheaterLaakAPi.Controllers;
@@ -19,33 +20,75 @@ public class PlaatsBestellingController : ControllerBase
         _context = context;
     }
 
+    // // GET: api/Zaal
+    // [HttpGet]
+    // [Route("selectiestoelen/{id}")]
+
+    // public async Task<ActionResult<IEnumerable<Zaal>>> getVoorstellingInfo(int id)
+    // {
+
+    //     var Stoel = await _context.Stoel.ToListAsync();
+    //     var Rang = await _context.Rang.ToListAsync();
+    //     var Zaal = await _context.Zaal.ToListAsync();
+    //     var Voorstelling = await _context.Voorstelling.ToListAsync();
+
+
+    //     var query = from s in Stoel
+    //                 from r in Rang
+    //                 from z in Zaal
+    //                 from v in Voorstelling
+    //                 where r.RangId == s.RangId
+    //                 where z.ZaalId == r.ZaalId
+    //                 where v.ZaalId == z.ZaalId
+    //                 where v.VoorstellingId == id
+
+    //                 select new
+    //                 {
+    //                     rangNr = r.RangNr,
+    //                     stoelId = s.StoelId,
+    //                     stoelNr = s.StoelNr
+    //                 };
+
+    //     return Ok(query);
+    // }
+    
     // GET: api/Zaal
     [HttpGet]
-    [Route("bestelling/{id}")]
+    [Route("selectiestoelen/{id}")]
 
     public async Task<ActionResult<IEnumerable<Zaal>>> getVoorstellingInfo(int id)
     {
-        var query = from zaal in _context.Zaal
-                    from vst in _context.Voorstelling
-                    from rang in _context.Rang
-                    from stoel in _context.Stoel
-                    where zaal.ZaalId == vst.ZaalId
-                    where rang.ZaalId == zaal.ZaalId
-                    where stoel.RangId == rang.RangId
-                    where vst.VoorstellingId == id
+
+        var Stoel = await _context.Stoel.ToListAsync();
+        var Rang = await _context.Rang.ToListAsync();
+        var Zaal = await _context.Zaal.ToListAsync();
+        var Voorstelling = await _context.Voorstelling.ToListAsync();
+
+
+                    var query = from s in Stoel
+                    from r in Rang
+                    from z in Zaal
+                    from v in Voorstelling
+                    where r.RangId == s.RangId
+                    where z.ZaalId == r.ZaalId
+                    where v.ZaalId == z.ZaalId
+                    where v.VoorstellingId == id
 
                     select new
-                    {
-                        zaalnr = zaal.ZaalId,
-                        voorstellingId = vst.VoorstellingId,
-                        voorstellingnaam = vst.Titel,
-                        rangId = rang.RangId,
-                        rangNr = rang.RangNr,
-                        stoelid = stoel.StoelId,
-                        stoelnr = stoel.StoelNr
+                    {   
+                        rangId = r.RangId,
+                        rangNr = r.RangNr,
+                        stoelId = s.StoelId,
+                        stoelNr = s.StoelNr
                     };
+
+                    
+
         return Ok(query);
     }
+    
+
+
 
 
 }

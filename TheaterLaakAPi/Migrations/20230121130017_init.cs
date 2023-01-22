@@ -456,8 +456,7 @@ namespace TheaterLaakAPi.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Reservering_StoelId",
                 table: "Reservering",
-                column: "StoelId",
-                unique: true);
+                column: "StoelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservering_VoorstellingId",

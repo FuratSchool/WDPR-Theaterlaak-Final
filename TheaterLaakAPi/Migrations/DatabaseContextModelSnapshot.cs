@@ -355,8 +355,7 @@ namespace TheaterLaakAPi.Migrations
 
                     b.HasIndex("ApplicationUserId1");
 
-                    b.HasIndex("StoelId")
-                        .IsUnique();
+                    b.HasIndex("StoelId");
 
                     b.HasIndex("VoorstellingId");
 
@@ -701,8 +700,8 @@ namespace TheaterLaakAPi.Migrations
                         .HasForeignKey("ApplicationUserId1");
 
                     b.HasOne("TheaterLaakAPi.Models.Stoel", "Stoel")
-                        .WithOne("Reserveringen")
-                        .HasForeignKey("TheaterLaakAPi.Models.Reservering", "StoelId")
+                        .WithMany("Reserveringen")
+                        .HasForeignKey("StoelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -748,8 +747,7 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Stoel", b =>
                 {
-                    b.Navigation("Reserveringen")
-                        .IsRequired();
+                    b.Navigation("Reserveringen");
                 });
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Voorstelling", b =>
