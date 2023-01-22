@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import { withAuthUser } from "react-auth-kit";
 export class Home extends Component {
   static displayName = Home.name;
 
@@ -16,9 +16,7 @@ export class Home extends Component {
           >
             <div class="mt-4 p-5 text-white">
               <h1 class="fw-bold text-white">Custom jumbotron</h1>
-              <h2 class="mb-4 text-white">
-                Jumbotron with background image
-              </h2>{" "}
+              <h2 class="mb-4 text-white">Jumbotron with background image</h2>
             </div>
           </div>
         </div>

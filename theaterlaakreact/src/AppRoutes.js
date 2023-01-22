@@ -2,7 +2,7 @@ import { Home } from "./components/Home";
 import GebruikersInterface from "../src/components/GebruikersInterface/GebruikersInterface";
 import MijnReserveringen from "./components/MijnReserveringen/MijnReserveringen";
 import Donatie from "./components/Donatie/Donatie";
-import { Voorstellingen } from "./components/Voorstellingen";
+import { Voorstellingen } from "./components/Voorstellingen/Voorstellingen";
 import { Voorstelling } from "./components/Voorstelling";
 import { Afrekenen } from "./components/Afrekenen";
 import { Cancel } from "./components/Cancel";
@@ -19,8 +19,12 @@ import { PlanningsOverzicht } from "./components/Admin/Planning/PlanningsOverzic
 import { Plannen } from "./components/Admin/Planning/Plannen";
 
 //Authentication
-import { Login } from "./components/Authentication/Login";
-import { Register } from "./components/Authentication/Register";
+import { Login } from "./components/Authentication/Login/Login";
+import { Register } from "./components/Authentication/Register/Register";
+import { RequireAuth } from "react-auth-kit";
+
+//UserHomes
+import { UserHome } from "./components/Accounts/User/UserHome";
 
 const AppRoutes = [
   {
@@ -34,6 +38,20 @@ const AppRoutes = [
   {
     path: "/Register",
     element: <Register />,
+  },
+  {
+    path: "/Logout",
+    element: <Register />,
+  },
+  {
+    path: "/UserHome",
+    element: (
+      // <OverzichtVoorstellingen />
+
+      <RequireAuth loginPath={"/login"}>
+        <UserHome />
+      </RequireAuth>
+    ),
   },
   {
     path: "/voorstellingen",
@@ -74,7 +92,13 @@ const AppRoutes = [
   },
   {
     path: "/admin/voorstellingen",
-    element: <OverzichtVoorstellingen />,
+    element: (
+      // <OverzichtVoorstellingen />
+
+      <RequireAuth loginPath={"/login"}>
+        <OverzichtVoorstellingen />
+      </RequireAuth>
+    ),
   },
   {
     path: "/admin/voorstellingen/:id",

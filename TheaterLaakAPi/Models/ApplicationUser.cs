@@ -3,5 +3,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TheaterLaakAPi.Models
 {
-    public class ApplicationUser : IdentityUser { }
+    public class ApplicationUser : IdentityUser
+    {
+        public string Voornaam { get; set; }
+        public string Achternaam { get; set; }
+    }
 }

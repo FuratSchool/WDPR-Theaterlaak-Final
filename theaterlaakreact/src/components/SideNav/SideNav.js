@@ -3,18 +3,11 @@ import "./SideMenu.css";
 
 export class SideNav extends Component {
   static displayName = SideNav.name;
-
   constructor(props) {
     super(props);
-
-    this.state = {
-      userName: null,
-    };
   }
 
   render() {
-    const { isAuthenticated, userName } = this.state;
-
     return (
       <div className="col-md-3">
         <div className="SideNav">
@@ -29,6 +22,11 @@ export class SideNav extends Component {
                     href="/"
                   >
                     Voorstellingen
+                  </a>
+                </li>
+                <li>
+                  <a className="nav-link" id="Zalen" href="">
+                    TODO: OPTIES TONEN OP BASIS VAN ROL{" "}
                   </a>
                 </li>
                 <li className="nav-item">

@@ -46,7 +46,7 @@ export function CreateVoorstellingForm() {
             aria-label="Genre"
             onChange={(e) => setGenre(e.target.value)}
           >
-            <option defaultValue={"klassiek"}>Klassiek</option>
+            <option defaultValue="klassiek">Klassiek</option>
             <option value="Dans">Dans</option>
             <option value="Musical">Musical</option>
           </select>

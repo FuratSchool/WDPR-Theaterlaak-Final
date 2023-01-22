@@ -20,104 +20,38 @@ namespace TheaterLaakAPi.Controllers
             _context = context;
         }
 
-        // GET: api/Zaal
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Zaal>>> GetZaal()
-        {
-          if (_context.Zaal == null)
-          {
-              return NotFound();
-          }
-            return await _context.Zaal.ToListAsync();
-        }
-
-        // GET: api/Zaal/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Zaal>> GetZaal(int id)
-        {
-          if (_context.Zaal == null)
-          {
-              return NotFound();
-          }
-            var Zaal = await _context.Zaal.FindAsync(id);
-
-            if (Zaal == null)
-            {
-                return NotFound();
-            }
-
-            return Zaal;
-        }
-
-        // PUT: api/Zaal/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutZaal(int id, Zaal Zaal)
-        {
-            if (id != Zaal.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(Zaal).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ZaalExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
         // POST: api/Zaal
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Zaal>> PostZaal(Zaal Zaal)
         {
-          if (_context.Zaal == null)
-          {
-              return Problem("Entity set 'DBContext.Zaal'  is null.");
-          }
-            _context.Zaal.Add(Zaal);
-            await _context.SaveChangesAsync();
-
-                return CreatedAtAction(nameof(GetZaal), new { id = Zaal.Id }, Zaal);
-        }
-
-        // DELETE: api/Zaal/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteZaal(int id)
-        {
             if (_context.Zaal == null)
             {
-                return NotFound();
+                return Problem("Entity set 'DBContext.Zaal'  is null.");
             }
-            var Zaal = await _context.Zaal.FindAsync(id);
-            if (Zaal == null)
+            var stoel = new Stoel
             {
-                return NotFound();
-            }
-
-            _context.Zaal.Remove(Zaal);
+                Id = 0,
+                StoelNr = 0,
+                isInvalide = 0,
+            };
+            var stoelen = new List<Stoel>();
+            stoelen.Add(stoel);
+            var rangen = new Rang
+            {
+                RangNr = 0,
+                Capiciteit = 60,
+                Stoelen = stoelen,
+                Zaal = Zaal
+            };
+            var rang = new List<Rang>();
+            rang.Add(rangen);
+            Console.WriteLine(rangen);
+            var zaal = new Zaal { Title = "test", Rangen = rang };
+            _context.Zaal.Add(zaal);
             await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
-
-        private bool ZaalExists(int id)
-        {
-            return (_context.Zaal?.Any(e => e.Id == id)).GetValueOrDefault();
+            return Ok(zaal);
         }
     }
 }

@@ -34,7 +34,6 @@ namespace TheaterLaakAPi.Controllers
 
         // GET: api/Voorstelling/5
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<Voorstelling>> GetVoorstelling(int id)
         {
             if (_context.Voorstelling == null)

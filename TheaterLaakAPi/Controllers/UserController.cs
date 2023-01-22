@@ -1,9 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TheaterLaakAPi.Models;
-using TheaterLaakAPi.Models.Authentication;
-using TheaterLaakAPi.Services;
-using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Net.Http.Headers;
 
 namespace TheaterLaakAPi.Controllers
 {
@@ -11,90 +11,42 @@ namespace TheaterLaakAPi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        private readonly JwtService _jwtService;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly DatabaseContext _context;
 
         public UserController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            JwtService jwtService
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            DatabaseContext context
         )
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _jwtService = jwtService;
+            _context = context;
         }
 
-        [HttpPost]
-        [Route("Register")]
-        public async Task<IActionResult> Register(UserRegister userRegister)
+        // GET: api/User/username
+        [HttpGet("Account")]
+        [Authorize]
+        public async Task<ActionResult<ApplicationUser>> GetUser()
         {
-            if (ModelState.IsValid)
+            ApplicationUser? result = await _userManager.FindByNameAsync(
+                HttpContext.User.Identity.Name
+            );
+            if (result == null)
             {
-                var user = new ApplicationUser
-                {
-                    Email = userRegister.Email,
-                    UserName = userRegister.UserName,
-                    PasswordHash = userRegister.Password,
-                };
-                var result = await _userManager.CreateAsync(user, user.PasswordHash);
-                return result.Succeeded ? StatusCode(201) : new BadRequestObjectResult(result);
-            }
-            return BadRequest("Bad credentials");
-        }
-
-        [HttpPost]
-        [Route("Login")]
-        public async Task<IActionResult> Login(UserLogin userLogin)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(
-                    userLogin.Email,
-                    userLogin.Password,
-                    false,
-                    false
-                );
-
-                if (result.Succeeded)
-                {
-                    Console.WriteLine("User Logged in");
-                    return Ok();
-                }
-            }
-            return Unauthorized();
-        }
-
-        // POST: api/User/BearerToken
-        [HttpPost("BearerToken")]
-        public async Task<ActionResult<AuthenticationResponse>> CreateBearerToken(
-            AuthenticationRequest request
-        )
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Bad credentials");
+                return NotFound();
             }
 
-            var user = await _userManager.FindByNameAsync(request.UserName);
-
-            if (user == null)
+            var user = new ApplicationUser
             {
-                return BadRequest("Bad credentials");
-            }
-
-            var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
-
-            if (!isPasswordValid)
-            {
-                return BadRequest("Bad credentials");
-            }
-
-            var token = _jwtService.CreateToken(user);
-
-            return Ok(token);
+                Email = result.Email,
+                UserName = result.UserName,
+                Voornaam = result.Voornaam,
+                Achternaam = result.Achternaam
+            };
+            return Ok(user);
         }
     }
 }
