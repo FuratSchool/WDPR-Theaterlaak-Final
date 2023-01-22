@@ -26,11 +26,13 @@ export function UserHome(props) {
       })
       .then(function (response) {
         setUser(response.data);
+        console.log(user);
         return response;
       })
       .then((result) => {
         if (result.status == 200) {
           setUser(result.data);
+         
         }
       });
   }, []);

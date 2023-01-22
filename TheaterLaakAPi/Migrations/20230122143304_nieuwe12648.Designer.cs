@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TheaterLaakAPi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230122143304_nieuwe12648")]
+    partial class nieuwe12648
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -31,47 +34,6 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("ArtiestGroep");
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("Bestelling", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("amount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("reference")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("url")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Bestelling");
-                });
-
-            modelBuilder.Entity("Betaling", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("reference")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("succes")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Betaling");
-                });
-
-=======
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -121,81 +83,6 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
-
-                    b.UseTphMappingStrategy();
-                });
-
-=======
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -275,8 +162,6 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-<<<<<<< HEAD
-=======
             modelBuilder.Entity("TheaterLaakAPi.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -357,7 +242,6 @@ namespace TheaterLaakAPi.Migrations
                     b.UseTphMappingStrategy();
                 });
 
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("TheaterLaakAPi.Models.Groep", b =>
                 {
                     b.Property<int>("GroepId")
@@ -368,17 +252,9 @@ namespace TheaterLaakAPi.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GroepNaam")
-<<<<<<< HEAD
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LogoLink")
-                        .IsRequired()
-=======
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LogoLink")
->>>>>>> origin/Authentication-and-Authorization
                         .HasColumnType("TEXT");
 
                     b.HasKey("GroepId");
@@ -405,46 +281,7 @@ namespace TheaterLaakAPi.Migrations
 
                     b.HasIndex("ZaalId");
 
-<<<<<<< HEAD
-                    b.ToTable("Rangen");
-                });
-
-            modelBuilder.Entity("TheaterLaakAPi.Models.Reservering", b =>
-                {
-                    b.Property<int>("reserveringId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ApplicationUserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ApplicationUserId1")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("ReserveringsDatum")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("StoelId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("VoorstellingId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("isBetaald")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("reserveringId");
-
-                    b.HasIndex("ApplicationUserId1");
-
-                    b.HasIndex("StoelId");
-
-                    b.HasIndex("VoorstellingId");
-
-                    b.ToTable("Reserveringen");
-=======
                     b.ToTable("Rang");
->>>>>>> origin/Authentication-and-Authorization
                 });
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Stoel", b =>
@@ -466,11 +303,7 @@ namespace TheaterLaakAPi.Migrations
 
                     b.HasIndex("RangId");
 
-<<<<<<< HEAD
-                    b.ToTable("Stoelen");
-=======
                     b.ToTable("Stoel");
->>>>>>> origin/Authentication-and-Authorization
                 });
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Voorstelling", b =>
@@ -527,31 +360,6 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("Zaal");
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("TheaterLaakAPi.Models.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Achternaam")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Voornaam")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("TheaterLaakAPi.Models.Admin", b =>
-                {
-                    b.HasBaseType("TheaterLaakAPi.Models.ApplicationUser");
-
-                    b.HasDiscriminator().HasValue("Admin");
-                });
-
-=======
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("TheaterLaakAPi.Models.Artiest", b =>
                 {
                     b.HasBaseType("TheaterLaakAPi.Models.ApplicationUser");
@@ -559,26 +367,6 @@ namespace TheaterLaakAPi.Migrations
                     b.HasDiscriminator().HasValue("Artiest");
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("TheaterLaakAPi.Models.Donateur", b =>
-                {
-                    b.HasBaseType("TheaterLaakAPi.Models.ApplicationUser");
-
-                    b.Property<double>("Bedrag")
-                        .HasColumnType("REAL");
-
-                    b.HasDiscriminator().HasValue("Donateur");
-                });
-
-            modelBuilder.Entity("TheaterLaakAPi.Models.Medewerker", b =>
-                {
-                    b.HasBaseType("TheaterLaakAPi.Models.ApplicationUser");
-
-                    b.HasDiscriminator().HasValue("Medewerker");
-                });
-
-=======
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("ArtiestGroep", b =>
                 {
                     b.HasOne("TheaterLaakAPi.Models.Artiest", null)
@@ -656,34 +444,6 @@ namespace TheaterLaakAPi.Migrations
                     b.Navigation("Zaal");
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("TheaterLaakAPi.Models.Reservering", b =>
-                {
-                    b.HasOne("TheaterLaakAPi.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId1");
-
-                    b.HasOne("TheaterLaakAPi.Models.Stoel", "Stoel")
-                        .WithMany()
-                        .HasForeignKey("StoelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TheaterLaakAPi.Models.Voorstelling", "Voorstelling")
-                        .WithMany()
-                        .HasForeignKey("VoorstellingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Stoel");
-
-                    b.Navigation("Voorstelling");
-                });
-
-=======
->>>>>>> origin/Authentication-and-Authorization
             modelBuilder.Entity("TheaterLaakAPi.Models.Stoel", b =>
                 {
                     b.HasOne("TheaterLaakAPi.Models.Rang", "Rang")

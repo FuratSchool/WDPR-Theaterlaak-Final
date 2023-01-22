@@ -17,6 +17,8 @@ import { CreateZaal } from "./components/Admin/Zalen/CreateZaal";
 import { CreatePlanning } from "./components/Admin/Planning/CreatePlanning";
 import { PlanningsOverzicht } from "./components/Admin/Planning/PlanningsOverzicht";
 import { Plannen } from "./components/Admin/Planning/Plannen";
+import { BandFormPagina } from "./components/BandFormPagina";
+import {Bandpagina1} from "./components/Bandpagina1";
 
 //Authentication
 import { Login } from "./components/Authentication/Login/Login";
@@ -123,7 +125,13 @@ const AppRoutes = [
   {
     path: "/admin/planning/update",
     element: <Plannen />,
-  },
+  }, {
+    path: '/admin/bandpagina',
+    element: <Bandpagina1 />
+},{
+    path: '/admin/bandform',
+    element: <BandFormPagina/>
+}
 ];
 
 export default AppRoutes;
