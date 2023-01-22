@@ -25,7 +25,7 @@ const AppRoutes = [
         element: <Home />    
     },
     {
-        path: '/stoelreservatie',
+        path: '/StoelReservatie/:voorstellingId',
         element: <StoelReservatie/>
     },
     {

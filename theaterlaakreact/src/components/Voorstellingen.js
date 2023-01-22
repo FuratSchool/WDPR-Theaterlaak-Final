@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VoorstellingCard from "./VoorstellingCard";
-import FetchVoorstelling from "./FetchVoorstelling";
 import axios from "axios";
+
 
 export const Voorstellingen = () => {
   const [voorstellingen, setVoorstellingen] = useState([]);
@@ -23,7 +23,7 @@ export const Voorstellingen = () => {
       });
   },[]);
 
-  const voorstellingLijst = voorstellingen.map((item, index)=>(<div>{item.titel}</div>))
+  const voorstellingLijst = voorstellingen.map((item, index)=>(<div key={index}>{item.titel}</div>))
 
   return (
     <>
