@@ -1,25 +1,20 @@
-import React,{useState} from 'react'
-import { ListGroupItem, Button} from 'reactstrap'
+import React, { useState, useEffect } from "react";
+import { ListGroupItem, Button } from "reactstrap";
 
 const Stoel = (props) => {
-const [knop, setKnop] = useState(false)
 
-const handleOnClick = (e) =>{
-  setKnop(!knop)
-  props.onClickSetGereseerveerd(current =>[...current,<Button color="primary"><div className="mx-2"></div>stoel: {e} {}</Button>])
-}
+  var lijstEen = props.propOne;
+  
+
+
+  const eenLijst = lijstEen.map((item, index) => <div key={index}>x</div>);
 
   return (
     <>
-    <ListGroupItem
-    disabled={knop}
-    onClick={()=>handleOnClick(props.stoel.StoelId)}
-    action
-    >
-    <p>stoel: {props.stoel.StoelId}</p>
-    </ListGroupItem>
+      <button>xx</button>
+      {eenLijst}
     </>
-  )
-}
+  );
+};
 
-export default Stoel
+export default Stoel;

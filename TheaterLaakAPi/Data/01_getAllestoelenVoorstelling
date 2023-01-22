@@ -1,11 +1,14 @@
 
 --get alle stoelen voorstelling
-select s.StoelId, s.StoelNr, r.RangId, r.RangNr
+select r.RangNr, count(s.StoelNr)
 from Stoel s
 join Rang r on r.RangId = s.RangId
 join Zaal z on z.ZaalId = r.ZaalId
 join Voorstelling v on v.ZaalId = z.ZaalId
-where v.VoorstellingId = 1;
+where v.VoorstellingId = 1
+group by r.RangNr;
+
+
 
 --get alle betaalde stoelen
 select r.StoelId FROM
