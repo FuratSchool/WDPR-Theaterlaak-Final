@@ -42,7 +42,26 @@ namespace TheaterLaakAPi.Controllers
             _context.Groepen.Add(groep);
             await _context.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetGroep), new { id = groep.Id }, groep);
+                return CreatedAtAction(nameof(GetGroep), new { id = groep.GroepID }, groep);
+        }
+
+         [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteGroep(int id)
+        {
+            if (_context.Groepen == null)
+            {
+                return NotFound();
+            }
+            var groep = await _context.Groepen.FindAsync(id);
+            if (groep == null)
+            {
+                return NotFound();
+            }
+
+            _context.Groepen.Remove(groep);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
 

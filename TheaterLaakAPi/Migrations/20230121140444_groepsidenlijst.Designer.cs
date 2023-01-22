@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TheaterLaakAPi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230116134223_AddIdentityTables")]
-    partial class AddIdentityTables
+    [Migration("20230121140444_groepsidenlijst")]
+    partial class groepsidenlijst
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -211,6 +211,90 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("TheaterLaakAPi.Models.Groepen", b =>
+                {
+                    b.Property<int>("GroepID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Logo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("bandnaam")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("website")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("GroepID");
+
+                    b.ToTable("Groepen");
+
+                    b.HasData(
+                        new
+                        {
+                            GroepID = 1,
+                            Logo = "c:/documents/img/thebooyz.png",
+                            bandnaam = "Theboyz",
+                            website = "theboyz.nl"
+                        });
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("GroepID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("GroepenGroepID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroepenGroepID");
+
+                    b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "Bomani33@gmail.com",
+                            Password = "Wachtwoord33",
+                            UserName = "Bomani33"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "Bomani35@gmail.com",
+                            GroepID = 1,
+                            Password = "Wachtwoord34",
+                            UserName = "Bomani34"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "Bomani35@gmail.com",
+                            GroepID = 1,
+                            Password = "Wachtwoord35",
+                            UserName = "Bomani35"
+                        });
+                });
+
             modelBuilder.Entity("TheaterLaakAPi.Models.Voorstelling", b =>
                 {
                     b.Property<int>("Id")
@@ -244,11 +328,9 @@ namespace TheaterLaakAPi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("SoortZaal")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -305,6 +387,20 @@ namespace TheaterLaakAPi.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.User", b =>
+                {
+                    b.HasOne("TheaterLaakAPi.Models.Groepen", "Groepen")
+                        .WithMany("Users")
+                        .HasForeignKey("GroepenGroepID");
+
+                    b.Navigation("Groepen");
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.Groepen", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

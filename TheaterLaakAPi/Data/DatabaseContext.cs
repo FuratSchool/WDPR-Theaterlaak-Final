@@ -8,19 +8,23 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
-    public class DatabaseContext : IdentityDbContext<IdentityUser>
+public class DatabaseContext : IdentityDbContext<IdentityUser>
+{
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
-        {
-        }
-
-        protected override void  OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
- 
-        }
-
-        public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; } = default!;
-        public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; } = default!;
-        public DbSet<TheaterLaakAPi.Models.Groepen> Groepen { get; set; } = default!;
     }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+
+   
+    }
+
+
+    public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; } = default!;
+    public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; } = default!;
+    public DbSet<TheaterLaakAPi.Models.Groepen> Groepen { get; set; } = default!;
+    public DbSet<TheaterLaakAPi.Models.User> User { get; set; } = default!;
+}

@@ -10,6 +10,7 @@ import { Succes } from "./components/Succes";
 import { Winkelwagen } from "./components/Winkelwagen";
 import {Bandpagina1} from "./components/Bandpagina1";
 
+
 //admin
 import { OverzichtVoorstelling } from './components/Admin/Voorstellingen/Voorstellingen';
 import { CreateVoorstelling } from './components/Admin/Voorstellingen/CreateVoorstelling';
@@ -17,6 +18,7 @@ import { CreateZaal } from './components/Admin/Zalen/CreateZaal';
 import { CreatePlanning } from './components/Admin/Planning/CreatePlanning';
 import { PlanningsOverzicht } from './components/Admin/Planning/PlanningsOverzicht';
 import { Plannen } from './components/Admin/Planning/Plannen';
+import { BandFormPagina } from "./components/BandFormPagina";
 
 const AppRoutes = [
     {
@@ -88,7 +90,10 @@ const AppRoutes = [
     {
         path: '/admin/bandpagina',
         element: <Bandpagina1 />
-    },
+    },{
+        path: '/admin/bandform',
+        element: <BandFormPagina/>
+    }
 ];
 
 export default AppRoutes;

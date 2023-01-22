@@ -1,9 +1,11 @@
-using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TheaterLaakAPi.Models;
-using TheaterLaakAPi.Models.Authentication;
-using TheaterLaakAPi.Services;
-using Microsoft.AspNetCore.Authorization;
 
 namespace TheaterLaakAPi.Controllers
 {
@@ -11,80 +13,111 @@ namespace TheaterLaakAPi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly JwtService _jwtService;
+        private readonly DatabaseContext _context;
 
-        public UserController(UserManager<IdentityUser> userManager, JwtService jwtService)
+        public UserController(DatabaseContext context)
         {
-            _userManager = userManager;
-            _jwtService = jwtService;
+            _context = context;
         }
 
-        // POST: api/User
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        // GET: api/User
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var result = await _userManager.CreateAsync(
-                new IdentityUser() { UserName = user.UserName, Email = user.Email },
-                user.Password
-            );
-
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            user.Password = null;
-            return Created("", user);
+          if (_context.User == null)
+          {
+              return NotFound();
+          }
+            return await _context.User.ToListAsync();
         }
 
-        // GET: api/User/username
-        [HttpGet("{username}")]
-        public async Task<ActionResult<User>> GetUser(string username)
+        // GET: api/User/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(int id)
         {
-            IdentityUser user = await _userManager.FindByNameAsync(username);
+          if (_context.User == null)
+          {
+              return NotFound();
+          }
+            var user = await _context.User.FindAsync(id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return new User { UserName = user.UserName, Email = user.Email };
+            return user;
         }
 
-        // POST: api/User/BearerToken
-        [HttpPost("BearerToken")]
-        public async Task<ActionResult<AuthenticationResponse>> CreateBearerToken(
-            AuthenticationRequest request
-        )
+        // PUT: api/User/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (!ModelState.IsValid)
+            if (id != user.Id)
             {
-                return BadRequest("Bad credentials");
+                return BadRequest();
             }
 
-            var user = await _userManager.FindByNameAsync(request.UserName);
+            _context.Entry(user).State = EntityState.Modified;
 
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/User
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<User>> PostUser(User user)
+        {
+          if (_context.User == null)
+          {
+              return Problem("Entity set 'DatabaseContext.User'  is null.");
+          }
+            _context.User.Add(user);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+        }
+
+        // DELETE: api/User/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            if (_context.User == null)
+            {
+                return NotFound();
+            }
+            var user = await _context.User.FindAsync(id);
             if (user == null)
             {
-                return BadRequest("Bad credentials");
+                return NotFound();
             }
 
-            var isPasswordValid = await _userManager.CheckPasswordAsync(user, request.Password);
+            _context.User.Remove(user);
+            await _context.SaveChangesAsync();
 
-            if (!isPasswordValid)
-            {
-                return BadRequest("Bad credentials");
-            }
+            return NoContent();
+        }
 
-            var token = _jwtService.CreateToken(user);
-
-            return Ok(token);
+        private bool UserExists(int id)
+        {
+            return (_context.User?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

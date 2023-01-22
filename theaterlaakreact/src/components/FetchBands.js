@@ -23,12 +23,12 @@ function FetchBands() {
     },[])
       return (
         <>
-        <ul>
+
           {
-        succesdata.map(s=><DropdownItem key={s.id }>{s.bandnaam}</DropdownItem>) //reference 
+        succesdata.map(s=><DropdownItem key={s.id}>{s.bandnaam}</DropdownItem>) //reference 
 
           }
-        </ul>
+        
         </>
       )
     }

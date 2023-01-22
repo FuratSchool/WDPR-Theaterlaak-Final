@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TheaterLaakAPi.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdentityTables : Migration
+    public partial class groepsidenlijst : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,6 +53,21 @@ namespace TheaterLaakAPi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Groepen",
+                columns: table => new
+                {
+                    GroepID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    bandnaam = table.Column<string>(type: "TEXT", nullable: true),
+                    website = table.Column<string>(type: "TEXT", nullable: true),
+                    Logo = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Groepen", x => x.GroepID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Voorstelling",
                 columns: table => new
                 {
@@ -73,8 +90,8 @@ namespace TheaterLaakAPi.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
-                    SoortZaal = table.Column<string>(type: "TEXT", nullable: false)
+                    Title = table.Column<string>(type: "TEXT", nullable: true),
+                    SoortZaal = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -187,6 +204,43 @@ namespace TheaterLaakAPi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserName = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    GroepID = table.Column<int>(type: "INTEGER", nullable: true),
+                    GroepenGroepID = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_User_Groepen_GroepenGroepID",
+                        column: x => x.GroepenGroepID,
+                        principalTable: "Groepen",
+                        principalColumn: "GroepID");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Groepen",
+                columns: new[] { "GroepID", "Logo", "bandnaam", "website" },
+                values: new object[] { 1, "c:/documents/img/thebooyz.png", "Theboyz", "theboyz.nl" });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "Email", "GroepID", "GroepenGroepID", "Password", "UserName" },
+                values: new object[,]
+                {
+                    { 1, "Bomani33@gmail.com", null, null, "Wachtwoord33", "Bomani33" },
+                    { 2, "Bomani35@gmail.com", 1, null, "Wachtwoord34", "Bomani34" },
+                    { 3, "Bomani35@gmail.com", 1, null, "Wachtwoord35", "Bomani35" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -223,6 +277,11 @@ namespace TheaterLaakAPi.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_GroepenGroepID",
+                table: "User",
+                column: "GroepenGroepID");
         }
 
         /// <inheritdoc />
@@ -244,6 +303,9 @@ namespace TheaterLaakAPi.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
                 name: "Voorstelling");
 
             migrationBuilder.DropTable(
@@ -254,6 +316,9 @@ namespace TheaterLaakAPi.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Groepen");
         }
     }
 }
