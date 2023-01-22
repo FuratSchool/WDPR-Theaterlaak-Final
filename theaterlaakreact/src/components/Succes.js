@@ -5,7 +5,7 @@ export function Succes() {
 const [succesdata,setsuccesdata] = useState([1])
 
 useEffect(() => {
-  axios.get('http://localhost:5044/api/Succes')
+  axios.get('http://localhost:5044/api/Betaling')
 .then(response =>{
   console.log(response);
   setsuccesdata(response.data)

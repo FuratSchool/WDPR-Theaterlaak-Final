@@ -8,21 +8,21 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
-    public class DatabaseContext : IdentityDbContext<IdentityUser>
+public class DatabaseContext : IdentityDbContext<IdentityUser>
+{
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
-        {
-        }
+    }
 
-        protected override void  OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
- 
-        }
-
-        public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; } = default!;
-        public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; } = default!;
-        public DbSet<Betaling> Betaling { get; set; } = default!;
-        public DbSet<Succes> Succes { get; set; } = default!;
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
 
     }
+
+    public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; } = default!;
+    public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; } = default!;
+    public DbSet<Betaling> Betaling { get; set; } = default!;
+    public DbSet<Bestelling> Bestelling { get; set; } = default!;
+
+}

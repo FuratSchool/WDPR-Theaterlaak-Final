@@ -23,10 +23,10 @@ namespace TheaterLaakAPi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Betaling>>> GetBetaling()
         {
-          if (_context.Betaling == null)
-          {
-              return NotFound();
-          }
+            if (_context.Betaling == null)
+            {
+                return NotFound();
+            }
             return await _context.Betaling.ToListAsync();
         }
 
@@ -34,10 +34,10 @@ namespace TheaterLaakAPi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Betaling>> GetBetaling(int id)
         {
-          if (_context.Betaling == null)
-          {
-              return NotFound();
-          }
+            if (_context.Betaling == null)
+            {
+                return NotFound();
+            }
             var betaling = await _context.Betaling.FindAsync(id);
 
             if (betaling == null)
@@ -82,16 +82,28 @@ namespace TheaterLaakAPi.Controllers
         // POST: api/Betaling
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Betaling>> PostBetaling(Betaling betaling)
+        public async Task<ActionResult<Betaling>> PostBetaling([FromForm] Betaling betaling)
         {
-          if (_context.Betaling == null)
-          {
-              return Problem("Entity set 'DatabaseContext.Betaling'  is null.");
-          }
+            if (_context.Betaling == null)
+            {
+                return Problem("Entity set 'DatabaseContext.Betaling'  is null.");
+            }
+            // Betaling betaling = new Betaling();
+            // betaling.reference = reference;
             _context.Betaling.Add(betaling);
             await _context.SaveChangesAsync();
+            if (betaling.succes == false)
+            {
+                //betaling is niet gelukt!
+                return Redirect("http://localhost:3000/Cancel");
+            }
+            else
+            {
 
-            return CreatedAtAction("GetBetaling", new { id = betaling.id }, betaling);
+                //dit geval wel
+                return Redirect("http://localhost:3000/Succes");
+            }
+            // return CreatedAtAction("GetBetaling", new { id = betaling.id }, betaling);
         }
 
         // DELETE: api/Betaling/5
