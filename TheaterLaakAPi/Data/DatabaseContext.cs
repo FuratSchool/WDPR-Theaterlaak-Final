@@ -20,4 +20,7 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
     public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; } = default!;
     public DbSet<TheaterLaakAPi.Models.Rang> Rang { get; set; } = default!;
     public DbSet<TheaterLaakAPi.Models.Stoel> Stoel { get; set; } = default!;
+     public DbSet<TheaterLaakAPi.Models.Groep> Groepen { get; set; }
+    public DbSet<TheaterLaakAPi.Models.Artiest> Artiesten { get; set; }
+    public DbSet<TheaterLaakAPi.Models.ApplicationUser> ApplicationUsers { get; set; }
 }

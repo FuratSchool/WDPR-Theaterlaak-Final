@@ -58,6 +58,10 @@ builder.Services
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(p => p.AddPolicy("corspolicy", build => {
+    build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+}));
+
 builder.Services.AddDistributedMemoryCache();
 
 var app = builder.Build();
@@ -80,7 +84,7 @@ app.Use(
         await next();
     }
 );
-
+app.UseCors("corspolicy");
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
