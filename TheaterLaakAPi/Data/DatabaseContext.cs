@@ -14,6 +14,7 @@ public class DatabaseContext : IdentityDbContext<IdentityUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.Seed();
     }
 
     public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; }

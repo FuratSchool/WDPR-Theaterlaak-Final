@@ -69,6 +69,21 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("Betaling");
                 });
 
+            modelBuilder.Entity("GroepVoorstelling", b =>
+                {
+                    b.Property<int>("GroepenGroepId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("VoorstellingenVoorstellingId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("GroepenGroepId", "VoorstellingenVoorstellingId");
+
+                    b.HasIndex("VoorstellingenVoorstellingId");
+
+                    b.ToTable("GroepVoorstelling");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -291,7 +306,7 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Rang", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RangId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -304,7 +319,7 @@ namespace TheaterLaakAPi.Migrations
                     b.Property<int>("ZaalId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.HasKey("RangId");
 
                     b.HasIndex("ZaalId");
 
@@ -313,11 +328,11 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Reservering", b =>
                 {
-                    b.Property<int>("reserveringId")
+                    b.Property<int>("ReserveringId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ApplicationUserId")
+                    b.Property<int?>("ApplicationUserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ApplicationUserId1")
@@ -335,7 +350,7 @@ namespace TheaterLaakAPi.Migrations
                     b.Property<int>("isBetaald")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("reserveringId");
+                    b.HasKey("ReserveringId");
 
                     b.HasIndex("ApplicationUserId1");
 
@@ -348,7 +363,7 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Stoel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("StoelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -361,7 +376,7 @@ namespace TheaterLaakAPi.Migrations
                     b.Property<int>("isInvalide")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.HasKey("StoelId");
 
                     b.HasIndex("RangId");
 
@@ -370,26 +385,25 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Voorstelling", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("VoorstellingId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("Datum")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Genre")
-                        .IsRequired()
+                    b.Property<DateTime>("EindDatum")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("GroepId")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("Prijs")
+                        .HasColumnType("REAL");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("INTEGER");
+                    b.Property<DateTime>("StartDatum")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Tijd")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -398,9 +412,7 @@ namespace TheaterLaakAPi.Migrations
                     b.Property<int?>("ZaalId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroepId");
+                    b.HasKey("VoorstellingId");
 
                     b.HasIndex("ZaalId");
 
@@ -409,7 +421,7 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Zaal", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ZaalId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -417,7 +429,7 @@ namespace TheaterLaakAPi.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("ZaalId");
 
                     b.ToTable("Zaal");
                 });
@@ -427,11 +439,9 @@ namespace TheaterLaakAPi.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("Achternaam")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Voornaam")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
@@ -479,6 +489,21 @@ namespace TheaterLaakAPi.Migrations
                     b.HasOne("TheaterLaakAPi.Models.Groep", null)
                         .WithMany()
                         .HasForeignKey("GroepenGroepId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GroepVoorstelling", b =>
+                {
+                    b.HasOne("TheaterLaakAPi.Models.Groep", null)
+                        .WithMany()
+                        .HasForeignKey("GroepenGroepId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TheaterLaakAPi.Models.Voorstelling", null)
+                        .WithMany()
+                        .HasForeignKey("VoorstellingenVoorstellingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -548,17 +573,17 @@ namespace TheaterLaakAPi.Migrations
             modelBuilder.Entity("TheaterLaakAPi.Models.Reservering", b =>
                 {
                     b.HasOne("TheaterLaakAPi.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Reserveringen")
                         .HasForeignKey("ApplicationUserId1");
 
                     b.HasOne("TheaterLaakAPi.Models.Stoel", "Stoel")
-                        .WithMany()
+                        .WithMany("Reserveringen")
                         .HasForeignKey("StoelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TheaterLaakAPi.Models.Voorstelling", "Voorstelling")
-                        .WithMany()
+                        .WithMany("Reserveringen")
                         .HasForeignKey("VoorstellingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -583,18 +608,11 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Voorstelling", b =>
                 {
-                    b.HasOne("TheaterLaakAPi.Models.Groep", null)
-                        .WithMany("Voorstellingen")
-                        .HasForeignKey("GroepId");
-
-                    b.HasOne("TheaterLaakAPi.Models.Zaal", null)
+                    b.HasOne("TheaterLaakAPi.Models.Zaal", "Zaal")
                         .WithMany("Voorstellingen")
                         .HasForeignKey("ZaalId");
-                });
 
-            modelBuilder.Entity("TheaterLaakAPi.Models.Groep", b =>
-                {
-                    b.Navigation("Voorstellingen");
+                    b.Navigation("Zaal");
                 });
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Rang", b =>
@@ -602,11 +620,26 @@ namespace TheaterLaakAPi.Migrations
                     b.Navigation("Stoelen");
                 });
 
+            modelBuilder.Entity("TheaterLaakAPi.Models.Stoel", b =>
+                {
+                    b.Navigation("Reserveringen");
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.Voorstelling", b =>
+                {
+                    b.Navigation("Reserveringen");
+                });
+
             modelBuilder.Entity("TheaterLaakAPi.Models.Zaal", b =>
                 {
                     b.Navigation("Rangen");
 
                     b.Navigation("Voorstellingen");
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Reserveringen");
                 });
 #pragma warning restore 612, 618
         }

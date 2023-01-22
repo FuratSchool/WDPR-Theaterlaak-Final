@@ -24,22 +24,22 @@ namespace TheaterLaakAPi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rang>>> GetRang()
         {
-          if (_context.Rang == null)
-          {
-              return NotFound();
-          }
-            return await _context.Rang.ToListAsync();
+            if (_context.Rangen == null)
+            {
+                return NotFound();
+            }
+            return await _context.Rangen.ToListAsync();
         }
 
         // GET: api/Rang/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Rang>> GetRang(int id)
         {
-          if (_context.Rang == null)
-          {
-              return NotFound();
-          }
-            var rang = await _context.Rang.FindAsync(id);
+            if (_context.Rangen == null)
+            {
+                return NotFound();
+            }
+            var rang = await _context.Rangen.FindAsync(id);
 
             if (rang == null)
             {
@@ -85,11 +85,11 @@ namespace TheaterLaakAPi.Controllers
         [HttpPost]
         public async Task<ActionResult<Rang>> PostRang(Rang rang)
         {
-          if (_context.Rang == null)
-          {
-              return Problem("Entity set 'DatabaseContext.Rang'  is null.");
-          }
-            _context.Rang.Add(rang);
+            if (_context.Rangen == null)
+            {
+                return Problem("Entity set 'DatabaseContext.Rang'  is null.");
+            }
+            _context.Rangen.Add(rang);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetRang", new { id = rang.RangId }, rang);
@@ -99,17 +99,17 @@ namespace TheaterLaakAPi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRang(int id)
         {
-            if (_context.Rang == null)
+            if (_context.Rangen == null)
             {
                 return NotFound();
             }
-            var rang = await _context.Rang.FindAsync(id);
+            var rang = await _context.Rangen.FindAsync(id);
             if (rang == null)
             {
                 return NotFound();
             }
 
-            _context.Rang.Remove(rang);
+            _context.Rangen.Remove(rang);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -117,7 +117,7 @@ namespace TheaterLaakAPi.Controllers
 
         private bool RangExists(int id)
         {
-            return (_context.Rang?.Any(e => e.RangId == id)).GetValueOrDefault();
+            return (_context.Rangen?.Any(e => e.RangId == id)).GetValueOrDefault();
         }
     }
 }

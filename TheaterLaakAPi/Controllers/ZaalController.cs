@@ -29,29 +29,11 @@ namespace TheaterLaakAPi.Controllers
             {
                 return Problem("Entity set 'DBContext.Zaal'  is null.");
             }
-            var stoel = new Stoel
-            {
-                Id = 0,
-                StoelNr = 0,
-                isInvalide = 0,
-            };
-            var stoelen = new List<Stoel>();
-            stoelen.Add(stoel);
-            var rangen = new Rang
-            {
-                RangNr = 0,
-                Capiciteit = 60,
-                Stoelen = stoelen,
-                Zaal = Zaal
-            };
-            var rang = new List<Rang>();
-            rang.Add(rangen);
-            Console.WriteLine(rangen);
-            var zaal = new Zaal { Title = "test", Rangen = rang };
-            _context.Zaal.Add(zaal);
+
+            _context.Zaal.Add(Zaal);
             await _context.SaveChangesAsync();
 
-            return Ok(zaal);
+            return Ok(Zaal);
         }
     }
 }

@@ -24,22 +24,22 @@ namespace TheaterLaakAPi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Stoel>>> GetStoel()
         {
-          if (_context.Stoel == null)
-          {
-              return NotFound();
-          }
-            return await _context.Stoel.ToListAsync();
+            if (_context.Stoelen == null)
+            {
+                return NotFound();
+            }
+            return await _context.Stoelen.ToListAsync();
         }
 
         // GET: api/Stoel/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Stoel>> GetStoel(int id)
         {
-          if (_context.Stoel == null)
-          {
-              return NotFound();
-          }
-            var stoel = await _context.Stoel.FindAsync(id);
+            if (_context.Stoelen == null)
+            {
+                return NotFound();
+            }
+            var stoel = await _context.Stoelen.FindAsync(id);
 
             if (stoel == null)
             {
@@ -85,11 +85,11 @@ namespace TheaterLaakAPi.Controllers
         [HttpPost]
         public async Task<ActionResult<Stoel>> PostStoel(Stoel stoel)
         {
-          if (_context.Stoel == null)
-          {
-              return Problem("Entity set 'DatabaseContext.Stoel'  is null.");
-          }
-            _context.Stoel.Add(stoel);
+            if (_context.Stoelen == null)
+            {
+                return Problem("Entity set 'DatabaseContext.Stoel'  is null.");
+            }
+            _context.Stoelen.Add(stoel);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetStoel", new { id = stoel.StoelId }, stoel);
@@ -99,17 +99,17 @@ namespace TheaterLaakAPi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStoel(int id)
         {
-            if (_context.Stoel == null)
+            if (_context.Stoelen == null)
             {
                 return NotFound();
             }
-            var stoel = await _context.Stoel.FindAsync(id);
+            var stoel = await _context.Stoelen.FindAsync(id);
             if (stoel == null)
             {
                 return NotFound();
             }
 
-            _context.Stoel.Remove(stoel);
+            _context.Stoelen.Remove(stoel);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -117,7 +117,7 @@ namespace TheaterLaakAPi.Controllers
 
         private bool StoelExists(int id)
         {
-            return (_context.Stoel?.Any(e => e.StoelId == id)).GetValueOrDefault();
+            return (_context.Stoelen?.Any(e => e.StoelId == id)).GetValueOrDefault();
         }
     }
 }

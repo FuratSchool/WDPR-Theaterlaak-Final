@@ -21,36 +21,37 @@ namespace TheaterLaakAPi.Controllers
         {
             _context = context;
         }
+
         // GET: api/Groep
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Groep>>> GetGroep()
         {
-          if (_context.Groepen == null)
-          {
-              return NotFound();
-          }
+            if (_context.Groepen == null)
+            {
+                return NotFound();
+            }
             return await _context.Groepen.ToListAsync();
         }
 
-         // POST: api/Groep
+        // POST: api/Groep
         [HttpPost]
         public async Task<ActionResult<Groep>> PostGroep(Groep groep)
         {
-          if (_context.Groepen == null)
-          {
-              return Problem("Entity set 'DBContext.Groep'  is null.");
-          }            
-        //   ApplicationUser? result = await _userManager.FindByEmailAsync(
-        //         HttpContext.User.Identity.Name
-        //     );
-        
+            if (_context.Groepen == null)
+            {
+                return Problem("Entity set 'DBContext.Groep'  is null.");
+            }
+            //   ApplicationUser? result = await _userManager.FindByEmailAsync(
+            //         HttpContext.User.Identity.Name
+            //     );
+
             _context.Groepen.Add(groep);
             await _context.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetGroep), new { id = groep.GroepId }, groep);
+            return CreatedAtAction(nameof(GetGroep), new { id = groep.GroepId }, groep);
         }
 
-         [HttpDelete("{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGroep(int id)
         {
             if (_context.Groepen == null)
@@ -68,9 +69,5 @@ namespace TheaterLaakAPi.Controllers
 
             return NoContent();
         }
-
-
-
-  
     }
 }

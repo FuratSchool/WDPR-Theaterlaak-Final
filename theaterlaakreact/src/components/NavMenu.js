@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Button } from "reactstrap";
+
 import {
   Collapse,
   Nav,
@@ -11,7 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import "./NavMenu.css";
 import "./css/style.css";
-import Winkelwagen from './Winkelwagen/Winkelwagen'
+import Winkelwagen from "./Winkelwagen/Winkelwagen";
 import Logout from "./Authentication/Logout";
 
 export class NavMenu extends Component {
@@ -66,10 +68,17 @@ export class NavMenu extends Component {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <Logout></Logout>
+                  <NavLink tag={Link} className="text-dark" to="/Winkelwagen">
+                    Winkelwagen
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/Winkelwagen">Winkelwagen</NavLink>
+                  <Button tag={Link} color="outline-info" to="/Login">
+                    Aanmelden
+                  </Button>
+                </NavItem>
+                <NavItem>
+                  <Logout></Logout>
                 </NavItem>
               </ul>
             </Collapse>

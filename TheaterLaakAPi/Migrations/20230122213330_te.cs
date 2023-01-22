@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TheaterLaakAPi.Migrations
 {
     /// <inheritdoc />
-    public partial class mergeBomani : Migration
+    public partial class te : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -102,13 +102,13 @@ namespace TheaterLaakAPi.Migrations
                 name: "Zaal",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    ZaalId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Zaal", x => x.Id);
+                    table.PrimaryKey("PK_Zaal", x => x.ZaalId);
                 });
 
             migrationBuilder.CreateTable(
@@ -245,7 +245,7 @@ namespace TheaterLaakAPi.Migrations
                 name: "Rangen",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    RangId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RangNr = table.Column<int>(type: "INTEGER", nullable: false),
                     Capiciteit = table.Column<int>(type: "INTEGER", nullable: false),
@@ -253,12 +253,12 @@ namespace TheaterLaakAPi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rangen", x => x.Id);
+                    table.PrimaryKey("PK_Rangen", x => x.RangId);
                     table.ForeignKey(
                         name: "FK_Rangen_Zaal_ZaalId",
                         column: x => x.ZaalId,
                         principalTable: "Zaal",
-                        principalColumn: "Id",
+                        principalColumn: "ZaalId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -266,36 +266,31 @@ namespace TheaterLaakAPi.Migrations
                 name: "Voorstelling",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    VoorstellingId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
-                    Genre = table.Column<string>(type: "TEXT", nullable: false),
+                    Tijd = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    ImageId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Datum = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    GroepId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Prijs = table.Column<double>(type: "REAL", nullable: false),
+                    StartDatum = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    EindDatum = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ZaalId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Voorstelling", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Voorstelling_Groepen_GroepId",
-                        column: x => x.GroepId,
-                        principalTable: "Groepen",
-                        principalColumn: "GroepId");
+                    table.PrimaryKey("PK_Voorstelling", x => x.VoorstellingId);
                     table.ForeignKey(
                         name: "FK_Voorstelling_Zaal_ZaalId",
                         column: x => x.ZaalId,
                         principalTable: "Zaal",
-                        principalColumn: "Id");
+                        principalColumn: "ZaalId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Stoelen",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                    StoelId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     StoelNr = table.Column<int>(type: "INTEGER", nullable: false),
                     isInvalide = table.Column<int>(type: "INTEGER", nullable: false),
@@ -303,12 +298,36 @@ namespace TheaterLaakAPi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stoelen", x => x.Id);
+                    table.PrimaryKey("PK_Stoelen", x => x.StoelId);
                     table.ForeignKey(
                         name: "FK_Stoelen_Rangen_RangId",
                         column: x => x.RangId,
                         principalTable: "Rangen",
-                        principalColumn: "Id",
+                        principalColumn: "RangId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GroepVoorstelling",
+                columns: table => new
+                {
+                    GroepenGroepId = table.Column<int>(type: "INTEGER", nullable: false),
+                    VoorstellingenVoorstellingId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroepVoorstelling", x => new { x.GroepenGroepId, x.VoorstellingenVoorstellingId });
+                    table.ForeignKey(
+                        name: "FK_GroepVoorstelling_Groepen_GroepenGroepId",
+                        column: x => x.GroepenGroepId,
+                        principalTable: "Groepen",
+                        principalColumn: "GroepId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GroepVoorstelling_Voorstelling_VoorstellingenVoorstellingId",
+                        column: x => x.VoorstellingenVoorstellingId,
+                        principalTable: "Voorstelling",
+                        principalColumn: "VoorstellingId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -316,18 +335,18 @@ namespace TheaterLaakAPi.Migrations
                 name: "Reserveringen",
                 columns: table => new
                 {
-                    reserveringId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ReserveringId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ReserveringsDatum = table.Column<DateTime>(type: "TEXT", nullable: false),
                     isBetaald = table.Column<int>(type: "INTEGER", nullable: false),
                     StoelId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ApplicationUserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ApplicationUserId = table.Column<int>(type: "INTEGER", nullable: true),
                     ApplicationUserId1 = table.Column<string>(type: "TEXT", nullable: true),
                     VoorstellingId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reserveringen", x => x.reserveringId);
+                    table.PrimaryKey("PK_Reserveringen", x => x.ReserveringId);
                     table.ForeignKey(
                         name: "FK_Reserveringen_AspNetUsers_ApplicationUserId1",
                         column: x => x.ApplicationUserId1,
@@ -337,13 +356,13 @@ namespace TheaterLaakAPi.Migrations
                         name: "FK_Reserveringen_Stoelen_StoelId",
                         column: x => x.StoelId,
                         principalTable: "Stoelen",
-                        principalColumn: "Id",
+                        principalColumn: "StoelId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reserveringen_Voorstelling_VoorstellingId",
                         column: x => x.VoorstellingId,
                         principalTable: "Voorstelling",
-                        principalColumn: "Id",
+                        principalColumn: "VoorstellingId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -390,6 +409,11 @@ namespace TheaterLaakAPi.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_GroepVoorstelling_VoorstellingenVoorstellingId",
+                table: "GroepVoorstelling",
+                column: "VoorstellingenVoorstellingId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rangen_ZaalId",
                 table: "Rangen",
                 column: "ZaalId");
@@ -413,11 +437,6 @@ namespace TheaterLaakAPi.Migrations
                 name: "IX_Stoelen_RangId",
                 table: "Stoelen",
                 column: "RangId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Voorstelling_GroepId",
-                table: "Voorstelling",
-                column: "GroepId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Voorstelling_ZaalId",
@@ -453,10 +472,16 @@ namespace TheaterLaakAPi.Migrations
                 name: "Betaling");
 
             migrationBuilder.DropTable(
+                name: "GroepVoorstelling");
+
+            migrationBuilder.DropTable(
                 name: "Reserveringen");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Groepen");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
@@ -469,9 +494,6 @@ namespace TheaterLaakAPi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Rangen");
-
-            migrationBuilder.DropTable(
-                name: "Groepen");
 
             migrationBuilder.DropTable(
                 name: "Zaal");

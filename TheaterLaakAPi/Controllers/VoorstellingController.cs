@@ -55,7 +55,7 @@ namespace TheaterLaakAPi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVoorstelling(int id, Voorstelling voorstelling)
         {
-            if (id != voorstelling.Id)
+            if (id != voorstelling.VoorstellingId)
             {
                 return BadRequest();
             }
@@ -95,7 +95,7 @@ namespace TheaterLaakAPi.Controllers
 
             return CreatedAtAction(
                 nameof(GetVoorstelling),
-                new { id = voorstelling.Id },
+                new { id = voorstelling.VoorstellingId },
                 voorstelling
             );
         }
@@ -122,7 +122,7 @@ namespace TheaterLaakAPi.Controllers
 
         private bool VoorstellingExists(int id)
         {
-            return (_context.Voorstelling?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Voorstelling?.Any(e => e.VoorstellingId == id)).GetValueOrDefault();
         }
     }
 }

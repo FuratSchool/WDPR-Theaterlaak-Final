@@ -62,20 +62,6 @@ export class CreateZaal extends Component {
                       }
                     ></input>
                   </div>
-                  <div class="col">
-                    <label for="Type">Soort Zaal</label>
-                    <select
-                      class="form-select"
-                      aria-label="Soort Zaal"
-                      name="SoortZaal"
-                      onChange={(e) =>
-                        this.handleChange({ SoortZaal: e.target.value })
-                      }
-                    >
-                      <option value="One">One</option>
-                      <option value="asd">One</option>
-                    </select>
-                  </div>
                 </div>
                 {/* <div class="mb-3">
                   <label for="customRange1" class="form-label">
