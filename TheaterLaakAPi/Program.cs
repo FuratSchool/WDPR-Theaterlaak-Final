@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using TheaterLaakAPi.Models;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
-using TheaterLaakAPi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
 using System.Text;
+using TheaterLaakAPi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,61 +17,48 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DbContext, DatabaseContext>(
     opt => opt.UseSqlite("Data Source=mydb.db")
 );
+
 builder.Services
-    .AddIdentityCore<IdentityUser>(options =>
+    .AddIdentity<ApplicationUser, IdentityRole>(opt =>
     {
-        options.SignIn.RequireConfirmedAccount = false;
-        options.User.RequireUniqueEmail = true;
-        options.Password.RequireDigit = false;
-        options.Password.RequiredLength = 6;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = false;
-        options.Password.RequireLowercase = false;
+        opt.User.RequireUniqueEmail = true;
+        opt.Password.RequiredLength = 7;
+        opt.Password.RequireDigit = false;
+        opt.Password.RequireLowercase = true;
+        opt.Password.RequireUppercase = true;
+        opt.Password.RequireNonAlphanumeric = true;
     })
-    .AddEntityFrameworkStores<DatabaseContext>();
-
-builder.Services.AddScoped<JwtService>();
-
+    .AddEntityFrameworkStores<DatabaseContext>()
+    .AddDefaultTokenProviders();
+builder.Services.AddSession();
+builder.Services.AddScoped<JwtTokenService>();
 builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+    .AddAuthentication(opt =>
     {
-        options.TokenValidationParameters = new TokenValidationParameters()
+        opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(opt =>
+    {
+        opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidAudience = builder.Configuration["Jwt:Audience"],
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Issuer"],
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])
+                System.Text.Encoding.UTF8.GetBytes(
+                    "awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"
+                )
             )
         };
     });
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc(
-        "v1",
-        new OpenApiInfo
-        {
-            Version = "v1",
-            Title = "ToDo API",
-            Description = "An ASP.NET Core Web API for managing ToDo items",
-            TermsOfService = new Uri("https://example.com/terms"),
-            Contact = new OpenApiContact
-            {
-                Name = "Example Contact",
-                Url = new Uri("https://example.com/contact")
-            },
-            License = new OpenApiLicense
-            {
-                Name = "Example License",
-                Url = new Uri("https://example.com/license")
-            }
-        }
-    );
-});
+
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddDistributedMemoryCache();
 
 var app = builder.Build();
 
@@ -81,10 +68,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseSession();
+app.Use(
+    async (context, next) =>
+    {
+        var token = context.Session.GetString("Token");
+        if (!string.IsNullOrEmpty(token))
+        {
+            context.Request.Headers.Add("Authorization", "Bearer " + token);
+        }
+        await next();
+    }
+);
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
-
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

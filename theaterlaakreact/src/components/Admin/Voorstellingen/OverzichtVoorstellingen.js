@@ -1,18 +1,9 @@
 ﻿import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { SideNav } from "../../SideNav/SideNav";
+import GetAllVoorstellingen from "./GetAllVoorstellingen";
 
-export class OverzichtVoorstelling extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      id: "",
-      Title: "",
-      Genre: "",
-      Description: "",
-    };
-  }
-
+export class OverzichtVoorstellingen extends Component {
   render() {
     return (
       <div class="row">
@@ -25,24 +16,17 @@ export class OverzichtVoorstelling extends Component {
                   <h3 class="fw-lighter">Uitgelichte Voorstellingen</h3>
                 </div>
                 <div class="col-md-4 text-end">
-                  <button
+                  <Link
                     type="button"
+                    to={"/admin/voorstellingen/create"}
                     class="btn-custom btn btn-outline-info mb-3 text-end"
                   >
                     Voeg voorstelling toe
-                  </button>
+                  </Link>
                 </div>
               </div>
               <div class="voorstellingen">
-                <ul class="list-group">
-                  <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                      <div class="fw-bold">Voorstelling titel</div>
-                      Beschrijving
-                    </div>
-                    <span class="badge bg-success rounded-pill">Live</span>
-                  </li>
-                </ul>
+                <GetAllVoorstellingen />
               </div>
             </div>
           </div>
