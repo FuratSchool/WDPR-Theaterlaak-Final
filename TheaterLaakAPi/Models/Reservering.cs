@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TheaterLaakAPi.Models;
 
 public class Reservering
-{  
-    public int ReserveringId { get; set; }
+    {
+    [Key]    public int reserveringId { get; set; }
     public DateTime ReserveringsDatum { get; set; }
     public int isBetaald { get; set; }
 

@@ -26,7 +26,7 @@ public class DatabaseContext : IdentityDbContext<IdentityUser>
 
     public DbSet<TheaterLaakAPi.Models.Medewerker> Medewerkers { get; set; }
     public DbSet<TheaterLaakAPi.Models.Rang> Rangen { get; set; }
-    public DbSet<TheaterLaakAPi.Models.Reservering> Reserveringen { get; set; }
+    public DbSet<Reservering> Reserveringen { get; set; }
     public DbSet<TheaterLaakAPi.Models.Stoel> Stoelen { get; set; }
     public DbSet<Betaling> Betaling { get; set; } = default!;
     public DbSet<Bestelling> Bestelling { get; set; } = default!;

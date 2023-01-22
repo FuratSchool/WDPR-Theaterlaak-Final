@@ -16,14 +16,6 @@ export const Winkelwagen = (args, {cart}) => {
         <>
             <h1>Uw Winkelwagen</h1>
           <Ww/>
-
-          {/* <Reserveren handleAddreservatie={handleAddreservatie}/>     */}
-                <Button color="danger">
-                        Verwijder Tickets
-          </Button>
-                    <Link type="button" class='btn-primary' to={"/afrekenen"}>
-                        Afrekenen
-          </Link>
         </>
     );
   }
