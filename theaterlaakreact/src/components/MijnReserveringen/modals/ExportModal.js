@@ -6,7 +6,7 @@ const ExportModal = () => {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
   return (
-    <div>
+    <>
       <Button color ="primary"onClick={toggle}>Exporteer voorstellingen naar agenda</Button>
       <Modal isOpen = {modal}  toggle={toggle}>
         <ModalHeader>Title</ModalHeader>
@@ -15,7 +15,7 @@ const ExportModal = () => {
           <Button onClick={toggle}>ok</Button>
         </ModalFooter>
       </Modal>
-    </div>
+    </>
   );
 }
 
