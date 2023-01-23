@@ -6,9 +6,11 @@ import data from "./data.json";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Stoel from "./Stoel"
+import './bg.css'
 const StoelReservatie = () => {
   const [stoelen, setStoelen] = useState([]);
-  const [gereserveerdestoelen, setGereserveerdeStoelen] = useState([]);
+  const [selectedLijst,setSelectedLijst] = useState([])
+  
 
   let { voorstellingId } = useParams();
 
@@ -31,36 +33,28 @@ const StoelReservatie = () => {
   }, []);
 
   const rangenLijst = stoelen.map((item, index) =>(
-  <div className="row">{item.rangNr}<Stoel propOne={item.stoelNr}/></div>))
+  <div className=""><h2> Rij {item.rangNr}</h2><Stoel propOne={item.stoelNr} propTwo={item}  setSelectedLijst={setSelectedLijst}/></div>))
 
-  const resetStoelLists = () => {
-    window.location.reload(false);
-    setGereserveerdeStoelen([]);
-  };
+
 
   return (
     <>
-      <div className="container">
-        <div className="row justify-content-center ">
-          <div className="col-6">
-            
+
+        <div className="row flex-wrap">
+          <div className="col-lg-12">
             {rangenLijst}
             </div>
-          <div className="col">
-            <div className="row sticky-top mt-5">
-              <p>Mijn Gereserveerde stoelen:</p>
-              <div className="row justify-content-end">
-                <div className="col d-inline-flex flex-wrap my-2 gap-2">
-                  xxxxxx
-                  <CloseButton className="" onClick={resetStoelLists} />
-                </div>
-
+          <div className="">
+            <div className="row">
+              <p>Mijn Geselecteerde stoelen:</p>
+              {JSON.stringify(selectedLijst)}
+       
                 <Button color="success">Afronden</Button>
-              </div>
+
             </div>
           </div>
         </div>
-      </div>
+
     </>
   );
 };

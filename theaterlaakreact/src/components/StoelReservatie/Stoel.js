@@ -1,20 +1,35 @@
-import React,{useState} from 'react'
-import { ListGroupItem, Button} from 'reactstrap'
+import React,{useState, useEf} from 'react'
+import { ButtonGroup, Button} from 'reactstrap'
 
 const Stoel = (props) => {
-const [knop, setKnop] = useState(false)
+  const [cSelected, setCSelected] = useState([]);
 
-const handleOnClick = (e) =>{
-  setKnop(!knop)
-  //props.onClickSetGereseerveerd(current =>[...current,<Button color="primary"><div className="mx-2"></div>stoel: {e} {}</Button>])
-}
-const stoelenLijst = props.propOne.map((item, index) => (<div>{item}</div>))
+
+  const onCheckboxBtnClick = (selected) => {
+    const index = cSelected.indexOf(selected);
+    if (index < 0) {
+      cSelected.push(selected);
+    } else {
+      cSelected.splice(index, 1);
+    }
+    setCSelected([...cSelected]);
+  };
+
+const stoelenLijst = props.propOne.map((item) => (
+  <div className='mx-2'>
+<Button
+          color="primary"
+          outline
+          onClick={() => onCheckboxBtnClick(item)}
+          active={cSelected.includes(item)}
+>{item}<div className='mx-5'></div></Button></div>))
   return (
     <>
-    {stoelenLijst}
-    
-    
 
+    <ButtonGroup className='d-flex flex-wrap gap-3'>{stoelenLijst}</ButtonGroup>
+
+    {JSON.stringify(cSelected)}
+    
     </>
   )
 }
