@@ -1,14 +1,11 @@
-import {React, useState, useEffect} from 'react'
+import {React, useState, useContext} from 'react'
 import { ButtonGroup, Button} from 'reactstrap'
+import { StoelReservatieContext } from '../stoelReservatieContext';
 
 const Stoel = (props) => {
   const [cSelected, setCSelected] = useState([]);
-  const [toCart, setToCart] = useState([]);
-
-
-
-
   
+  const scontext = useContext(StoelReservatieContext)
 
   const checkBtnClick = (selected) => {
     const index = cSelected.indexOf(selected);
@@ -20,20 +17,21 @@ const Stoel = (props) => {
     setCSelected([...cSelected]);
   };
 
-  const cartBtnClick = (selected) => {
-    const index = toCart.indexOf(selected);
+  const getIdBtnClick = (selected) => {
+    const index = scontext.idStoelen.indexOf(selected);
     if (index < 0) {
-      toCart.push(selected);
+      scontext.idStoelen.push(selected);
     } else {
-      toCart.splice(index, 1);
+      scontext.idStoelen.splice(index, 1);
     }
-    setToCart([...toCart]);
+    scontext.setIdStoelen([...scontext.idStoelen]);
+    
   };
+
 
   const handleClick = (e, x) => {
     checkBtnClick(e)
-    cartBtnClick(x)
-
+    getIdBtnClick(x)
   }
 
 
@@ -60,7 +58,7 @@ const Stoel = (props) => {
       </div>
       </ButtonGroup>
     <p>Selected: {JSON.stringify(cSelected)}</p>
-    <p>cart: {JSON.stringify(toCart)}</p>
+    
     
 
     </>

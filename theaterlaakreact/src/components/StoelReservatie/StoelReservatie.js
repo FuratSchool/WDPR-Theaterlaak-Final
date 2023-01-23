@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Button, CloseButton, ButtonGroup } from "reactstrap";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import Rang from "./Rang";
-import Datum from "./Datum";
-import data from "./data.json";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Stoel from "./Stoel";
 import "./bg.css";
+import { StoelReservatieContext } from "../stoelReservatieContext";
+
 const StoelReservatie = () => {
   const [stoelen, setStoelen] = useState([]);
-
-  
+  const [idStoelen, setIdStoelen] = useState([]);
+  const [toCart, setToCart] = useState([]);
 
   let { voorstellingId } = useParams();
 
@@ -37,7 +35,6 @@ const StoelReservatie = () => {
           rang.stoelen.push(stoel);
         }
 
-
         setStoelen(rangen);
       } catch (err) {
         // Handle Error Here
@@ -47,22 +44,23 @@ const StoelReservatie = () => {
     sendGetRequest();
   }, []);
 
-  console.log(stoelen)
+  console.log(stoelen);
 
   const stoelenLijst = stoelen.map((item, index) => (
     <div className="row">
       {item.rangNr}
-      <Rang 
-      propOne={item}
-      
-      />
-
-
+      <Rang propOne={item} />
     </div>
   ));
 
-  return <>{stoelenLijst}</>;
+  return (
+    <>
+      <StoelReservatieContext.Provider value={{idStoelen, setIdStoelen, toCart, setToCart}}>
+        {stoelenLijst}
+        <p>id stoelen: {JSON.stringify(idStoelen)}</p>
+      </StoelReservatieContext.Provider>
+    </>
+  );
 };
 
 export default StoelReservatie;
-
