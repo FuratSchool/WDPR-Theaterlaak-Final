@@ -5,58 +5,64 @@ import Datum from "./Datum";
 import data from "./data.json";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Stoel from "./Stoel"
-import './bg.css'
+import Stoel from "./Stoel";
+import "./bg.css";
 const StoelReservatie = () => {
   const [stoelen, setStoelen] = useState([]);
-  const [selectedLijst,setSelectedLijst] = useState([])
+
   
 
   let { voorstellingId } = useParams();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5044/selectiestoelen/" + voorstellingId)
-      .then(function (response) {
-        // handle success
+    const sendGetRequest = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5044/selectiestoelen/" + voorstellingId
+        );
 
-        console.log(response);
-        setStoelen(response.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
+        var rangen = [];
+        for (let i = 0; i < res.data.length; i++) {
+          let stoel = res.data[i];
+          let rang = rangen.find(function (rang) {
+            return rang.rangNr === stoel.rangNr;
+          });
+          if (!rang) {
+            rang = {
+              rangNr: stoel.rangNr,
+              stoelen: [],
+            };
+            rangen.push(rang);
+          }
+          rang.stoelen.push(stoel);
+        }
+
+
+        setStoelen(rangen);
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
+    };
+    sendGetRequest();
   }, []);
 
-  const rangenLijst = stoelen.map((item, index) =>(
-  <div className=""><h2> Rij {item.rangNr}</h2><Stoel propOne={item.stoelNr} propTwo={item}  setSelectedLijst={setSelectedLijst}/></div>))
+  console.log(stoelen)
+
+  const stoelenLijst = stoelen.map((item, index) => (
+    <div className="row">
+      {item.rangNr}
+      <Rang 
+      propOne={item}
+      
+      />
 
 
+    </div>
+  ));
 
-  return (
-    <>
-
-        <div className="row flex-wrap">
-          <div className="col-lg-12">
-            {rangenLijst}
-            </div>
-          <div className="">
-            <div className="row">
-              <p>Mijn Geselecteerde stoelen:</p>
-              {JSON.stringify(selectedLijst)}
-       
-                <Button color="success">Afronden</Button>
-
-            </div>
-          </div>
-        </div>
-
-    </>
-  );
+  return <>{stoelenLijst}</>;
 };
 
 export default StoelReservatie;
+
