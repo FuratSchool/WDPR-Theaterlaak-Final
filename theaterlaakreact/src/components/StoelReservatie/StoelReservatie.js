@@ -1,67 +1,99 @@
-import React, { useState, useEffect } from "react";
-import { Button, CloseButton, ButtonGroup } from "reactstrap";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import Rang from "./Rang";
-import Datum from "./Datum";
-import data from "./data.json"
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import "./bg.css";
+import { StoelReservatieContext } from "../stoelReservatieContext";
+import { Button } from "reactstrap";
+import { Voorstelling } from "../Voorstelling";
+import { Winkelwagen } from '../Winkelwagen';
 
 const StoelReservatie = () => {
-  const [stoelen, setStoelen] = useState(data);
-  const [gereserveerdestoelen, setGereserveerdeStoelen] = useState([]);
-  const [voorstellingDatum, setVoorstellingDarum] = useState([1, 2, 3]);
-  const [datumSelected, setDatumSelected] = useState(null);
+  const [stoelen, setStoelen] = useState([]);
+  const [idStoelen, setIdStoelen] = useState([]);
+  const [voorstellinginfo, setVoorstellinginfo] = useState([]);
 
+  let { voorstellingId } = useParams();
 
+  useEffect(() => {
+    const FetchBeschikbareStoelen = async () => {
+      //get alle stoelen
+      try {
+        const response = await axios.get(
+          "http://localhost:5044/beschikbarestoelen/" + voorstellingId
+        );
 
-  const resetStoelLists = () => {
-    window.location.reload(false);
-    setGereserveerdeStoelen([]);
-  };
+        var rangen = [];
+        for (let i = 0; i < response.data.length; i++) {
+          let stoel = response.data[i];
+          let rang = rangen.find(function (rang) {
+            return rang.rangNr === stoel.rangNr;
+          });
+          if (!rang) {
+            rang = {
+              rangNr: stoel.rangNr,
+              stoelen: [],
+            };
+            rangen.push(rang);
+          }
+          rang.stoelen.push(stoel);
+        }
 
-  const rangen = stoelen.map((stoel, index) => (
-    <Rang
-      key={index}
-      stoelen={stoelen}
-      onClicksetStoelen={setStoelen}
-      onClickSetGereseerveerd={setGereserveerdeStoelen}
-      onClickgereserveerdestoelen={gereserveerdestoelen}
-      propOne={stoel}
-    />
-  ));
+        setStoelen(rangen);
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
+    };
 
-  const datums = voorstellingDatum.map((item, index) => (
-    <Datum
-      key={index}
-      datum={item}
-      datumSelected={datumSelected}
-      setDatumSelected={setDatumSelected}
-    />
+    const FetchVoorstellinginfo = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5044/voorstellinginfo/" + voorstellingId
+        );
+        console.log(response.data);
+        setVoorstellinginfo(String(response.data.map((item) => item.titel)));
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
+    };
+
+    FetchVoorstellinginfo();
+    FetchBeschikbareStoelen();
+  }, []);
+
+  const stoelenLijst = stoelen.map((item, index) => (
+    <div key={index}>
+      <div className="h2">Rij nummer {item.rangNr}</div>
+      <Rang propOne={item} />
+    </div>
   ));
 
   return (
     <>
-      <button>get data</button>
-
-      <div className="container">
-        <div className="row justify-content-center ">
-          <div className="col-6">{rangen}</div>
-          <div className="col">
-            <div className="row sticky-top mt-5">
-              <ButtonGroup>{datums}</ButtonGroup>
-              <p>Mijn Gereserveerde stoelen:</p>
-              <div className="row justify-content-end">
-                <div className="col d-inline-flex flex-wrap my-2 gap-2">
-                  {gereserveerdestoelen}
-
-                  <CloseButton className="" onClick={resetStoelLists} />
-                </div>
-
-                <Button color="success">Afronden</Button>
-              </div>
+      <StoelReservatieContext.Provider value={{ idStoelen, setIdStoelen }}>
+        <div className="row m-0 p-0">
+          <div className="col-sm-6 m-0 p-0">{stoelenLijst}</div>
+          <div className="col-sm-6  m-0 p-0">
+            <div className="sticky-top mt-0">
+              <h1>{voorstellinginfo}</h1>
+              <img
+                src="../images/card-img-1.jpg"
+                className="card-custom card-img-top"
+                alt="voorstelling naam"
+              ></img>
+              <Button className="mt-2 col-12" color="success">
+                Bestelling afronden
+              </Button>
+              <Button className="mt-2 mb-5 col-6" color="warning">
+                Bestelling naar winkelwagen
+              </Button>
             </div>
           </div>
+        {JSON.stringify(idStoelen)}
         </div>
-      </div>
+      </StoelReservatieContext.Provider>
     </>
   );
 };

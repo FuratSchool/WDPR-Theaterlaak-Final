@@ -66,9 +66,9 @@ const AppRoutes = [
     element: <Voorstelling />,
   },
   {
-    path: "/StoelReservatie/",
-    element: <StoelReservatie />,
-  },
+    path: '/StoelReservatie/:voorstellingId',
+    element: <StoelReservatie/>
+},
   {
     path: "/GebruikersInterface",
     element: <GebruikersInterface />,

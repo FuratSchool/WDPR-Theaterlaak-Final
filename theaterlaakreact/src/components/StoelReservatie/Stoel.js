@@ -1,25 +1,91 @@
-import React,{useState} from 'react'
-import { ListGroupItem, Button} from 'reactstrap'
+import { React, useState, useContext, useEffect } from "react";
+import { ButtonGroup, Button } from "reactstrap";
+import { StoelReservatieContext } from "../stoelReservatieContext";
 
 const Stoel = (props) => {
-const [knop, setKnop] = useState(false)
+  const [cSelected, setCSelected] = useState([]);
+  const [tekstMijnGeselecteerdStoelen, setTekstMijnGeselecteerdeStoelen] =
+    useState("");
 
-const handleOnClick = (e) =>{
-  setKnop(!knop)
-  props.onClickSetGereseerveerd(current =>[...current,<Button color="primary"><div className="mx-2"></div>stoel: {e} {}</Button>])
-}
+  const scontext = useContext(StoelReservatieContext);
+
+  useEffect(() => {
+    const tekstMijnGeselecteerdStoelen = () => {
+      if (cSelected.length > 0) {
+        setTekstMijnGeselecteerdeStoelen("Mijn geselecteerde stoelen:");
+      } else {
+        setTekstMijnGeselecteerdeStoelen("");
+      }
+    };
+    tekstMijnGeselecteerdStoelen();
+  });
+
+  const checkBtnClick = (selected) => {
+    const index = cSelected.indexOf(selected);
+    if (index < 0) {
+      cSelected.push(selected);
+    } else {
+      cSelected.splice(index, 1);
+    }
+    setCSelected([...cSelected]);
+  };
+
+  const getIdBtnClick = (selected) => {
+    const index = scontext.idStoelen.indexOf(selected);
+    if (index < 0) {
+      scontext.idStoelen.push(selected);
+    } else {
+      scontext.idStoelen.splice(index, 1);
+    }
+    scontext.setIdStoelen([...scontext.idStoelen]);
+  };
+
+  const handleClick = (e, x) => {
+    checkBtnClick(e);
+    getIdBtnClick(x);
+  };
+
+  const stoelenLijst = props.propOne.stoelen.map((item) => (
+    <div key={item.stoelId} className="me-2 mt-2 ">
+      <Button
+        key={item.stoelId}
+        color="primary"
+        outline
+        onClick={() => handleClick(item.stoelNr, item.stoelId)}
+        active={cSelected.includes(item.stoelNr, item.StoelId)}
+      >
+        {item.stoelNr}
+        <div className="mx-5"></div>
+      </Button>
+    </div>
+  ));
+
+  const addZeroToNumber = (e) => {
+    if (e < 10) {
+      return "0";
+    } else return "";
+  };
+
+  const selectedStoelenPill = cSelected.map((item, index) => (
+    <>
+      <Button key={index} disabled className="col-sm-2 p-0 mt-2 me-2">
+        {"Stoel " + addZeroToNumber(item) + item}
+      </Button>
+    </>
+  ));
 
   return (
     <>
-    <ListGroupItem
-    disabled={knop}
-    onClick={()=>handleOnClick(props.stoel.StoelId)}
-    action
-    >
-    <p>stoel: {props.stoel.StoelId}</p>
-    </ListGroupItem>
-    </>
-  )
-}
+      <ButtonGroup className="row m-0 p-0 ">
+        <div className="d-flex flex-wrap p-0">{stoelenLijst}</div>
+      </ButtonGroup>
 
-export default Stoel
+      <div className="row p-0 mx-0 my-3">
+        <p className="my-1 mx-0 p-0">{tekstMijnGeselecteerdStoelen}</p>
+        <div className="p-0">{selectedStoelenPill}</div>
+      </div>
+    </>
+  );
+};
+
+export default Stoel;

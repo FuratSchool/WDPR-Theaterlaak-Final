@@ -12,6 +12,7 @@ namespace TheaterLaakAPi.Controllers;
 
 public class PlaatsBestellingController : ControllerBase
 {
+
     private readonly DatabaseContext _context;
 
     public PlaatsBestellingController(DatabaseContext context)
@@ -19,63 +20,102 @@ public class PlaatsBestellingController : ControllerBase
         _context = context;
     }
 
-    // // GET: api/Zaal
-    // [HttpGet]
-    // [Route("selectiestoelen/{id}")]
-
-    // public async Task<ActionResult<IEnumerable<Zaal>>> getVoorstellingInfo(int id)
-    // {
-
-    //     var Stoel = await _context.Stoel.ToListAsync();
-    //     var Rang = await _context.Rang.ToListAsync();
-    //     var Zaal = await _context.Zaal.ToListAsync();
-    //     var Voorstelling = await _context.Voorstelling.ToListAsync();
-
-
-    //     var query = from s in Stoel
-    //                 from r in Rang
-    //                 from z in Zaal
-    //                 from v in Voorstelling
-    //                 where r.RangId == s.RangId
-    //                 where z.ZaalId == r.ZaalId
-    //                 where v.ZaalId == z.ZaalId
-    //                 where v.VoorstellingId == id
-
-    //                 select new
-    //                 {
-    //                     rangNr = r.RangNr,
-    //                     stoelId = s.StoelId,
-    //                     stoelNr = s.StoelNr
-    //                 };
-
-    //     return Ok(query);
-    // }
-
-    // GET: api/Zaal
     [HttpGet]
-    [Route("selectiestoelen/{id}")]
-    public async Task<ActionResult<IEnumerable<Zaal>>> getVoorstellingInfo(int id)
+    [Route("beschikbarestoelen/{id}")]
+
+    public async Task<ActionResult<IEnumerable<Zaal>>> getBeschikbareStoelen(int id)
     {
-        var Stoel = await _context.Stoelen.ToListAsync();
-        var Rang = await _context.Rangen.ToListAsync();
-        var Zaal = await _context.Zaal.ToListAsync();
+        if (_context.Reservering == null)
+        {
+            return NotFound();
+        }
+        if (_context.Stoel == null)
+        {
+            return NotFound();
+        }
+        if (_context.Voorstelling == null)
+        {
+            return NotFound();
+        }
+
+        var Reservering = await _context.Reservering.ToListAsync();
+        var Stoel = await _context.Stoel.ToListAsync();
         var Voorstelling = await _context.Voorstelling.ToListAsync();
 
-        var query =
-            from s in Stoel
-            from r in Rang
-            from z in Zaal
-            from v in Voorstelling
-            where r.RangId == s.RangId
-            where z.ZaalId == r.ZaalId
-            where v.ZaalId == z.ZaalId
-            where v.VoorstellingId == id
-            group r.RangNr by s.StoelNr into g
-            select new { RangNr = g.Key, StoelNr = g.ToList() };
+        if (Reservering == null)
+        {
+            return NotFound();
+        }
+        if (Stoel == null)
+        {
+            return NotFound();
+        }
+        if (Voorstelling == null)
+        {
+            return NotFound();
+        }
 
-        string json = JsonConvert.SerializeObject(query);
-        ;
+        var queryBetaaldeStoelen = from rs in Reservering
+                                   from s in Stoel
+                                   from v in Voorstelling
+                                   where s.StoelId == rs.StoelId
+                                   where rs.VoorstellingId == v.VoorstellingId
+                                   where rs.VoorstellingId == id
+                                   where rs.isBetaald == 0
 
-        return Ok(query);
+                                   select new
+                                   {
+                                       rangNr = s.RangId,
+                                       stoelNr = s.StoelNr,
+                                       stoelId = rs.StoelId,
+                                       voorstellingId = rs.VoorstellingId,
+                                   };
+
+        string json = JsonConvert.SerializeObject(queryBetaaldeStoelen);
+
+        return Ok(queryBetaaldeStoelen);
     }
+
+    [HttpGet("voorstellingInfo/{id}")]
+    public async Task<ActionResult<IEnumerable<Zaal>>> getVoorstellingInfo(int id)
+    {
+        var Voorstelling = await _context.Voorstelling.ToListAsync();
+
+        if (Voorstelling == null)
+        {
+            return NotFound();
+        }
+
+        var queryVoorstellingInfo = from v in Voorstelling
+                                    where v.VoorstellingId == id
+                                    select new
+                                    {
+                                        voorstellingid = v.VoorstellingId,
+                                        titel = v.Titel,
+                                        beschrijving = v.Beschrijving,
+                                        tijd = v.Tijd,
+                                        prijs = v.Prijs
+                                    };
+
+        if (Voorstelling == null)
+        {
+            return NotFound();
+        }
+
+
+        string json = JsonConvert.SerializeObject(queryVoorstellingInfo);
+
+        return Ok(queryVoorstellingInfo);
+    }
+
+
+
+    [HttpGet("voorstellingInfo/{id}")]
+    public async Task<ActionResult<IEnumerable<Zaal>>> bestellingToCart(int id, Voorstelling voorstelling)
+    {
+
+        return Ok();
+    }
+
+
 }
