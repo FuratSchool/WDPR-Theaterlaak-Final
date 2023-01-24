@@ -2,7 +2,6 @@ import React, { useState, useEffect, createContext, useContext } from "react";
 import Rang from "./Rang";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import "./bg.css";
 import { StoelReservatieContext } from "../stoelReservatieContext";
 import { Button } from "reactstrap";
 
