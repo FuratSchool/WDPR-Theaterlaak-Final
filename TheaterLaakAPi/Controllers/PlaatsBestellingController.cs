@@ -25,11 +25,11 @@ public class PlaatsBestellingController : ControllerBase
 
     public async Task<ActionResult<IEnumerable<Zaal>>> getBeschikbareStoelen(int id)
     {
-        if (_context.Reservering == null)
+        if (_context.Reserveringen == null)
         {
             return NotFound();
         }
-        if (_context.Stoel == null)
+        if (_context.Stoelen == null)
         {
             return NotFound();
         }
@@ -38,8 +38,8 @@ public class PlaatsBestellingController : ControllerBase
             return NotFound();
         }
 
-        var Reservering = await _context.Reservering.ToListAsync();
-        var Stoel = await _context.Stoel.ToListAsync();
+        var Reservering = await _context.Reserveringen.ToListAsync();
+        var Stoel = await _context.Stoelen.ToListAsync();
         var Voorstelling = await _context.Voorstelling.ToListAsync();
 
         if (Reservering == null)
