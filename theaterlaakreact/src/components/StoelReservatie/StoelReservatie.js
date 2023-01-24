@@ -5,8 +5,6 @@ import { useParams } from "react-router-dom";
 import "./bg.css";
 import { StoelReservatieContext } from "../stoelReservatieContext";
 import { Button } from "reactstrap";
-import { Voorstelling } from "../Voorstelling";
-import { Winkelwagen } from '../Winkelwagen';
 
 const StoelReservatie = () => {
   const [stoelen, setStoelen] = useState([]);

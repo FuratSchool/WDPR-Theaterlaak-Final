@@ -106,16 +106,16 @@ public class PlaatsBestellingController : ControllerBase
         string json = JsonConvert.SerializeObject(queryVoorstellingInfo);
 
         return Ok(queryVoorstellingInfo);
-    }
+    }}
 
 
 
-    [HttpGet("voorstellingInfo/{id}")]
-    public async Task<ActionResult<IEnumerable<Zaal>>> bestellingToCart(int id, Voorstelling voorstelling)
-    {
+//     [HttpGet("voorstellingInfo/{id}")]
+//     public async Task<ActionResult<IEnumerable<Zaal>>> bestellingToCart(int id, Voorstelling voorstelling)
+//     {
 
-        return Ok();
-    }
+//         return Ok();
+//     }
 
 
-}
+// }

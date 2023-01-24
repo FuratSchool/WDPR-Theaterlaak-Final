@@ -15,8 +15,8 @@ public static class ModelBuilderExtensions
     {
 
         builder.Entity<Zaal>().HasData(
-            new Zaal { ZaalId = 1 },
-            new Zaal { ZaalId = 2 });
+            new Zaal { ZaalId = 1, Title="x" },
+            new Zaal { ZaalId = 2, Title="x"});
 
         builder.Entity<Voorstelling>().HasData(
             new Voorstelling { VoorstellingId = 1, Titel = "Les Miserables", Tijd = new DateTime(2023, 1, 1), Beschrijving = "miauw", Prijs = 15.00, StartDatum = new DateTime(2023, 1, 1), EindDatum = new DateTime(2023, 1, 1), ZaalId = 1 },
