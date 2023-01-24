@@ -1,0 +1,10 @@
+select * 
+FROM Reservering rs
+where rs.VoorstellingId = 1 and rs.isBetaald = 0
+
+
+
+
+
+
+

@@ -2,13 +2,14 @@ import React, { Component, useState} from "react";
 import { Route, Routes } from "react-router-dom";
 import AppRoutes from "./AppRoutes";
 import { Layout } from "./components/Layout";
-import { StoelReservatieContext } from "./components/stoelReservatieContext";
+
+
 
 const App = () => {
   
   return (
     <div>
-      
+     
         <Layout>
           <Routes>
             {AppRoutes.map((route, index) => {
@@ -17,6 +18,7 @@ const App = () => {
             })}
           </Routes>
         </Layout>
+
       
     </div>
   );

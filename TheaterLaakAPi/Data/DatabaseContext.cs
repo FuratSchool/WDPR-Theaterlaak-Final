@@ -18,7 +18,7 @@ public class DatabaseContext : IdentityDbContext<IdentityUser>
     public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; }
     public DbSet<TheaterLaakAPi.Models.Stoel> Stoel { get; set; }
     public DbSet<TheaterLaakAPi.Models.Rang> Rang { get; set; }
-
+public DbSet<TheaterLaakAPi.Models.Reservering> Reservering { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

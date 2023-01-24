@@ -4,24 +4,28 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./bg.css";
 import { StoelReservatieContext } from "../stoelReservatieContext";
+import { Button } from "reactstrap";
+import { Voorstelling } from "../Voorstelling";
+import { Winkelwagen } from '../Winkelwagen';
 
 const StoelReservatie = () => {
   const [stoelen, setStoelen] = useState([]);
   const [idStoelen, setIdStoelen] = useState([]);
-  const [toCart, setToCart] = useState([]);
+  const [voorstellinginfo, setVoorstellinginfo] = useState([]);
 
   let { voorstellingId } = useParams();
 
   useEffect(() => {
-    const sendGetRequest = async () => {
+    const FetchBeschikbareStoelen = async () => {
+      //get alle stoelen
       try {
-        const res = await axios.get(
-          "http://localhost:5044/selectiestoelen/" + voorstellingId
+        const response = await axios.get(
+          "http://localhost:5044/beschikbarestoelen/" + voorstellingId
         );
 
         var rangen = [];
-        for (let i = 0; i < res.data.length; i++) {
-          let stoel = res.data[i];
+        for (let i = 0; i < response.data.length; i++) {
+          let stoel = response.data[i];
           let rang = rangen.find(function (rang) {
             return rang.rangNr === stoel.rangNr;
           });
@@ -41,23 +45,54 @@ const StoelReservatie = () => {
         console.error(err);
       }
     };
-    sendGetRequest();
+
+    const FetchVoorstellinginfo = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5044/voorstellinginfo/" + voorstellingId
+        );
+        console.log(response.data);
+        setVoorstellinginfo(String(response.data.map((item) => item.titel)));
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
+    };
+
+    FetchVoorstellinginfo();
+    FetchBeschikbareStoelen();
   }, []);
 
-  console.log(stoelen);
-
   const stoelenLijst = stoelen.map((item, index) => (
-    <div className="row">
-      {item.rangNr}
+    <div key={index}>
+      <div className="h2">Rij nummer {item.rangNr}</div>
       <Rang propOne={item} />
     </div>
   ));
 
   return (
     <>
-      <StoelReservatieContext.Provider value={{idStoelen, setIdStoelen, toCart, setToCart}}>
-        {stoelenLijst}
-        <p>id stoelen: {JSON.stringify(idStoelen)}</p>
+      <StoelReservatieContext.Provider value={{ idStoelen, setIdStoelen }}>
+        <div className="row m-0 p-0">
+          <div className="col-sm-6 m-0 p-0">{stoelenLijst}</div>
+          <div className="col-sm-6  m-0 p-0">
+            <div className="sticky-top mt-0">
+              <h1>{voorstellinginfo}</h1>
+              <img
+                src="../images/card-img-1.jpg"
+                className="card-custom card-img-top"
+                alt="voorstelling naam"
+              ></img>
+              <Button className="mt-2 col-12" color="success">
+                Bestelling afronden
+              </Button>
+              <Button className="mt-2 mb-5 col-6" color="warning">
+                Bestelling naar winkelwagen
+              </Button>
+            </div>
+          </div>
+        {JSON.stringify(idStoelen)}
+        </div>
       </StoelReservatieContext.Provider>
     </>
   );

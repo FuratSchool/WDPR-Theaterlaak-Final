@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { ListGroup, ListGroupItemHeading } from "reactstrap";
+import React from "react";
 import Stoel from "./Stoel";
 
 const Rang = (props) => {
   return (
     <>
-      <div className="row m-0 gap-2">
-        
+      <div className="row m-0 p-0">
         <Stoel 
         setCSelected={props.setCSelected}
         onCheckboxBtnClick={props.onCheckboxBtnClick}

@@ -369,7 +369,7 @@ namespace TheaterLaakAPi.Migrations
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 1,
                             VoorstellingId = 1,
-                            isBetaald = 0
+                            isBetaald = 1
                         },
                         new
                         {
@@ -378,7 +378,7 @@ namespace TheaterLaakAPi.Migrations
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 2,
                             VoorstellingId = 1,
-                            isBetaald = 0
+                            isBetaald = 1
                         },
                         new
                         {
@@ -394,8 +394,8 @@ namespace TheaterLaakAPi.Migrations
                             ReserveringId = 4,
                             ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StoelId = 1,
-                            VoorstellingId = 2,
+                            StoelId = 4,
+                            VoorstellingId = 1,
                             isBetaald = 0
                         },
                         new
@@ -403,9 +403,297 @@ namespace TheaterLaakAPi.Migrations
                             ReserveringId = 5,
                             ApplicationUserId = 5,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 5,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 6,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 6,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 7,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 7,
+                            VoorstellingId = 1,
+                            isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 8,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 8,
+                            VoorstellingId = 1,
+                            isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 9,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 9,
+                            VoorstellingId = 1,
+                            isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 10,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 10,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 11,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 11,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 12,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 12,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 13,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 13,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 14,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 14,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 15,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 15,
+                            VoorstellingId = 1,
+                            isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 16,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 16,
+                            VoorstellingId = 1,
+                            isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 17,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 17,
+                            VoorstellingId = 1,
+                            isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 18,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 18,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 19,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 19,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 20,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 20,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 21,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 21,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 22,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 22,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 23,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 23,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 24,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 24,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 25,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 25,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 26,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 26,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 27,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 27,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 28,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 28,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 29,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 29,
+                            VoorstellingId = 1,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 30,
+                            ApplicationUserId = 2,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 1,
+                            VoorstellingId = 2,
+                            isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 31,
+                            ApplicationUserId = 3,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 2,
                             VoorstellingId = 2,
                             isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 32,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 3,
+                            VoorstellingId = 2,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 33,
+                            ApplicationUserId = 5,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 4,
+                            VoorstellingId = 2,
+                            isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 34,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 5,
+                            VoorstellingId = 2,
+                            isBetaald = 1
+                        },
+                        new
+                        {
+                            ReserveringId = 35,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 6,
+                            VoorstellingId = 2,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 36,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 7,
+                            VoorstellingId = 2,
+                            isBetaald = 0
+                        },
+                        new
+                        {
+                            ReserveringId = 37,
+                            ApplicationUserId = 4,
+                            ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StoelId = 8,
+                            VoorstellingId = 2,
+                            isBetaald = 0
                         });
                 });
 
@@ -468,21 +756,189 @@ namespace TheaterLaakAPi.Migrations
                         },
                         new
                         {
+                            StoelId = 6,
+                            RangId = 3,
+                            StoelNr = 2,
+                            isInvalide = 0
+                        },
+                        new
+                        {
                             StoelId = 7,
+                            RangId = 3,
+                            StoelNr = 3,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 8,
+                            RangId = 3,
+                            StoelNr = 4,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 9,
+                            RangId = 3,
+                            StoelNr = 5,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 10,
+                            RangId = 3,
+                            StoelNr = 6,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 11,
+                            RangId = 3,
+                            StoelNr = 7,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 12,
+                            RangId = 3,
+                            StoelNr = 8,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 13,
+                            RangId = 3,
+                            StoelNr = 9,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 14,
+                            RangId = 3,
+                            StoelNr = 10,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 15,
+                            RangId = 3,
+                            StoelNr = 11,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 16,
+                            RangId = 3,
+                            StoelNr = 12,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 17,
+                            RangId = 3,
+                            StoelNr = 13,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 18,
+                            RangId = 3,
+                            StoelNr = 14,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 19,
+                            RangId = 3,
+                            StoelNr = 15,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 20,
+                            RangId = 3,
+                            StoelNr = 16,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 21,
+                            RangId = 3,
+                            StoelNr = 17,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 22,
+                            RangId = 3,
+                            StoelNr = 18,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 23,
+                            RangId = 3,
+                            StoelNr = 19,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 24,
+                            RangId = 3,
+                            StoelNr = 20,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 25,
+                            RangId = 3,
+                            StoelNr = 21,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 26,
+                            RangId = 3,
+                            StoelNr = 22,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 27,
+                            RangId = 3,
+                            StoelNr = 23,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 28,
+                            RangId = 3,
+                            StoelNr = 24,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 29,
+                            RangId = 3,
+                            StoelNr = 25,
+                            isInvalide = 0
+                        },
+                        new
+                        {
+                            StoelId = 30,
                             RangId = 4,
                             StoelNr = 1,
                             isInvalide = 1
                         },
                         new
                         {
-                            StoelId = 8,
+                            StoelId = 31,
                             RangId = 4,
                             StoelNr = 2,
                             isInvalide = 0
                         },
                         new
                         {
-                            StoelId = 9,
+                            StoelId = 32,
                             RangId = 5,
                             StoelNr = 1,
                             isInvalide = 0
@@ -533,7 +989,7 @@ namespace TheaterLaakAPi.Migrations
                             Prijs = 15.0,
                             StartDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Tijd = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titel = "kat",
+                            Titel = "Les Miserables",
                             ZaalId = 1
                         },
                         new
@@ -544,7 +1000,7 @@ namespace TheaterLaakAPi.Migrations
                             Prijs = 15.0,
                             StartDatum = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Tijd = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titel = "hond",
+                            Titel = "Matilda the Musical",
                             ZaalId = 1
                         },
                         new
@@ -555,7 +1011,7 @@ namespace TheaterLaakAPi.Migrations
                             Prijs = 15.0,
                             StartDatum = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Tijd = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titel = "luipaard",
+                            Titel = "Wicked",
                             ZaalId = 2
                         });
                 });
