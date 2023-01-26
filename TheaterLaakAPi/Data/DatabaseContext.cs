@@ -7,7 +7,7 @@ using TheaterLaakAPi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-public class DatabaseContext : IdentityDbContext<IdentityUser>
+public class DatabaseContext : IdentityDbContext<ApplicationUser>
 {
     public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
@@ -16,10 +16,12 @@ public class DatabaseContext : IdentityDbContext<IdentityUser>
         base.OnModelCreating(builder);
     }
 
+
+
+
     public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; }
     public DbSet<TheaterLaakAPi.Models.Zaal> Zaal { get; set; }
     public DbSet<TheaterLaakAPi.Models.Admin> Admins { get; set; }
-    public DbSet<TheaterLaakAPi.Models.ApplicationUser> ApplicationUsers { get; set; }
     public DbSet<TheaterLaakAPi.Models.Artiest> Artiesten { get; set; }
     public DbSet<TheaterLaakAPi.Models.Donateur> Donateurs { get; set; }
     public DbSet<TheaterLaakAPi.Models.Groep> Groepen { get; set; }

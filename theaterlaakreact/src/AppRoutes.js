@@ -9,6 +9,8 @@ import { Cancel } from "./components/Cancel";
 import { Succes } from "./components/Succes";
 import { Winkelwagen } from "./components/Winkelwagen/Winkelwagen";
 
+import StoelReservatie from "./components/StoelReservatie/StoelReservatie";
+
 //admin
 import { OverzichtVoorstellingen } from "./components/Admin/Voorstellingen/OverzichtVoorstellingen";
 import { DetailsVoorstelling } from "./components/Admin/Voorstellingen/DetailsVoorstelling";
@@ -17,6 +19,8 @@ import { CreateZaal } from "./components/Admin/Zalen/CreateZaal";
 import { CreatePlanning } from "./components/Admin/Planning/CreatePlanning";
 import { PlanningsOverzicht } from "./components/Admin/Planning/PlanningsOverzicht";
 import { Plannen } from "./components/Admin/Planning/Plannen";
+import { CreateBand } from "./components/Bands/Create/CreateBand";
+import { Bandpagina } from "./components/Bands/BandPagina";
 
 //Authentication
 import { Login } from "./components/Authentication/Login/Login";
@@ -61,7 +65,10 @@ const AppRoutes = [
     path: "/voorstelling",
     element: <Voorstelling />,
   },
-
+  {
+    path: "/StoelReservatie/",
+    element: <StoelReservatie />,
+  },
   {
     path: "/GebruikersInterface",
     element: <GebruikersInterface />,
@@ -123,6 +130,14 @@ const AppRoutes = [
   {
     path: "/admin/planning/update",
     element: <Plannen />,
+  },
+  {
+    path: "/admin/bandpagina",
+    element: <Bandpagina />,
+  },
+  {
+    path: "/admin/bandform",
+    element: <CreateBand />,
   },
 ];
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TheaterLaakAPi.Migrations
 {
     /// <inheritdoc />
-    public partial class doehet : Migration
+    public partial class ee : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,9 +30,9 @@ namespace TheaterLaakAPi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Voornaam = table.Column<string>(type: "TEXT", nullable: false),
+                    Achternaam = table.Column<string>(type: "TEXT", nullable: false),
                     Discriminator = table.Column<string>(type: "TEXT", nullable: false),
-                    Voornaam = table.Column<string>(type: "TEXT", nullable: true),
-                    Achternaam = table.Column<string>(type: "TEXT", nullable: true),
                     Bedrag = table.Column<double>(type: "REAL", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
