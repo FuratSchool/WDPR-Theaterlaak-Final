@@ -7,6 +7,7 @@ using System.Configuration;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using TheaterLaakAPi.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,9 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DbContext, DatabaseContext>(
     opt => opt.UseSqlite("Data Source=mydb.db")
 );
-
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(opt =>
     {

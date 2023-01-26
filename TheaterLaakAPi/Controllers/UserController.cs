@@ -38,15 +38,7 @@ namespace TheaterLaakAPi.Controllers
             {
                 return NotFound();
             }
-
-            var user = new ApplicationUser
-            {
-                Email = result.Email,
-                UserName = result.UserName,
-                Voornaam = result.Voornaam,
-                Achternaam = result.Achternaam
-            };
-            return Ok(user);
+            return Ok(result);
         }
     }
 }

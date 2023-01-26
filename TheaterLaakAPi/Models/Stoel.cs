@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace TheaterLaakAPi.Models;
 
 public class Stoel
 {
+    [Key]
     public int Id { get; set; }
     public int StoelNr { get; set; }
     public int isInvalide { get; set; }
