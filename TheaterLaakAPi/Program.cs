@@ -79,11 +79,12 @@ builder.Services.AddCors(p => p.AddPolicy("corspolicy", build => {
 builder.Services.AddDistributedMemoryCache();
 
 var app = builder.Build();
+//swagger erbuiten voor de development
+app.UseSwagger();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
     app.UseSwaggerUI();
 }
 app.UseSession();
