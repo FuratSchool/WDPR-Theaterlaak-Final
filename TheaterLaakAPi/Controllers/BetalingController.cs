@@ -130,5 +130,7 @@ namespace TheaterLaakAPi.Controllers
         {
             return (_context.Betaling?.Any(e => e.id == id)).GetValueOrDefault();
         }
+
+        
     }
 }

@@ -54,10 +54,10 @@ export function GetAllVoorstellingen() {
                   <p>{voorstelling.description}</p>
                   <Link
                     type="button"
-                    to={"/voorstelling"}
+                    to={"/StoelReservatie/1"}
                     class="btn-custom btn btn-info btn-purple  float-end text-white"
                   >
-                    Meer info
+                    bestel ticket
                   </Link>
                 </div>
               </div>
