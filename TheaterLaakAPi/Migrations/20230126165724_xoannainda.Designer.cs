@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TheaterLaakAPi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230126165724_xoannainda")]
+    partial class xoannainda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -369,24 +372,27 @@ namespace TheaterLaakAPi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("ReserveringsDatum")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("StoelId")
+                    b.Property<int?>("ApplicationUserId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("VoorstellingId")
+                    b.Property<string>("ApplicationUserId1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ReserveringsDatum")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StoelId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("isBetaald")
+                    b.Property<int>("VoorstellingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("isBetaald")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ReserveringId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("ApplicationUserId1");
 
                     b.HasIndex("StoelId");
 
@@ -1179,15 +1185,19 @@ namespace TheaterLaakAPi.Migrations
                 {
                     b.HasOne("TheaterLaakAPi.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Reserveringen")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId1");
 
                     b.HasOne("TheaterLaakAPi.Models.Stoel", "Stoel")
                         .WithMany("Reserveringen")
-                        .HasForeignKey("StoelId");
+                        .HasForeignKey("StoelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TheaterLaakAPi.Models.Voorstelling", "Voorstelling")
                         .WithMany("Reserveringen")
-                        .HasForeignKey("VoorstellingId");
+                        .HasForeignKey("VoorstellingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ApplicationUser");
 

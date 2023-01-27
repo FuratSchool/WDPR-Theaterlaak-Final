@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TheaterLaakAPi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230126161709_xosajxja")]
+    partial class xosajxja
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -369,24 +372,27 @@ namespace TheaterLaakAPi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("ReserveringsDatum")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("StoelId")
+                    b.Property<int?>("ApplicationUserId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("VoorstellingId")
+                    b.Property<string>("ApplicationUserId1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ReserveringsDatum")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StoelId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("isBetaald")
+                    b.Property<int>("VoorstellingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("isBetaald")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ReserveringId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("ApplicationUserId1");
 
                     b.HasIndex("StoelId");
 
@@ -398,6 +404,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 1,
+                            ApplicationUserId = 1,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 1,
                             VoorstellingId = 1,
@@ -406,6 +413,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 2,
+                            ApplicationUserId = 2,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 2,
                             VoorstellingId = 1,
@@ -414,6 +422,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 3,
+                            ApplicationUserId = 3,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 3,
                             VoorstellingId = 1,
@@ -422,6 +431,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 4,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 4,
                             VoorstellingId = 1,
@@ -430,6 +440,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 5,
+                            ApplicationUserId = 5,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 5,
                             VoorstellingId = 1,
@@ -438,6 +449,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 6,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 6,
                             VoorstellingId = 1,
@@ -446,6 +458,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 7,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 7,
                             VoorstellingId = 1,
@@ -454,6 +467,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 8,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 8,
                             VoorstellingId = 1,
@@ -462,6 +476,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 9,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 9,
                             VoorstellingId = 1,
@@ -470,6 +485,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 10,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 10,
                             VoorstellingId = 1,
@@ -478,6 +494,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 11,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 11,
                             VoorstellingId = 1,
@@ -486,6 +503,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 12,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 12,
                             VoorstellingId = 1,
@@ -494,6 +512,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 13,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 13,
                             VoorstellingId = 1,
@@ -502,6 +521,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 14,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 14,
                             VoorstellingId = 1,
@@ -510,6 +530,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 15,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 15,
                             VoorstellingId = 1,
@@ -518,6 +539,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 16,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 16,
                             VoorstellingId = 1,
@@ -526,6 +548,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 17,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 17,
                             VoorstellingId = 1,
@@ -534,6 +557,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 18,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 18,
                             VoorstellingId = 1,
@@ -542,6 +566,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 19,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 19,
                             VoorstellingId = 1,
@@ -550,6 +575,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 20,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 20,
                             VoorstellingId = 1,
@@ -558,6 +584,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 21,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 21,
                             VoorstellingId = 1,
@@ -566,6 +593,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 22,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 22,
                             VoorstellingId = 1,
@@ -574,6 +602,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 23,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 23,
                             VoorstellingId = 1,
@@ -582,6 +611,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 24,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 24,
                             VoorstellingId = 1,
@@ -590,6 +620,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 25,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 25,
                             VoorstellingId = 1,
@@ -598,6 +629,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 26,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 26,
                             VoorstellingId = 1,
@@ -606,6 +638,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 27,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 27,
                             VoorstellingId = 1,
@@ -614,6 +647,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 28,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 28,
                             VoorstellingId = 1,
@@ -622,6 +656,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 29,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 29,
                             VoorstellingId = 1,
@@ -630,6 +665,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 30,
+                            ApplicationUserId = 2,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 1,
                             VoorstellingId = 2,
@@ -638,6 +674,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 31,
+                            ApplicationUserId = 3,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 2,
                             VoorstellingId = 2,
@@ -646,6 +683,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 32,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 3,
                             VoorstellingId = 2,
@@ -654,6 +692,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 33,
+                            ApplicationUserId = 5,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 4,
                             VoorstellingId = 2,
@@ -662,6 +701,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 34,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 5,
                             VoorstellingId = 2,
@@ -670,6 +710,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 35,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 6,
                             VoorstellingId = 2,
@@ -678,6 +719,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 36,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 7,
                             VoorstellingId = 2,
@@ -686,6 +728,7 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             ReserveringId = 37,
+                            ApplicationUserId = 4,
                             ReserveringsDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StoelId = 8,
                             VoorstellingId = 2,
@@ -1179,15 +1222,19 @@ namespace TheaterLaakAPi.Migrations
                 {
                     b.HasOne("TheaterLaakAPi.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Reserveringen")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId1");
 
                     b.HasOne("TheaterLaakAPi.Models.Stoel", "Stoel")
                         .WithMany("Reserveringen")
-                        .HasForeignKey("StoelId");
+                        .HasForeignKey("StoelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TheaterLaakAPi.Models.Voorstelling", "Voorstelling")
                         .WithMany("Reserveringen")
-                        .HasForeignKey("VoorstellingId");
+                        .HasForeignKey("VoorstellingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ApplicationUser");
 

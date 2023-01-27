@@ -4,13 +4,23 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { StoelReservatieContext } from "../stoelReservatieContext";
 import { Button } from "reactstrap";
+import { useAuthHeader, useAuthUser } from "react-auth-kit";
 
 const StoelReservatie = () => {
   const [stoelen, setStoelen] = useState([]);
   const [idStoelen, setIdStoelen] = useState([]);
-  const [voorstellinginfo, setVoorstellinginfo] = useState([]);
+  const [voorstellingTitel, setVoorstellingTitel] = useState([]);
+  const [user, setUser] = useState([]);
 
   let { voorstellingId } = useParams();
+  const authHeader = useAuthHeader();
+  const auth = useAuthUser();
+
+  const jwtAuthenticationHeader = {
+    headers: {
+      Authorization: authHeader(),
+    },
+  };
 
   useEffect(() => {
     const FetchBeschikbareStoelen = async () => {
@@ -19,7 +29,6 @@ const StoelReservatie = () => {
         const response = await axios.get(
           "http://localhost:5044/beschikbarestoelen/" + voorstellingId
         );
-
         var rangen = [];
         for (let i = 0; i < response.data.length; i++) {
           let stoel = response.data[i];
@@ -49,16 +58,51 @@ const StoelReservatie = () => {
           "http://localhost:5044/voorstellinginfo/" + voorstellingId
         );
         console.log(response.data);
-        setVoorstellinginfo(String(response.data.map((item) => item.titel)));
+        setVoorstellingTitel(String(response.data.map((item) => item.titel)));
       } catch (err) {
         // Handle Error Here
         console.error(err);
       }
     };
 
+    const FetchLoggedUser = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5044/api/User/Account",
+          jwtAuthenticationHeader
+        );
+        console.log(response);
+        setUser(response.data);
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
+    };
+    FetchLoggedUser();
     FetchVoorstellinginfo();
     FetchBeschikbareStoelen();
   }, []);
+
+  const putUserInReservering = async () => {
+    idStoelen.forEach((stoelId) => {
+      axios
+        .post("http://localhost:5044/toCart/",{
+          vid: voorstellingId,
+          sid: stoelId,
+          uid: user.id
+
+        }
+          
+        )
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+
+  };
 
   const stoelenLijst = stoelen.map((item, index) => (
     <div key={index}>
@@ -69,26 +113,26 @@ const StoelReservatie = () => {
 
   return (
     <>
+    {JSON.stringify(user.id)}
       <StoelReservatieContext.Provider value={{ idStoelen, setIdStoelen }}>
         <div className="row m-0 p-0">
           <div className="col-sm-6 m-0 p-0">{stoelenLijst}</div>
           <div className="col-sm-6  m-0 p-0">
             <div className="sticky-top mt-0">
-              <h1>{voorstellinginfo}</h1>
+              <h1>{voorstellingTitel}</h1>
               <img
                 src="../images/card-img-1.jpg"
                 className="card-custom card-img-top"
                 alt="voorstelling naam"
               ></img>
-              <Button className="mt-2 col-12" color="success">
+              {/* <Button className="mt-2 col-12" color="success">
                 Bestelling afronden
-              </Button>
-              <Button className="mt-2 mb-5 col-6" color="warning">
-                Bestelling naar winkelwagen
+              </Button> */}
+              <Button onClick={()=>putUserInReservering()} className="mt-2 mb-5 col-6" color="warning">
+                Verplaats tickets naar winkelwagen
               </Button>
             </div>
           </div>
-        {JSON.stringify(idStoelen)}
         </div>
       </StoelReservatieContext.Provider>
     </>

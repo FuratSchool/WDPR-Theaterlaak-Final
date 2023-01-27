@@ -15,8 +15,8 @@ public static class ModelBuilderExtensions
     {
 
         builder.Entity<Zaal>().HasData(
-            new Zaal { ZaalId = 1, Title="x" },
-            new Zaal { ZaalId = 2, Title="x"});
+            new Zaal { ZaalId = 1, Title = "x" },
+            new Zaal { ZaalId = 2, Title = "x" });
 
         builder.Entity<Voorstelling>().HasData(
             new Voorstelling { VoorstellingId = 1, Titel = "Les Miserables", Tijd = new DateTime(2023, 1, 1), Beschrijving = "miauw", Prijs = 15.00, StartDatum = new DateTime(2023, 1, 1), EindDatum = new DateTime(2023, 1, 1), ZaalId = 1 },
@@ -79,44 +79,44 @@ public static class ModelBuilderExtensions
         );
 
         builder.Entity<Reservering>().HasData(
-        new { ReserveringId = 1, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 1, VoorstellingId = 1, StoelId = 1 },
-        new { ReserveringId = 2, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 2, VoorstellingId = 1, StoelId = 2 },
-        new { ReserveringId = 3, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 3, VoorstellingId = 1, StoelId = 3 },
-        new { ReserveringId = 4, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 4 },
-        new { ReserveringId = 5, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 5, VoorstellingId = 1, StoelId = 5 },
-        new { ReserveringId = 6, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 6 },
-        new { ReserveringId = 7, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 7 },
-        new { ReserveringId = 8, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 8 },
-        new { ReserveringId = 9, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 9 },
-        new { ReserveringId = 10, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 10 },
-        new { ReserveringId = 11, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 11 },
-        new { ReserveringId = 12, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 12 },
-        new { ReserveringId = 13, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 13 },
-        new { ReserveringId = 14, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 14 },
-        new { ReserveringId = 15, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 15 },
-        new { ReserveringId = 16, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 16 },
-        new { ReserveringId = 17, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 17 },
-        new { ReserveringId = 18, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 18 },
-        new { ReserveringId = 19, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 19 },
-        new { ReserveringId = 20, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 20 },
-        new { ReserveringId = 21, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 21 },
-        new { ReserveringId = 22, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 22 },
-        new { ReserveringId = 23, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 23 },
-        new { ReserveringId = 24, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 24 },
-        new { ReserveringId = 25, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 25 },
-        new { ReserveringId = 26, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 26 },
-        new { ReserveringId = 27, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 27 },
-        new { ReserveringId = 28, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 28 },
-        new { ReserveringId = 29, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 1, StoelId = 29 },
+        new { ReserveringId = 1, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 1 },
+        new { ReserveringId = 2, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 2 },
+        new { ReserveringId = 3, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 3 },
+        new { ReserveringId = 4, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 4 },
+        new { ReserveringId = 5, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 5 },
+        new { ReserveringId = 6, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 6 },
+        new { ReserveringId = 7, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 7 },
+        new { ReserveringId = 8, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 8 },
+        new { ReserveringId = 9, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 9 },
+        new { ReserveringId = 10, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 10 },
+        new { ReserveringId = 11, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 11 },
+        new { ReserveringId = 12, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 12 },
+        new { ReserveringId = 13, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 13 },
+        new { ReserveringId = 14, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 14 },
+        new { ReserveringId = 15, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 15 },
+        new { ReserveringId = 16, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 16 },
+        new { ReserveringId = 17, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 17 },
+        new { ReserveringId = 18, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 18 },
+        new { ReserveringId = 19, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 19 },
+        new { ReserveringId = 20, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 20 },
+        new { ReserveringId = 21, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 21 },
+        new { ReserveringId = 22, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 22 },
+        new { ReserveringId = 23, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 23 },
+        new { ReserveringId = 24, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 24 },
+        new { ReserveringId = 25, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 25 },
+        new { ReserveringId = 26, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 26 },
+        new { ReserveringId = 27, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 27 },
+        new { ReserveringId = 28, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 28 },
+        new { ReserveringId = 29, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, VoorstellingId = 1, StoelId = 29 },
 
-        new { ReserveringId = 30, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 2, VoorstellingId = 2, StoelId = 1 },
-        new { ReserveringId = 31, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 3, VoorstellingId = 2, StoelId = 2 },
-        new { ReserveringId = 32, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 2, StoelId = 3 },
-        new { ReserveringId = 33, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 5, VoorstellingId = 2, StoelId = 4 },
-        new { ReserveringId = 34, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 1, ApplicationUserId = 4, VoorstellingId = 2, StoelId = 5 },
-        new { ReserveringId = 35, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 2, StoelId = 6 },
-        new { ReserveringId = 36, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 2, StoelId = 7 },
-        new { ReserveringId = 37, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0, ApplicationUserId = 4, VoorstellingId = 2, StoelId = 8 }
+        new { ReserveringId = 30, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0,  VoorstellingId = 2, StoelId = 1 },
+        new { ReserveringId = 31, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0,  VoorstellingId = 2, StoelId = 2 },
+        new { ReserveringId = 32, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0,  VoorstellingId = 2, StoelId = 3 },
+        new { ReserveringId = 33, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0,  VoorstellingId = 2, StoelId = 4 },
+        new { ReserveringId = 34, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0,  VoorstellingId = 2, StoelId = 5 },
+        new { ReserveringId = 35, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0,  VoorstellingId = 2, StoelId = 6 },
+        new { ReserveringId = 36, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0,  VoorstellingId = 2, StoelId = 7 },
+        new { ReserveringId = 37, ReserveringsDatum = new DateTime(2023, 1, 1), isBetaald = 0,  VoorstellingId = 2, StoelId = 8 }
 
         );
 

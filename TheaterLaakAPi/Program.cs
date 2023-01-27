@@ -29,8 +29,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DbContext, DatabaseContext>(
-    opt => opt.UseSqlite("Data Source=mydb.db")
+    opt => opt.UseSqlite("Data Source=TheaterLaakAPi.db")
 );
+
 
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(opt =>
