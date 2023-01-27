@@ -29,6 +29,27 @@ namespace TheaterLaakAPi.Controllers
                 return NotFound();
             }
             return await _context.Reserveringen.ToListAsync();
+
+            // GET: api/Reservering
+
+        }
+       
+        [HttpGet("{vid}/{sid}")]
+        public async Task<ActionResult<Reservering>> GetSpecificReservering(int vid, int sid)
+        {
+            if (_context.Reserveringen == null)
+            {
+                return NotFound();
+            }
+
+            var reservering = await _context.Reserveringen.ToListAsync();
+
+            var query = (from rs in reservering
+                         where rs.VoorstellingId == vid
+                         where rs.StoelId == sid
+                         select rs.ReserveringId).FirstOrDefault();
+
+            return Ok(query);
         }
     }
-    }
+}

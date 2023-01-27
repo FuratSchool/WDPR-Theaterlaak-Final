@@ -12,9 +12,12 @@ const StoelReservatie = () => {
   const [voorstellingTitel, setVoorstellingTitel] = useState([]);
   const [user, setUser] = useState([]);
 
+
   let { voorstellingId } = useParams();
+  
   const authHeader = useAuthHeader();
   const auth = useAuthUser();
+  const voorstellingIdInt = parseInt(voorstellingId);
 
   const jwtAuthenticationHeader = {
     headers: {
@@ -23,6 +26,7 @@ const StoelReservatie = () => {
   };
 
   useEffect(() => {
+
     const FetchBeschikbareStoelen = async () => {
       //get alle stoelen
       try {
@@ -80,28 +84,29 @@ const StoelReservatie = () => {
     };
     FetchLoggedUser();
     FetchVoorstellinginfo();
+    setInterval(() => {
     FetchBeschikbareStoelen();
+    }, 500);
+    
   }, []);
 
+
   const putUserInReservering = async () => {
-    idStoelen.forEach((stoelId) => {
-      axios
-        .post("http://localhost:5044/toCart/",{
-          vid: voorstellingId,
-          sid: stoelId,
-          uid: user.id
 
-        }
-          
-        )
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    var ps = [];
+
+    idStoelen.forEach( e => {
+
+      var req = (axios.get("http://localhost:5044/toCart/" + String(voorstellingId) + "/"+String(e) +"/"+ String(user.id)))
+      .then(function (response) {
+        ps.push(req)
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
     });
-
+    Promise.all(ps).then(console.log(ps))
+    
   };
 
   const stoelenLijst = stoelen.map((item, index) => (
@@ -113,7 +118,6 @@ const StoelReservatie = () => {
 
   return (
     <>
-    {JSON.stringify(user.id)}
       <StoelReservatieContext.Provider value={{ idStoelen, setIdStoelen }}>
         <div className="row m-0 p-0">
           <div className="col-sm-6 m-0 p-0">{stoelenLijst}</div>
