@@ -84,6 +84,7 @@ const StoelReservatie = () => {
     };
     FetchLoggedUser();
     FetchVoorstellinginfo();
+    
     setInterval(() => {
     FetchBeschikbareStoelen();
     }, 500);

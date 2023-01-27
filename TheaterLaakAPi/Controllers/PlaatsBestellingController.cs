@@ -228,7 +228,8 @@ public class PlaatsBestellingController : ControllerBase
                         rang = r.RangNr,
                         stoel = s.StoelNr,
                         voorstelling = v.Titel,
-                        userId = uid
+                        userId = uid,
+                        prijs = v.Prijs
                     };
         return Ok(query);
     }
