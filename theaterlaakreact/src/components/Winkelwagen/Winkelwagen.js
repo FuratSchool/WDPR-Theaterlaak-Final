@@ -1,23 +1,65 @@
-import React, { useState } from 'react';
-import { Button} from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { Reserveren } from './Reserveren';
-import Ww from './ww';
+import React, { useEffect, useState } from "react";
+import { Button } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Reserveren } from "./Reserveren";
+import Ww from "./ww";
+import axios from "axios";
+import { useAuthHeader } from "react-auth-kit";
 
-//dit wil ik uiteindelijk in de navigatie bar erbij hebben zodat als je op winkelwagen klikt dit opent.
-//verder functioneel uitbreiden met dat tickets ook worden toegevoegd in de winkelwagen etc.etc.
+export const Winkelwagen = (args, { cart }) => {
+  const [user, setUser] = useState([]);
+  const authHeader = useAuthHeader();
+  const [winkelwagen, setWinkelwagen] = useState([]);
 
-export const Winkelwagen = (args, {cart}) => {
-    const [reservaties, setReservaties] = useState([])
-    function handleAddreservatie(reservatie){
-        setReservaties([...reservaties, reservatie]);
+  const jwtAuthenticationHeader = {
+    headers: {
+      Authorization: authHeader(),
+    },
+  };
+
+  useEffect(() => {
+    const FetchLoggedUser = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5044/api/User/Account",
+          jwtAuthenticationHeader
+        );
+        console.log(response);
+        setUser(response.data.id);
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
     };
-    return (
-        <>
-            <h1>Uw Winkelwagen</h1>
-          <Ww/>
-        </>
-    );
+    // var requestRoute = "http://localhost:5044/getReservering/" + user;
+    console.log(user);
+
+    const fetchWinkelwagen = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5044/getReservering/" + user
+        );
+        console.log(response);
+        setWinkelwagen(response.data);
+      } catch (err) {
+        // Handle Error Here
+        console.error(err);
+      }
+    };
+    FetchLoggedUser();
+    fetchWinkelwagen();
+  }, []);
+
+  const [reservaties, setReservaties] = useState([]);
+  function handleAddreservatie(reservatie) {
+    setReservaties([...reservaties, reservatie]);
   }
+  return (
+    <>
+      <h1>Uw Winkelwagen</h1>
+      {JSON.stringify(winkelwagen)}
+    </>
+  );
+};
 
 export default Winkelwagen;

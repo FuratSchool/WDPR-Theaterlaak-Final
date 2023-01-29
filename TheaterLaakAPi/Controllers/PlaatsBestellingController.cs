@@ -178,7 +178,8 @@ public class PlaatsBestellingController : ControllerBase
     }
 
 
-    [HttpGet("{uid}")]
+    [HttpGet]
+    [Route("getReservering/{uid}")]
     public async Task<ActionResult<IEnumerable<Reservering>>> GetReserveringInCart(string uid)
     {
         if (_context.Reserveringen == null)
