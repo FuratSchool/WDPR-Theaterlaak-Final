@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using TheaterLaakAPi.Models;
-
 namespace TheaterLaakAPi.Controllers;
 
 public class PlaatsBestellingController : ControllerBase
@@ -236,6 +235,56 @@ public class PlaatsBestellingController : ControllerBase
                      }).DistinctBy(x => x.stoelId);
 
         return Ok(query);
+    }
+
+    [HttpGet]
+    [Route("betaalCart/{uid}/{vid}/{sid}")]
+    public async Task<ActionResult<IEnumerable<Reservering>>> betaalCart(string uid, int vid, int sid)
+    {
+        int getResId = _context.Reserveringen.Where
+                (x => x.StoelId == sid && x.VoorstellingId == vid).Select(x => x.ReserveringId).FirstOrDefault();
+
+
+        //remove old one
+        if (_context.Reserveringen == null)
+        {
+            return NotFound();
+        }
+
+        var reservering = await _context.Reserveringen.FindAsync(getResId);
+
+        if (reservering == null)
+        {
+            return NotFound();
+        }
+
+        _context.Reserveringen.Remove(reservering);
+
+        // add new one
+
+
+        Reservering res = new Reservering();
+
+        ApplicationUser user = await GetCurrentUserAsync();
+        res.ReserveringId = getResId;
+        res.ApplicationUser = user;
+        res.ApplicationUserId = uid;
+        res.ReserveringsDatum = DateTime.Now;
+        res.VoorstellingId = vid;
+        res.StoelId = sid;
+        res.isBetaald = 1;
+
+        if (_context.Reserveringen == null)
+        {
+            return Problem("Entity set 'DatabaseContext.Rang'  is null.");
+        }
+
+
+        _context.Reserveringen.Add(res);
+        await _context.SaveChangesAsync();
+
+        return Ok();
+
     }
 
 

@@ -1,70 +1,65 @@
-import React, { useContext, useState } from 'react'
-import axios from 'axios'
-import { FormGroup } from 'reactstrap';
-import {v4 as uuid} from 'uuid'
-import Voorstelling, { MyReservering } from './Voorstelling'
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { Button, FormGroup, Modal } from "reactstrap";
+import { v4 as uuid } from "uuid";
+import Voorstelling, { MyReservering } from "./Voorstelling";
+import AfrekenenModal from "./AfrekenenModal";
 
-
-export function Afrekenen({TotaalPrijs}) {
-  // let prijs = TotaalPrijs;
-
-
+export function Afrekenen(props) {
   const referenceGenerated = uuid();
-
-  const bestelling = {details: details, gebruiker: "", } // voor het linken met gebruiker uiteindelijk
-  var details ={
-    amount: TotaalPrijs, //kosten <- gekregen van de Ww Parent component
+  
+  var details = {
+    amount: props.propPrijs, //kosten <- gekregen van de Ww Parent component
     reference: referenceGenerated, //betaling id <-generate per betaling, per keer dat er op submit wordt geklikt(?)
-    url: 'http://localhost:5044/api/betaling', //terugverwijzing aan het eind van de betaling, ontvangt id, reference en succes(bool)
-  }
+    url: "http://localhost:5044/api/betaling", //terugverwijzing aan het eind van de betaling, ontvangt id, reference en succes(bool)
+  };
   var options = {
-    headers: {"content-type": "application/x-www-form-urlencoded"}
-  }
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+  };
   var betaalsite = "https://fakepay.azurewebsites.net/";
-  
 
-  const [streamBody, setBody] = useState("")
-function afrekenenFetch(props){
-    //post naar onze backend
-    //post naar fakepay
-    // details.amount = props.TotaalPrijs
-    axios.post(betaalsite, details, options)
-    .then(response=>
-      {
-        console.log(response)
-        setBody(response.data)
-      return response.data
-      }).then((response) => {
-        if(response.data){
-          // window.location.assign(response.data)
-          setBody(response.data)
-        }
-  
+  const [streamBody, setBody] = useState("");
+
+  useEffect(() => {
+    axios
+      .post(betaalsite, details, options)
+      .then((response) => {
+        console.log(response);
+        setBody(response.data);
+        return response.data;
       })
-    .catch(err=>
-      console.log(err))
-  }
-  
-  // document.body.innerHTML = streamBody
+      .then((response) => {
+        if (response.data) {
+          // window.location.assign(response.data)
+          setBody(response.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-  //nog een post request erbij maken die de gegevens naar onze database ook opstuurt, zodat de referentie nummer gekoppeld is bij de ingelogde gebruiker.
+  const handleClick = () => {
+    axios
+      .post(betaalsite, details, options)
+      .then((response) => {
+        console.log(response);
+        setBody(response.data);
+        return response.data;
+      })
+      .then((response) => {
+        if (response.data) {
+          // window.location.assign(response.data)
+          setBody(response.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
-      <>
-    <h1>Afrekenen</h1>
-    <button onClick={afrekenenFetch}>Betalen</button>
-
-        {/*Post request naar website met amount, reference(id van betaling),
-         url(teruggewezen na betaling, naar /success of /cancel)
-        website: https://fakepay.azurewebsites.net/ */}
-        <div>
-      <iframe srcDoc={streamBody} title="html-body" style={{width: '50%', height: '500px'}}/>
-    </div>
-        
-
-      </>
-  )
-  
+    <>
+    <br></br>
+      {/* <button onClick={afrekenenFetch}>Afrekenen</button> */}
+      <AfrekenenModal srcDoc={streamBody} handleClick={handleClick} />
+    </>
+  );
 }
-  
 
-export default Afrekenen
+export default Afrekenen;

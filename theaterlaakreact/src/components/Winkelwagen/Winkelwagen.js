@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Reserveren } from "./Reserveren";
 import Ww from "./ww";
 import axios from "axios";
 import { useAuthHeader } from "react-auth-kit";
+import Afrekenen from "../Afrekenen";
 
 export const Winkelwagen = (args, { cart }) => {
   const [user, setUser] = useState([]);
   const authHeader = useAuthHeader();
   const [winkelwagen, setWinkelwagen] = useState([]);
-  const [totPrijs, setTotPrijs] = useState(0);
+  const [Totaalprijs, setTotaalprijs] = useState(0);
+
 
   const jwtAuthenticationHeader = {
     headers: {
@@ -45,7 +47,9 @@ export const Winkelwagen = (args, { cart }) => {
     };
     FetchLoggedUser();
   }, [user]);
-
+  useEffect(() => {
+    setTotaalprijs(winkelwagen.reduce((acc, item) => acc + item.prijs, 0));
+  }, [winkelwagen]);
   // const TotaalPrijs = winkelwagen.prijs.reduce(
   //   (eersteprijs, currentprijs, index) => eersteprijs + currentprijs,
   //   0
@@ -61,13 +65,14 @@ export const Winkelwagen = (args, { cart }) => {
         <div key={index}>
           {"Voorstelling " +
             item.voorstelling +
-            " Stoel nummer " +
+            ", Stoel nummer " +
             item.stoelNr +
             ", €" +
             item.prijs}
         </div>
       ))}
-      {totPrijs}
+      {"De totaalprijs is = €" + Totaalprijs}
+      <Afrekenen propPrijs={Totaalprijs} />
     </>
   );
 };
