@@ -52,9 +52,10 @@ export function GetAllVoorstellingen() {
                     {voorstelling.title}
                   </h5>
                   <p>{voorstelling.description}</p>
+                
                   <Link
                     type="button"
-                    to={"/StoelReservatie/1"}
+                    to={"/StoelReservatie/" + voorstelling.voorstellingId}
                     class="btn-custom btn btn-info btn-purple  float-end text-white"
                   >
                     bestel ticket

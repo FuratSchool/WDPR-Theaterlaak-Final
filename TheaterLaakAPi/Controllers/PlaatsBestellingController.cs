@@ -213,28 +213,27 @@ public class PlaatsBestellingController : ControllerBase
         var voorstelling = await _context.Voorstelling.ToListAsync();
 
         var query = (from rs in reservering
-                    from s in stoel
-                    from r in rang
-                    from z in zaal
-                    from v in voorstelling
-                    where rs.ApplicationUserId == uid
-                    where rs.StoelId == s.StoelId
-                    where r.RangId == s.RangId
-                    where z.ZaalId == r.ZaalId
-                    where v.ZaalId == z.ZaalId
-                    where rs.isBetaald == 0
-                    select new
-                    {
-                        zaal = z.Title,
-                        rang = r.RangNr,
-                        stoelNr = s.StoelNr,
-                        stoelId = s.StoelId,
-                        voorstelling = v.Titel,
-                        userId = uid,
-                        prijs = v.Prijs
-                    }).DistinctBy(x => x.stoelId);
+                     from s in stoel
+                     from r in rang
+                     from z in zaal
+                     from v in voorstelling
+                     where rs.ApplicationUserId == uid
+                     where rs.StoelId == s.StoelId
+                     where r.RangId == s.RangId
+                     where z.ZaalId == r.ZaalId
+                     where v.ZaalId == z.ZaalId
+                     where rs.isBetaald == 0
+                     select new
+                     {
+                         zaal = z.Title,
+                         rang = r.RangNr,
+                         stoelNr = s.StoelNr,
+                         stoelId = s.StoelId,
+                         voorstelling = v.Titel,
+                         userId = uid,
+                         prijs = v.Prijs
+                     }).DistinctBy(x => x.stoelId);
 
-        
         return Ok(query);
     }
 
