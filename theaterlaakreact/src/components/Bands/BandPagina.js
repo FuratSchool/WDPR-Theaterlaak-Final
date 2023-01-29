@@ -32,6 +32,16 @@ export class Bandpagina extends Component {
             <Button variant="outline-primary">Selecteer</Button>
           </div>
         </div>
+        <div className="Aanmaak">
+        <p className="info1">
+            Maak een nieuwe band.
+          </p>
+        <div className="knop9" >
+          <a href="http://localhost:3000/admin/bandform">
+            <Button variant="outline-primary" >Maak</Button>
+            </a>
+          </div>
+          </div>
         <p className="titel4">Jouw Bands/Groep</p>
         <div className="tabellen">
           <div className="tafel1">
