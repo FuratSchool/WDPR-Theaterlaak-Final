@@ -212,7 +212,7 @@ public class PlaatsBestellingController : ControllerBase
         var zaal = await _context.Zaal.ToListAsync();
         var voorstelling = await _context.Voorstelling.ToListAsync();
 
-        var query = from rs in reservering
+        var query = (from rs in reservering
                     from s in stoel
                     from r in rang
                     from z in zaal
@@ -222,15 +222,19 @@ public class PlaatsBestellingController : ControllerBase
                     where r.RangId == s.RangId
                     where z.ZaalId == r.ZaalId
                     where v.ZaalId == z.ZaalId
+                    where rs.isBetaald == 0
                     select new
                     {
                         zaal = z.Title,
                         rang = r.RangNr,
-                        stoel = s.StoelNr,
+                        stoelNr = s.StoelNr,
+                        stoelId = s.StoelId,
                         voorstelling = v.Titel,
                         userId = uid,
                         prijs = v.Prijs
-                    };
+                    }).DistinctBy(x => x.stoelId);
+
+        
         return Ok(query);
     }
 
