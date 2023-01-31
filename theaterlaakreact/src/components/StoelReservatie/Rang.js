@@ -8,7 +8,10 @@ const Rang = (props) => {
         <Stoel 
         setCSelected={props.setCSelected}
         onCheckboxBtnClick={props.onCheckboxBtnClick}
-        propOne={props.propOne} />
+        propOne={props.propOne} 
+        data-cy="stoel"
+        />
+        
       </div>
     </>
   );

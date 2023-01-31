@@ -53,6 +53,7 @@ const Stoel = (props) => {
         outline
         onClick={() => handleClick(item.stoelNr, item.stoelId)}
         active={cSelected.includes(item.stoelNr, item.StoelId)}
+        data-cy={"stoel" + item.stoelId}
       >
         {item.stoelNr}
         <div className="mx-5"></div>
