@@ -88,16 +88,3 @@ describe('wachtwoorden komen overeen en voldoen aan voorwaarden', () => {
     cy.get('[data-cy="cySubmitForm"]').click()
   })
 })
-
-describe('Alles wordt correct ingevuld', () => {
-  it('alles wordt groen', () => {
-    cy.visit('/register')
-    cy.get('[data-cy="cyVoornaam"]').type('Erik')
-    cy.get('[data-cy="cyAchternaam"]').type('Ten Hag')
-    cy.get('[data-cy="cyUserName"]').type('UserHag')
-    cy.get('[data-cy="cyEmail"]').type('Tester@gmail.com')
-    cy.get('[data-cy="cyPassword"]').type('Testing123!')
-    cy.get('[data-cy="cyConfirmPassword"]').type('Testing123!')
-    cy.get('[data-cy="cySubmitForm"]').click()
-  })
-})

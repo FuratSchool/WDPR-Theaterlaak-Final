@@ -222,6 +222,7 @@ public class PlaatsBestellingController : ControllerBase
                      where r.RangId == s.RangId
                      where z.ZaalId == r.ZaalId
                      where v.ZaalId == z.ZaalId
+                     where rs.VoorstellingId == v.VoorstellingId //
                      where rs.isBetaald == 0
                      select new
                      {
@@ -230,6 +231,7 @@ public class PlaatsBestellingController : ControllerBase
                          stoelNr = s.StoelNr,
                          stoelId = s.StoelId,
                          voorstelling = v.Titel,
+                         datum = v.StartDatum, //
                          userId = uid,
                          prijs = v.Prijs
                      }).DistinctBy(x => x.stoelId);
