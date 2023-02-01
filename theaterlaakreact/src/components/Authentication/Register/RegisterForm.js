@@ -167,6 +167,7 @@ export function RegisterForm() {
           name="UserName"
           htmlFor="UserName"
           placeholder="UserName"
+          data-cy="cyUsername"
           onChange={(e) => setUserName(e.target.value)}
         />
         <label htmlFor="UserName">UserName</label>

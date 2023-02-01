@@ -47,6 +47,7 @@ describe('Alles wordt correct ingevuld', () => {
     cy.visit('/register')
     cy.get('[data-cy="cyVoornaam"]').type('Erik')
     cy.get('[data-cy="cyAchternaam"]').type('Ten Hag')
+    cy.get('[data-cy="cyUsername"]').type('UserHag')
     cy.get('[data-cy="cyEmail"]').type('Tester@gmail.com')
     cy.get('[data-cy="cyPassword"]').type('Testing123!')
     cy.get('[data-cy="cyConfirmPassword"]').type('Testing123!')
