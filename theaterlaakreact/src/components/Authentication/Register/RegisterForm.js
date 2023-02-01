@@ -11,7 +11,7 @@ export function RegisterForm() {
   const [emailForm, setEmailForm] = useState("form-control");
   const [passwordState, setPasswordState] = useState(null);
   const [passwordForm, setPasswordForm] = useState("form-control");
-  // const [UserName, setUserName] = useState("");
+  const [UserName, setUserName] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,11 +25,18 @@ export function RegisterForm() {
       body: JSON.stringify({
         Email: Email,
         PassWord: PassWord,
-        // UserName: UserName,
+        UserName: UserName,
         Voornaam: Voornaam,
         Achternaam: Achternaam,
       }),
-    }).catch((err) => {
+    }).then((res) =>{
+      if(res.status === 400){
+        alert('Er bestaat al een gebruiker met dit emailadres of gebruikersnaam')
+      }
+      else{
+        navigate("/login")
+      }
+    }).catch((err) => {  
       console.log(err);
     });
   }
@@ -122,8 +129,8 @@ export function RegisterForm() {
 
     validatePasswordAll();
     if (validatePasswordAll() && validateEmail(Email)) {
-      navigate("/login");
       Register(e);
+     
     }
   };
 
@@ -153,7 +160,7 @@ export function RegisterForm() {
             />
             <label htmlFor="UserName">Achternaam</label>
           </div>
-          {/* <div className="form-floating mb-3">
+          <div className="form-floating mb-3">
         <input
           className="form-control"
           type="text"
@@ -163,7 +170,7 @@ export function RegisterForm() {
           onChange={(e) => setUserName(e.target.value)}
         />
         <label htmlFor="UserName">UserName</label>
-      </div> */}
+      </div>
 
           <div className="form-floating mb-3">
             <input
