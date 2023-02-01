@@ -39,6 +39,9 @@ export function RegisterForm() {
     if (!email.match(emailRegex)) {
       setEmailState("Ongeldige Email-adress");
       setEmailForm("form-control is-invalid");
+      if (Email === "") {
+        setEmailState("Email is niet ingevuld");
+      }
       return false;
     } else {
       setEmailState(null);
@@ -68,7 +71,6 @@ export function RegisterForm() {
   };
 
   var validatePasswordAll = () => {
-    
     if (
       validatePasswordConformatie(PasswordConformatie) &&
       validatePasswordKarakter(PassWord)
@@ -93,8 +95,12 @@ export function RegisterForm() {
       !validatePasswordKarakter(PassWord)
     ) {
       setPasswordState(
-        "Wachtwoorden komen niet overeen en Ongeldig wachtwoord, wachtwoord bevat minimaal 1 hoofdletter, 1 kleine letter, een getal een leesteken en een minimale lengte van 7 karakters"
+        "Wachtwoorden komen niet overeen en ongeldig wachtwoord, wachtwoord bevat minimaal 1 hoofdletter, 1 kleine letter, een getal een leesteken en een minimale lengte van 7 karakters"
       );
+    }
+
+    if (PassWord === "") {
+      setPasswordState("Wachtwoord is niet ingevuld");
     }
 
     setPasswordForm("form-control is-invalid");
@@ -171,7 +177,7 @@ export function RegisterForm() {
             />
             <label htmlFor="Email">Email</label>
           </div>
-
+          <p className="text-danger">{toonErrorMsg(emailState)}</p>
           <div className="form-floating mb-3">
             <input
               className={passwordForm}
@@ -183,6 +189,9 @@ export function RegisterForm() {
             <label htmlFor="Password">Password</label>
             <span htmlFor="Password" className="text-danger"></span>
           </div>
+
+          <p className="text-danger">{toonErrorMsg(passwordState)}</p>
+
           <div className="form-floating mb-3">
             <input
               className={passwordForm}
@@ -206,8 +215,6 @@ export function RegisterForm() {
           </button>
         </form>
       </div>
-      <p>{toonErrorMsg(emailState)}</p>
-      <p>{toonErrorMsg(passwordState)}</p>
     </>
   );
 }
