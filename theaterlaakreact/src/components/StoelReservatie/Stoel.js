@@ -18,7 +18,7 @@ const Stoel = (props) => {
       }
     };
     tekstMijnGeselecteerdStoelen();
-  });
+  },[]);
 
   const checkBtnClick = (selected) => {
     const index = cSelected.indexOf(selected);

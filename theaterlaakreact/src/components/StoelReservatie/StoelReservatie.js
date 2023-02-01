@@ -1,7 +1,7 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect, } from "react";
 import Rang from "./Rang";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { StoelReservatieContext } from "../stoelReservatieContext";
 import { Button } from "reactstrap";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
@@ -12,12 +12,13 @@ const StoelReservatie = () => {
   const [voorstellingTitel, setVoorstellingTitel] = useState([]);
   const [user, setUser] = useState([]);
 
+  const navigate = useNavigate();
+
+
 
   let { voorstellingId } = useParams();
   
   const authHeader = useAuthHeader();
-  const auth = useAuthUser();
-  const voorstellingIdInt = parseInt(voorstellingId);
 
   const jwtAuthenticationHeader = {
     headers: {
@@ -91,6 +92,13 @@ const StoelReservatie = () => {
     
   }, []);
 
+  const clearSelectedStoelen = () => {
+    setIdStoelen([])
+  }
+
+  const getStoelNummerById = () =>{
+      var x = null;
+  }
 
   const putUserInReservering = async () => {
 
@@ -106,9 +114,11 @@ const StoelReservatie = () => {
         console.log(error);
       });
     });
-    Promise.all(ps).then(console.log(ps))
-    
+    Promise.all(ps).then(console.log(ps)) 
+    navigate("/Winkelwagen");
   };
+
+
 
   const stoelenLijst = stoelen.map((item, index) => (
     <div key={index}>
@@ -134,11 +144,14 @@ const StoelReservatie = () => {
                 Bestelling afronden
               </Button> */}
               <Button onClick={()=>putUserInReservering()} className="mt-2 mb-5 col-6" color="warning">
-                Verplaats tickets naar winkelwagen
+                bestel tickets
               </Button>
             </div>
           </div>
         </div>
+        {JSON.stringify(idStoelen)}
+        {JSON.stringify(stoelen)}
+    
       </StoelReservatieContext.Provider>
     </>
   );
