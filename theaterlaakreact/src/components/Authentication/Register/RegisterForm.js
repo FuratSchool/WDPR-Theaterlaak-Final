@@ -5,13 +5,23 @@ export function RegisterForm() {
   const [Email, setEmail] = useState("");
   const [PassWord, setPassWord] = useState("");
   const [PasswordConformatie, setPasswordConformatie] = useState("");
+
+  const [UserName, setUserName] = useState("");
   const [Voornaam, setVoornaam] = useState("");
   const [Achternaam, setAchternaam] = useState("");
+   // *"state" weergeeft de foutmeldingen
+   // *"form " verander form-control, valid of invalid
   const [emailState, setEmailState] = useState(null);
   const [emailForm, setEmailForm] = useState("form-control");
   const [passwordState, setPasswordState] = useState(null);
   const [passwordForm, setPasswordForm] = useState("form-control");
-  const [UserName, setUserName] = useState("");
+
+  const [voornaamState, setVoornaamState] = useState(null);
+  const [voornaamForm, setVoornaamForm] = useState("form-control"); 
+  const [achternaamState, setAchternaamState] = useState(null);
+  const [achternaamForm, setAchternaamForm] = useState("form-control");
+  const [userNameState, setUserNameState] = useState(null);
+  const [userNameForm, setUserNameForm] = useState("form-control");
 
   const navigate = useNavigate();
 
@@ -40,6 +50,50 @@ export function RegisterForm() {
       console.log(err);
     });
   }
+
+  var validateVoornaam = (e) =>{
+    if (e === ""){
+      setVoornaamState("Voer een voornaam in")
+      setVoornaamForm("form-control is-invalid")
+      return false;
+      
+    }
+    else{
+      setVoornaamState(null)
+      setVoornaamForm("form-control is-valid")
+      return true;
+    }
+  }
+
+  var validateAchternaam = (e) =>{
+    if (e === ""){
+      setAchternaamState("Voer een achternaam in")
+      setAchternaamForm("form-control is-invalid")
+      return false;
+      
+    }
+    else{
+      setAchternaamState(null)
+      setAchternaamForm("form-control is-valid")
+      return true;
+    }
+  }
+
+  var validateUserName = (e) =>{
+    if (e === ""){
+      setUserNameState("Voer een username in")
+      setUserNameForm("form-control is-invalid")
+      return false;
+      
+    }
+    else{
+      setUserNameState(null)
+      setUserNameForm("form-control is-valid")
+      return true;
+    }
+  }
+
+
 
   var validateEmail = (email) => {
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -93,7 +147,7 @@ export function RegisterForm() {
 
     if (!validatePasswordKarakter(PassWord)) {
       setPasswordState(
-        "Ongeldig wachtwoord, wachtwoord bevat minimaal 1 hoofdletter, 1 kleine letter, een getal een leesteken en een minimale lengte van 7 karakters"
+        "Ongeldig wachtwoord, wachtwoord bevat minimaal 1 hoofdletter, 1 kleine letter, een getal, een leesteken en heeft een minimale lengte van 7 karakters"
       );
     }
 
@@ -102,7 +156,7 @@ export function RegisterForm() {
       !validatePasswordKarakter(PassWord)
     ) {
       setPasswordState(
-        "Wachtwoorden komen niet overeen en ongeldig wachtwoord, wachtwoord bevat minimaal 1 hoofdletter, 1 kleine letter, een getal een leesteken en een minimale lengte van 7 karakters"
+        "Wachtwoorden komen niet overeen en ongeldig wachtwoord, wachtwoord bevat minimaal 1 hoofdletter, 1 kleine letter, een getal, een leesteken en heeft een minimale lengte van 7 karakters"
       );
     }
 
@@ -124,11 +178,13 @@ export function RegisterForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+    validateVoornaam(Voornaam)
+    validateAchternaam(Achternaam)
+    validateUserName(UserName)
     validateEmail(Email);
-
     validatePasswordAll();
-    if (validatePasswordAll() && validateEmail(Email)) {
+
+    if (validatePasswordAll() && validateEmail(Email) && validateVoornaam(Voornaam) && validateAchternaam(Achternaam) && validateUserName(UserName) ) {
       Register(e);
      
     }
@@ -138,9 +194,10 @@ export function RegisterForm() {
     <>
       <div className="Form">
         <form id="registerForm" className="mb-3">
+
           <div className="form-floating mb-3">
             <input
-              className="form-control"
+              className={voornaamForm}
               type="text"
               name="Voornaam"
               placeholder="Voornaam"
@@ -149,9 +206,13 @@ export function RegisterForm() {
             />
             <label htmlFor="UserName">Voornaam</label>
           </div>
+
+          <p className="text-danger">{toonErrorMsg(voornaamState)}</p>
+
           <div className="form-floating mb-3">
             <input
-              className="form-control"
+            
+            className={achternaamForm}
               type="text"
               name="Achternaam"
               placeholder="Achternaam"
@@ -160,18 +221,23 @@ export function RegisterForm() {
             />
             <label htmlFor="UserName">Achternaam</label>
           </div>
+
+          <p className="text-danger">{toonErrorMsg(achternaamState)}</p>
+
           <div className="form-floating mb-3">
         <input
-          className="form-control"
+          className={userNameForm}
           type="text"
           name="UserName"
           htmlFor="UserName"
           placeholder="UserName"
-          data-cy="cyUsername"
+          data-cy="cyUserName"
           onChange={(e) => setUserName(e.target.value)}
         />
         <label htmlFor="UserName">UserName</label>
       </div>
+
+      <p className="text-danger">{toonErrorMsg(userNameState)}</p>
 
           <div className="form-floating mb-3">
             <input
@@ -189,6 +255,7 @@ export function RegisterForm() {
           <div className="form-floating mb-3">
             <input
               className={passwordForm}
+              // type="password"
               htmlFor="Password"
               placeholder="password"
               data-cy="cyPassword"
@@ -203,6 +270,7 @@ export function RegisterForm() {
           <div className="form-floating mb-3">
             <input
               className={passwordForm}
+              // type="password"
               htmlFor="ConfirmPassword"
               autoComplete="new-password"
               aria-required="true"
