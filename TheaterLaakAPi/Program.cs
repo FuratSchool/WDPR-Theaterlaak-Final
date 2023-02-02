@@ -29,7 +29,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DbContext, DatabaseContext>(
-    opt => opt.UseSqlServer(Configuration.GetConnectionSTring("defaultConnection")));
+    opt => opt.UseSqlServer("defaultConnection"));
 
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(opt =>
