@@ -2,6 +2,8 @@ import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
 import axios from "axios";
+
+
 export function LoginForm() {
   const [Email, setEmail] = useState("");
   const [PassWord, setPassWord] = useState("");
@@ -31,9 +33,8 @@ export function LoginForm() {
             authState: { Email: Email },
           });
           navigate("/userhome");
-          alert("gelukt");
         } else {
-          alert("mislukt");
+          alert("Foute Email of Wachtwoord");
         }
       });
   }
