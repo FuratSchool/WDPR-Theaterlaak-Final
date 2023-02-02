@@ -17,8 +17,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy(MyAllowSpecificOrigins,
                           policy =>
                           {
-                              policy.WithOrigins("http://example.com", //uiteindelijk de azure sites hierbij voegen.
-                                                  "http://www.example2.com") //hier ook.
+                              policy.WithOrigins("http://amirsgateway.nl", //uiteindelijk de azure sites hierbij voegen.
+                                                  "http://www.amirsgateway.nl") //hier ook.
                                                   .AllowAnyHeader()
                                                   .AllowAnyOrigin()
                                                   .AllowAnyMethod();
@@ -29,8 +29,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DbContext, DatabaseContext>(
-    opt => opt.UseSqlite("Data Source=mydb.db")
-);
+    opt => opt.UseSqlServer(Configuration.GetConnectionSTring("defaultConnection")));
 
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(opt =>
@@ -72,9 +71,6 @@ builder.Services
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(p => p.AddPolicy("corspolicy", build => {
-    build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
-}));
 
 builder.Services.AddDistributedMemoryCache();
 
@@ -99,7 +95,7 @@ app.Use(
         await next();
     }
 );
-app.UseCors("corspolicy");
+
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
