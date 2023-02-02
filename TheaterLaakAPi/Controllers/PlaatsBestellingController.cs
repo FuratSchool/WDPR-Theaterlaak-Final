@@ -43,7 +43,7 @@ public class PlaatsBestellingController : ControllerBase
         res.ApplicationUser = user;
         res.ApplicationUserId = uid;
         //tijd om bestelling te bevestigen
-        res.ReserveringsDatum = DateTime.Now.AddSeconds(20);
+        res.ReserveringsDatum = DateTime.Now.AddSeconds(300);
         res.VoorstellingId = vid;
         res.StoelId = sid;
         res.isBetaald = 0;
@@ -123,6 +123,7 @@ public class PlaatsBestellingController : ControllerBase
                                    where rs.VoorstellingId == id
                                    where rs.isBetaald == 0
                                    where rs.ReserveringsDatum < DateTime.Now
+
 
 
                                    select new
@@ -231,10 +232,11 @@ public class PlaatsBestellingController : ControllerBase
                          stoelNr = s.StoelNr,
                          stoelId = s.StoelId,
                          voorstelling = v.Titel,
+                         reserveringId = rs.ReserveringId,
                          datum = v.StartDatum, //
                          userId = uid,
                          prijs = v.Prijs
-                     }).DistinctBy(x => x.stoelId);
+                     }).DistinctBy(x => x.reserveringId);
 
         return Ok(query);
     }
@@ -289,9 +291,86 @@ public class PlaatsBestellingController : ControllerBase
 
     }
 
+    [HttpGet("maakReserveringBijVoorstelling/{vid}")]
+    public async Task<ActionResult<IEnumerable<Reservering>>> maakReserveringenBijNieuweVoorstelling(int vid)
+    {
+        var reservering = await _context.Reserveringen.ToListAsync();
+
+        var aantalReserveringenVoorstelling = (from rs in reservering
+                                               where rs.VoorstellingId == vid
+                                               select new
+                                               {
+                                                   voorstellingId = rs.VoorstellingId
+                                               }).Count();
+
+        if(aantalReserveringenVoorstelling !=0){
+            return NotFound();
+        }
+
+        var stoel = await _context.Stoelen.ToListAsync();
+        var rang = await _context.Rangen.ToListAsync();
+        var zaal = await _context.Zaal.ToListAsync();
+        var voorstelling = await _context.Voorstelling.ToListAsync();
 
 
 
+
+        var query = (from rs in reservering
+                     from s in stoel
+                     from r in rang
+                     from z in zaal
+                     from v in voorstelling
+                     where v.VoorstellingId == vid
+                     where z.ZaalId == v.ZaalId
+                     where r.ZaalId == z.ZaalId
+                     where s.RangId == r.RangId
+                     select new
+                     {
+                         stoelId = s.StoelId
+                     }).Distinct().ToList();
+
+        if (query == null)
+        {
+            return NotFound();
+        }
+
+
+
+        var getlaatsteReserveringNummer = reservering.Select(x => x.ReserveringId).ToList().Max();
+        int laatsteResnummer = getlaatsteReserveringNummer;
+
+        if (aantalReserveringenVoorstelling == 0)
+        {
+            foreach (var item in query)
+            {
+                laatsteResnummer++;
+                Reservering res = new Reservering
+                {
+                    ReserveringId = laatsteResnummer,
+                    isBetaald = 0,
+                    StoelId = item.stoelId,
+                    VoorstellingId = vid,
+                    ReserveringsDatum = DateTime.Now
+                    
+                };
+                _context.Reserveringen.Add(res);
+                await _context.SaveChangesAsync();
+            }
+        }
+        else
+        {
+            return NotFound();
+        }
+                    //  where rs.ApplicationUserId == uid
+                    //  where rs.StoelId == s.StoelId
+                    //  where r.RangId == s.RangId
+                    //  where z.ZaalId == r.ZaalId
+                    //  where v.ZaalId == z.ZaalId
+                    //  where rs.VoorstellingId == v.VoorstellingId //
+                    //  where rs.isBetaald == 0
+
+        return Ok(aantalReserveringenVoorstelling);
+    }
 }
 
 

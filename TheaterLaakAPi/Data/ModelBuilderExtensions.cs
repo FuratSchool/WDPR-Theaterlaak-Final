@@ -21,7 +21,8 @@ public static class ModelBuilderExtensions
         builder.Entity<Voorstelling>().HasData(
             new Voorstelling { VoorstellingId = 1, Titel = "Les Miserables", Tijd = new DateTime(2023, 1, 1), Beschrijving = "miauw", Prijs = 15.00, StartDatum = new DateTime(2023, 1, 1), EindDatum = new DateTime(2023, 1, 1), ZaalId = 1 },
             new Voorstelling { VoorstellingId = 2, Titel = "Matilda the Musical", Tijd = new DateTime(2023, 2, 1), Beschrijving = "woef", Prijs = 15.00, StartDatum = new DateTime(2023, 2, 1), EindDatum = new DateTime(2023, 2, 1), ZaalId = 1 },
-            new Voorstelling { VoorstellingId = 3, Titel = "Wicked", Tijd = new DateTime(2023, 3, 1), Beschrijving = "growl", Prijs = 15.00, StartDatum = new DateTime(2023, 3, 1), EindDatum = new DateTime(2023, 3, 1), ZaalId = 2 }
+            new Voorstelling { VoorstellingId = 3, Titel = "Wicked", Tijd = new DateTime(2023, 3, 1), Beschrijving = "growl", Prijs = 15.00, StartDatum = new DateTime(2023, 3, 1), EindDatum = new DateTime(2023, 3, 1), ZaalId = 2 },
+            new Voorstelling { VoorstellingId = 4, Titel = "Mama", Tijd = new DateTime(2023, 3, 1), Beschrijving = "xo", Prijs = 15.00, StartDatum = new DateTime(2023, 3, 1), EindDatum = new DateTime(2023, 3, 1), ZaalId = 1 }
         );
 
         builder.Entity<Rang>().HasData(

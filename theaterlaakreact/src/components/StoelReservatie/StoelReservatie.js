@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import Rang from "./Rang";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -23,6 +23,21 @@ const StoelReservatie = () => {
       Authorization: authHeader(),
     },
   };
+
+  useLayoutEffect(()=>{
+
+    const maakReserveringenAan = async () => {
+      try {
+        await axios.get("http://localhost:5044/maakReserveringBijVoorstelling/" + voorstellingId
+        );
+      } catch (err) {
+        
+        console.error("reserveringen zijn al gemaakt");
+      } 
+  }
+  maakReserveringenAan();
+
+  },[])
 
   useEffect(() => {
     const FetchBeschikbareStoelen = async () => {
@@ -77,9 +92,10 @@ const StoelReservatie = () => {
         setUser(response.data);
       } catch (err) {
         // Handle Error Here
-        console.error(err);
+        console.error("user niet ingelogd");
       }
     };
+
     FetchLoggedUser();
     FetchVoorstellinginfo();
 
@@ -87,7 +103,6 @@ const StoelReservatie = () => {
       FetchBeschikbareStoelen();
     }, 500);
   }, []);
-
 
   const putUserInReservering = async () => {
     var ps = [];
@@ -112,7 +127,10 @@ const StoelReservatie = () => {
     });
     await Promise.all(ps).then(console.log(ps));
 
-    navigate("/Winkelwagen");
+    const naarWW = () => {
+      navigate("/Winkelwagen");
+    }
+    setTimeout(naarWW,250)
   };
 
   const stoelenLijst = stoelen.map((item, index) => (
