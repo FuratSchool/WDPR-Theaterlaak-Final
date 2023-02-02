@@ -1,11 +1,16 @@
-import { useState } from "react";
+import FetchZalen from "../FetchZalen";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Form, Input, FormGroup, Label, ButtonDropdown } from "reactstrap";
 
 export function CreateVoorstellingForm() {
   const [Title, setTitle] = useState("");
   const [Genre, setGenre] = useState("");
   const [Description, setDescription] = useState("");
-
+  const [Date, setDate] = useState("");
+  const [Zaal, setZaal] = useState("");
+  const [Tijd, setTijd] = useState("");
   const navigate = useNavigate();
 
   async function submitHandler(e) {
@@ -18,14 +23,17 @@ export function CreateVoorstellingForm() {
         Title: Title,
         Genre: Genre,
         Description: Description,
+        Datun: Date,
+        ZaalId: Zaal,
+        Tijd: Tijd,
       }),
     }).then((response) => {
       console.log(response);
-      response.ok ? navigate("/") : alert("poging mislukt");
+      response.ok ? navigate("/admin/voorstellingen") : alert("poging mislukt");
     });
   }
   return (
-    <form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler}>
       <div className="row mb-3">
         <div className="col">
           <label htmlFor="Input.Title">Title</label>
@@ -44,9 +52,10 @@ export function CreateVoorstellingForm() {
             className="form-select"
             name="Genre"
             aria-label="Genre"
+            defaultValue={"Klassiek"}
             onChange={(e) => setGenre(e.target.value)}
           >
-            <option defaultValue="klassiek">Klassiek</option>
+            <option value="Klassiek">Klassiek</option>
             <option value="Dans">Dans</option>
             <option value="Musical">Musical</option>
           </select>
@@ -62,35 +71,48 @@ export function CreateVoorstellingForm() {
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
       </div>
-      {/* <div className=" row mb-3">
-                        <div className="col-6">
-                            <label htmlFor="Date">Date</label>
-                            <select className="form-select" aria-label="Date">
-                                <option selected>Date</option>
-                                <option value="1">One</option>
-                            </select>
-                        </div>
-                        <div className="col-6">
-                            <label htmlFor="Date">Image</label>
-                            <input className="form-control" type="file" id="formFile"></input>
-                        </div>
-                    </div>*/}
-      {/* <div className="mb-3">
-      <label htmlFor="Genre">Zaal</label>
-      <select className="form-select" aria-label="Zaal">
-        <option defaultValue>Zaal</option>
-  
-        {items.map((item) => (
-          <option key={item.id}>{item.Title}</option>
-        ))}
-        <option value="1">One</option>
-      </select>
-        </div> */}
+
+      <div className="row mb-3">
+        <div className="col">
+          <FormGroup controlid="dob">
+            <Label>Date</Label>
+            <Input
+              type="date"
+              name="startDate"
+              placeholder="startDate"
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </FormGroup>
+        </div>
+      </div>
+      <div className="col-4">
+        <FormGroup controlid="Tijd">
+          <Label>end Date</Label>
+          <Input
+            type="time"
+            name="Tijd"
+            placeholder="Tijd"
+            onChange={(e) => setTijd(e.target.value)}
+          />
+        </FormGroup>
+      </div>
+      <div className="mb-3">
+        <label htmlFor="Zaal">Zaal</label>
+        <select
+          className="form-select"
+          name="Zaal"
+          aria-label="Zaal"
+          onChange={(e) => setZaal(e.target.value)}
+        >
+          <FetchZalen></FetchZalen>
+        </select>
+      </div>
+
       <div className="col-md-12 mb-3">
         <button type="submit" className="btn btn-info text-white">
           Voeg toe
         </button>
       </div>
-    </form>
+    </Form>
   );
 }

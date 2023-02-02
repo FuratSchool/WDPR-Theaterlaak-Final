@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Dropdown } from "bootstrap";
 import { DropdownItem } from "reactstrap";
-function FetchBands() {
+function FetchZalen() {
   const [succesdata, setsuccesdata] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5044/api/Groep")
+      .get("http://localhost:5044/api/Zaal")
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         setsuccesdata(response.data);
       })
       .catch((error) => {
@@ -21,13 +20,13 @@ function FetchBands() {
   }, []);
   return (
     <>
-      {
-        succesdata.map((s) => (
-          <DropdownItem key={s.groepId}>{s.groepNaam}</DropdownItem>
-        )) //reference
-      }
+      {succesdata.map((s) => (
+        <option key={s.zaalId} id={s.zaalId}>
+          {s.zaalId}
+        </option>
+      ))}
     </>
   );
 }
 
-export default FetchBands;
+export default FetchZalen;

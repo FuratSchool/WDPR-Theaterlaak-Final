@@ -7,6 +7,7 @@ using System.Configuration;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using TheaterLaakAPi.Services;
+using System.Text.Json.Serialization;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -14,23 +15,31 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(MyAllowSpecificOrigins,
-                          policy =>
-                          {
-                              policy.WithOrigins("http://example.com", //uiteindelijk de azure sites hierbij voegen.
-                                                  "http://www.example2.com") //hier ook.
-                                                  .AllowAnyHeader()
-                                                  .AllowAnyOrigin()
-                                                  .AllowAnyMethod();
-                          });
+    options.AddPolicy(
+        MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy
+                .WithOrigins(
+                    "http://example.com", //uiteindelijk de azure sites hierbij voegen.
+                    "http://www.example2.com"
+                ) //hier ook.
+                .AllowAnyHeader()
+                .AllowAnyOrigin()
+                .AllowAnyMethod();
+        }
+    );
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DbContext, DatabaseContext>(
     opt => opt.UseSqlite("Data Source=mydb.db")
 );
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(opt =>
@@ -72,9 +81,16 @@ builder.Services
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(p => p.AddPolicy("corspolicy", build => {
-    build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
-}));
+builder.Services.AddCors(
+    p =>
+        p.AddPolicy(
+            "corspolicy",
+            build =>
+            {
+                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+            }
+        )
+);
 
 builder.Services.AddDistributedMemoryCache();
 

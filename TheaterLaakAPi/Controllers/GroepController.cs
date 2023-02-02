@@ -17,9 +17,10 @@ namespace TheaterLaakAPi.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly DatabaseContext _context;
 
-        public GroepController(DatabaseContext context)
+        public GroepController(DatabaseContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/Groep
@@ -33,22 +34,43 @@ namespace TheaterLaakAPi.Controllers
             return await _context.Groepen.ToListAsync();
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Groep>> GetGroupById(int id)
+        {
+            if (_context.Groepen == null)
+            {
+                return NotFound();
+            }
+            var groep = await _context.Groepen.FindAsync(id);
+            if (groep == null)
+            {
+                return NotFound();
+            }
+
+            return await _context.Groepen.FindAsync(id);
+        }
+
         // POST: api/Groep
         [HttpPost]
-        public async Task<ActionResult<Groep>> PostGroep(Groep groep)
+        public async Task<ActionResult<Groep>> PostGroep(GroepArtistViewModel viewModel)
         {
             if (_context.Groepen == null)
             {
                 return Problem("Entity set 'DBContext.Groep'  is null.");
             }
-            //   ApplicationUser? result = await _userManager.FindByEmailAsync(
-            //         HttpContext.User.Identity.Name
-            //     );
+
+            var groep = new Groep
+            {
+                GroepNaam = viewModel.GroepNaam,
+                BandWebsite = viewModel.BandWebsite,
+                LogoLink = viewModel.LogoLink,
+            };
 
             _context.Groepen.Add(groep);
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetGroep), new { id = groep.GroepId }, groep);
+            return Ok(groep.Artiesten);
         }
 
         [HttpDelete("{id}")]
@@ -70,4 +92,14 @@ namespace TheaterLaakAPi.Controllers
             return NoContent();
         }
     }
+}
+
+public class GroepArtistViewModel
+{
+    public string GroepNaam { get; set; }
+
+    public string UserId { get; set; }
+
+    public string? BandWebsite { get; set; }
+    public string? LogoLink { get; set; }
 }

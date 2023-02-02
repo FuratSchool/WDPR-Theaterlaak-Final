@@ -25,33 +25,33 @@ public static class ModelBuilderExtensions
                 {
                     VoorstellingId = 1,
                     Title = "kat",
-                    Tijd = new DateTime(2023, 1, 1),
+                    Tijd = "12:12",
+                    Genre = "Dans",
                     Description = "miauw",
                     Prijs = 15.00,
-                    StartDatum = new DateTime(2023, 1, 1),
-                    EindDatum = new DateTime(2023, 1, 1),
+                    Datum = new DateTime(2023, 1, 1),
                     ZaalId = 1
                 },
                 new Voorstelling
                 {
                     VoorstellingId = 2,
                     Title = "hond",
-                    Tijd = new DateTime(2023, 2, 1),
+                    Tijd = "12:12",
+                    Genre = "Dans",
                     Description = "woef",
                     Prijs = 15.00,
-                    StartDatum = new DateTime(2023, 2, 1),
-                    EindDatum = new DateTime(2023, 2, 1),
+                    Datum = new DateTime(2023, 2, 1),
                     ZaalId = 1
                 },
                 new Voorstelling
                 {
                     VoorstellingId = 3,
                     Title = "luipaard",
-                    Tijd = new DateTime(2023, 3, 1),
+                    Tijd = "12:12",
+                    Genre = "Dans",
                     Description = "growl",
                     Prijs = 15.00,
-                    StartDatum = new DateTime(2023, 3, 1),
-                    EindDatum = new DateTime(2023, 3, 1),
+                    Datum = new DateTime(2023, 3, 1),
                     ZaalId = 2
                 }
             );

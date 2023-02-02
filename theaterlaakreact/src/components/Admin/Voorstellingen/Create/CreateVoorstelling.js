@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { SideNav } from "../../SideNav/SideNav";
+import { SideNav } from "../../.././SideNav/SideNav";
 import { CreateVoorstellingForm } from "./CreateVoorstellingForm";
 
 export class CreateVoorstelling extends Component {

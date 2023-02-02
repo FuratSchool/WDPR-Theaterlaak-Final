@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TheaterLaakAPi.Models;
 using Microsoft.AspNetCore.Authorization;
+using TheaterLaakAPi.ViewModels;
 
 namespace TheaterLaakAPi.Controllers
 {
@@ -84,14 +85,35 @@ namespace TheaterLaakAPi.Controllers
         // POST: api/Voorstelling
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Voorstelling>> PostVoorstelling(Voorstelling voorstelling)
+        public async Task<ActionResult<Voorstelling>> PostVoorstelling(
+            VoorstellingModelView voorstellingModelView
+        )
         {
             if (_context.Voorstelling == null)
             {
                 return Problem("Entity set 'DBContext.Voorstelling'  is null.");
             }
+            Zaal zaal = _context.Zaal.Find(voorstellingModelView.ZaalId);
+            Voorstelling voorstelling = new Voorstelling
+            {
+                Title = voorstellingModelView.Title,
+                Genre = voorstellingModelView.Genre,
+                Description = voorstellingModelView.Description,
+                Datum = voorstellingModelView.Datum, // Datum fixen
+                Tijd = voorstellingModelView.Tijd,
+                Zaal = zaal
+            };
+
+            Console.Write(voorstellingModelView.Datum);
+
             _context.Voorstelling.Add(voorstelling);
+            zaal.Voorstellingen.Add(voorstelling);
+
+            _context.Zaal.Update(zaal);
+
             await _context.SaveChangesAsync();
+
+            Console.Write(zaal.Voorstellingen.First().VoorstellingId);
 
             return CreatedAtAction(
                 nameof(GetVoorstelling),

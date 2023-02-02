@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TheaterLaakAPi.Models;
 
 namespace TheaterLaakAPi.Controllers
 {
@@ -23,10 +24,10 @@ namespace TheaterLaakAPi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bestelling>>> GetBestelling()
         {
-          if (_context.Bestelling == null)
-          {
-              return NotFound();
-          }
+            if (_context.Bestelling == null)
+            {
+                return NotFound();
+            }
             return await _context.Bestelling.ToListAsync();
         }
 
@@ -34,10 +35,10 @@ namespace TheaterLaakAPi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Bestelling>> GetBestelling(int id)
         {
-          if (_context.Bestelling == null)
-          {
-              return NotFound();
-          }
+            if (_context.Bestelling == null)
+            {
+                return NotFound();
+            }
             var bestelling = await _context.Bestelling.FindAsync(id);
 
             if (bestelling == null)
@@ -84,10 +85,10 @@ namespace TheaterLaakAPi.Controllers
         [HttpPost]
         public async Task<ActionResult<Bestelling>> PostBestelling(Bestelling bestelling)
         {
-          if (_context.Bestelling == null)
-          {
-              return Problem("Entity set 'DatabaseContext.Bestelling'  is null.");
-          }
+            if (_context.Bestelling == null)
+            {
+                return Problem("Entity set 'DatabaseContext.Bestelling'  is null.");
+            }
             _context.Bestelling.Add(bestelling);
             await _context.SaveChangesAsync();
 

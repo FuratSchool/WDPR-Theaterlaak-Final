@@ -31,22 +31,15 @@ namespace TheaterLaakAPi.Controllers
         [Authorize]
         public async Task<ActionResult<ApplicationUser>> GetUser()
         {
-            ApplicationUser? result = await _userManager.FindByNameAsync(
+            //REFRACTORING
+            ApplicationUser result = await _userManager.FindByNameAsync(
                 HttpContext.User.Identity.Name
             );
             if (result == null)
             {
                 return NotFound();
             }
-
-            var user = new ApplicationUser
-            {
-                Email = result.Email,
-                UserName = result.UserName,
-                Voornaam = result.Voornaam,
-                Achternaam = result.Achternaam
-            };
-            return Ok(user);
+            return Ok(result);
         }
     }
 }
