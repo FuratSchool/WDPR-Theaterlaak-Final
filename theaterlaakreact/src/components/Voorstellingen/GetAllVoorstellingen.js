@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import PaginationComponent from "../Pagination";
 
 export function GetAllVoorstellingen() {
   const [voorstellingen, setVoorstellingen] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentVoorstellingen = voorstellingen.slice(startIndex, endIndex);
 
   const fetchData = () => {
     fetch("http://localhost:5044/api/voorstelling")
       .then((response) => {
         return response.json();
       })
-
       .then((data) => {
         setVoorstellingen(data);
       });
   };
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -23,7 +27,7 @@ export function GetAllVoorstellingen() {
     <div>
       {voorstellingen.length > 0 && (
         <div class="row">
-          {voorstellingen.map((voorstelling) => (
+          {currentVoorstellingen.map((voorstelling) => (
             <div className="col-md-4">
               <div class="card card-custom card-border-gradient">
                 <div class="card-image">
@@ -52,7 +56,7 @@ export function GetAllVoorstellingen() {
                     {voorstelling.title}
                   </h5>
                   <p>{voorstelling.description}</p>
-                
+
                   <Link
                     type="button"
                     to={"/StoelReservatie/" + voorstelling.voorstellingId}
@@ -66,8 +70,12 @@ export function GetAllVoorstellingen() {
           ))}
         </div>
       )}
+      <PaginationComponent
+        succesdata={voorstellingen}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }
-
 export default GetAllVoorstellingen;

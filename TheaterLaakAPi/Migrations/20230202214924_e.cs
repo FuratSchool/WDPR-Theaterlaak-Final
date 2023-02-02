@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TheaterLaakAPi.Migrations
 {
     /// <inheritdoc />
-    public partial class te : Migration
+    public partial class e : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,35 +25,6 @@ namespace TheaterLaakAPi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
-                    Voornaam = table.Column<string>(type: "TEXT", nullable: true),
-                    Achternaam = table.Column<string>(type: "TEXT", nullable: true),
-                    Bedrag = table.Column<double>(type: "REAL", nullable: true),
-                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,21 +54,6 @@ namespace TheaterLaakAPi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Betaling", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Groepen",
-                columns: table => new
-                {
-                    GroepId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    GroepNaam = table.Column<string>(type: "TEXT", nullable: true),
-                    BandWebsite = table.Column<string>(type: "TEXT", nullable: true),
-                    LogoLink = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Groepen", x => x.GroepId);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,115 +91,6 @@ namespace TheaterLaakAPi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<string>(type: "TEXT", nullable: false),
-                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
-                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
-                columns: table => new
-                {
-                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
-                    ProviderKey = table.Column<string>(type: "TEXT", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "TEXT", nullable: true),
-                    UserId = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "TEXT", nullable: false),
-                    RoleId = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "TEXT", nullable: false),
-                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Value = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ArtiestGroep",
-                columns: table => new
-                {
-                    ArtiestenId = table.Column<string>(type: "TEXT", nullable: false),
-                    GroepenGroepId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ArtiestGroep", x => new { x.ArtiestenId, x.GroepenGroepId });
-                    table.ForeignKey(
-                        name: "FK_ArtiestGroep_AspNetUsers_ArtiestenId",
-                        column: x => x.ArtiestenId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ArtiestGroep_Groepen_GroepenGroepId",
-                        column: x => x.GroepenGroepId,
-                        principalTable: "Groepen",
-                        principalColumn: "GroepId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Rangen",
                 columns: table => new
                 {
@@ -260,30 +109,6 @@ namespace TheaterLaakAPi.Migrations
                         principalTable: "Zaal",
                         principalColumn: "ZaalId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Voorstelling",
-                columns: table => new
-                {
-                    VoorstellingId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
-                    Tijd = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Prijs = table.Column<double>(type: "REAL", nullable: false),
-                    StartDatum = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EindDatum = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ZaalId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Voorstelling", x => x.VoorstellingId);
-                    table.ForeignKey(
-                        name: "FK_Voorstelling_Zaal_ZaalId",
-                        column: x => x.ZaalId,
-                        principalTable: "Zaal",
-                        principalColumn: "ZaalId");
                 });
 
             migrationBuilder.CreateTable(
@@ -308,26 +133,164 @@ namespace TheaterLaakAPi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GroepVoorstelling",
+                name: "ArtiestGroeps",
                 columns: table => new
                 {
-                    GroepenGroepId = table.Column<int>(type: "INTEGER", nullable: false),
-                    VoorstellingenVoorstellingId = table.Column<int>(type: "INTEGER", nullable: false)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    GroepId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GroepVoorstelling", x => new { x.GroepenGroepId, x.VoorstellingenVoorstellingId });
+                    table.PrimaryKey("PK_ArtiestGroeps", x => new { x.UserId, x.GroepId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
+                    ProviderKey = table.Column<string>(type: "TEXT", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_GroepVoorstelling_Groepen_GroepenGroepId",
-                        column: x => x.GroepenGroepId,
-                        principalTable: "Groepen",
-                        principalColumn: "GroepId",
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Voornaam = table.Column<string>(type: "TEXT", nullable: true),
+                    Achternaam = table.Column<string>(type: "TEXT", nullable: true),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
+                    GroepId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Bedrag = table.Column<double>(type: "REAL", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_GroepVoorstelling_Voorstelling_VoorstellingenVoorstellingId",
-                        column: x => x.VoorstellingenVoorstellingId,
-                        principalTable: "Voorstelling",
-                        principalColumn: "VoorstellingId",
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Groepen",
+                columns: table => new
+                {
+                    GroepId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    GroepNaam = table.Column<string>(type: "TEXT", nullable: false),
+                    BandWebsite = table.Column<string>(type: "TEXT", nullable: true),
+                    LogoLink = table.Column<string>(type: "TEXT", nullable: true),
+                    ArtiestId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Groepen", x => x.GroepId);
+                    table.ForeignKey(
+                        name: "FK_Groepen_AspNetUsers_ArtiestId",
+                        column: x => x.ArtiestId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Voorstelling",
+                columns: table => new
+                {
+                    VoorstellingId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Prijs = table.Column<double>(type: "REAL", nullable: true),
+                    Genre = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    ImageId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Datum = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Tijd = table.Column<string>(type: "TEXT", nullable: false),
+                    ZaalId = table.Column<int>(type: "INTEGER", nullable: false),
+                    GroepId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Voorstelling", x => x.VoorstellingId);
+                    table.ForeignKey(
+                        name: "FK_Voorstelling_Groepen_GroepId",
+                        column: x => x.GroepId,
+                        principalTable: "Groepen",
+                        principalColumn: "GroepId");
+                    table.ForeignKey(
+                        name: "FK_Voorstelling_Zaal_ZaalId",
+                        column: x => x.ZaalId,
+                        principalTable: "Zaal",
+                        principalColumn: "ZaalId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -366,10 +329,68 @@ namespace TheaterLaakAPi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Zaal",
+                columns: new[] { "ZaalId", "Title" },
+                values: new object[,]
+                {
+                    { 1, "Zaal1" },
+                    { 2, "Zaal2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rangen",
+                columns: new[] { "RangId", "Capiciteit", "RangNr", "ZaalId" },
+                values: new object[,]
+                {
+                    { 1, 0, 1, 1 },
+                    { 2, 0, 2, 1 },
+                    { 3, 0, 3, 1 },
+                    { 4, 0, 1, 2 },
+                    { 5, 0, 2, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Voorstelling",
+                columns: new[] { "VoorstellingId", "Datum", "Description", "Genre", "GroepId", "ImageId", "Prijs", "Tijd", "Title", "ZaalId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "miauw", "Dans", null, 0, 15.0, "12:12", "kat", 1 },
+                    { 2, new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "woef", "Dans", null, 0, 15.0, "12:12", "hond", 1 },
+                    { 3, new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "growl", "Dans", null, 0, 15.0, "12:12", "luipaard", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Stoelen",
+                columns: new[] { "StoelId", "RangId", "StoelNr", "isInvalide" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, 0 },
+                    { 2, 1, 2, 0 },
+                    { 3, 2, 1, 0 },
+                    { 4, 2, 2, 0 },
+                    { 5, 3, 1, 0 },
+                    { 7, 4, 1, 1 },
+                    { 8, 4, 2, 0 },
+                    { 9, 5, 1, 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Reserveringen",
+                columns: new[] { "ReserveringId", "ApplicationUserId", "ApplicationUserId1", "ReserveringsDatum", "StoelId", "VoorstellingId", "isBetaald" },
+                values: new object[,]
+                {
+                    { 1, 1, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, 0 },
+                    { 2, 2, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, 0 },
+                    { 3, 3, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 1, 1 },
+                    { 4, 4, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, 0 },
+                    { 5, 5, null, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, 1 }
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_ArtiestGroep_GroepenGroepId",
-                table: "ArtiestGroep",
-                column: "GroepenGroepId");
+                name: "IX_ArtiestGroeps_GroepId",
+                table: "ArtiestGroeps",
+                column: "GroepId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -403,15 +424,20 @@ namespace TheaterLaakAPi.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_GroepId",
+                table: "AspNetUsers",
+                column: "GroepId");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroepVoorstelling_VoorstellingenVoorstellingId",
-                table: "GroepVoorstelling",
-                column: "VoorstellingenVoorstellingId");
+                name: "IX_Groepen_ArtiestId",
+                table: "Groepen",
+                column: "ArtiestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rangen_ZaalId",
@@ -439,16 +465,72 @@ namespace TheaterLaakAPi.Migrations
                 column: "RangId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Voorstelling_GroepId",
+                table: "Voorstelling",
+                column: "GroepId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Voorstelling_ZaalId",
                 table: "Voorstelling",
                 column: "ZaalId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_ArtiestGroeps_AspNetUsers_UserId",
+                table: "ArtiestGroeps",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_ArtiestGroeps_Groepen_GroepId",
+                table: "ArtiestGroeps",
+                column: "GroepId",
+                principalTable: "Groepen",
+                principalColumn: "GroepId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                table: "AspNetUserClaims",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                table: "AspNetUserRoles",
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUsers_Groepen_GroepId",
+                table: "AspNetUsers",
+                column: "GroepId",
+                principalTable: "Groepen",
+                principalColumn: "GroepId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Groepen_AspNetUsers_ArtiestId",
+                table: "Groepen");
+
             migrationBuilder.DropTable(
-                name: "ArtiestGroep");
+                name: "ArtiestGroeps");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -472,19 +554,10 @@ namespace TheaterLaakAPi.Migrations
                 name: "Betaling");
 
             migrationBuilder.DropTable(
-                name: "GroepVoorstelling");
-
-            migrationBuilder.DropTable(
                 name: "Reserveringen");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Groepen");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Stoelen");
@@ -497,6 +570,12 @@ namespace TheaterLaakAPi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Zaal");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Groepen");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿import React, { Component, Fragment } from "react";
 import "./SideMenu.css";
+import Nav from "react-bootstrap/Nav";
 
 export class SideNav extends Component {
   static displayName = SideNav.name;
@@ -13,33 +14,31 @@ export class SideNav extends Component {
         <div className="SideNav">
           <div className="card mb-3">
             <div className="card-body">
-              <ul className="nav custom-nav flex-column">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    id="Voorstellingen"
-                    aria-current="page"
-                    href="/"
-                  >
-                    Voorstellingen
-                  </a>
-                </li>
-                <li>
-                  <a className="nav-link" id="Zalen" href="">
-                    TODO: OPTIES TONEN OP BASIS VAN ROL{" "}
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" id="Zalen" href="">
-                    Zalen
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" id="Planningen" href="">
-                    Planningen
-                  </a>
-                </li>
-              </ul>
+              <Nav className="nav custom-nav flex-column">
+                <Nav.Link
+                  className="nav-item"
+                  id="Voorstellingen"
+                  aria-current="page"
+                  href="/admin/voorstellingen"
+                >
+                  Voorstellingen
+                </Nav.Link>
+
+                <Nav.Link
+                  className="nav-item"
+                  id="Zalen"
+                  href="/admin/zalen/create"
+                >
+                  Zalen
+                </Nav.Link>
+                <Nav.Link
+                  className="nav-item"
+                  id="Bands"
+                  href="/admin/band/overzicht"
+                >
+                  Bands
+                </Nav.Link>
+              </Nav>
             </div>
           </div>
         </div>

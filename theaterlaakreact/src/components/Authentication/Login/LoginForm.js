@@ -8,10 +8,10 @@ export function LoginForm() {
   const navigate = useNavigate();
   const signIn = useSignIn();
 
-  function LoginHandler(e) {
+  async function LoginHandler(e) {
     e.preventDefault();
 
-    axios
+    await axios
       .post("http://localhost:5044/api/Authentication/Login/", {
         Email: Email,
         PassWord: PassWord,

@@ -4,7 +4,7 @@ import axios from "axios";
 import { SideNav } from "../../SideNav/SideNav";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
 
-export function UserHome(props) {
+export function UserHome() {
   const [user, setUser] = useState({});
   const authHeader = useAuthHeader();
   const auth = useAuthUser();
@@ -32,7 +32,6 @@ export function UserHome(props) {
       .then((result) => {
         if (result.status == 200) {
           setUser(result.data);
-         
         }
       });
   }, []);
