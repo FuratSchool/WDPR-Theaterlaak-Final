@@ -2,10 +2,11 @@ describe('niks ingevoerd in de invoervelden', () => {
   it('wordt rood en er wordt tekst weergegeven om alsnog een invoervelden in te vullen', () => {
     cy.visit('/register')
     cy.get('[data-cy="cySubmitForm"]').click()
+    cy.url().should('include', '/register');
   })
 })
 
-describe('Alles wordt correct ingevuld', () => {
+describe('Alles wordt correct ingevuld gebruiker bestaat al', () => {
   it('alles wordt groen', () => {
     cy.visit('/register')
     cy.get('[data-cy="cyVoornaam"]').type('Erik')
@@ -15,6 +16,10 @@ describe('Alles wordt correct ingevuld', () => {
     cy.get('[data-cy="cyPassword"]').type('Testing123!')
     cy.get('[data-cy="cyConfirmPassword"]').type('Testing123!')
     cy.get('[data-cy="cySubmitForm"]').click()
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Er bestaat al een gebruiker met dit emailadres of gebruikersnaam');
+    })
+    cy.url().should('not.include', '/login');
   })
 })
 
@@ -23,24 +28,29 @@ describe('voornaam ingevoerd', () => {
     cy.visit('/register')
     cy.get('[data-cy="cyVoornaam"]').type('Erik')
     cy.get('[data-cy="cySubmitForm"]').click()
+    cy.get('[data-cy="cyVoornaam"]').should('have.class', 'is-valid')
   })
 })
 
 
-describe('achternaam ingevoerd', () => {
-  it('wordt groen en je kan verder', () => {
+describe('geldig achternaam ingevoerd', () => {
+  it('wordt groen', () => {
     cy.visit('/register')
     cy.get('[data-cy="cyAchternaam"]').type('Ten Hag')
     cy.get('[data-cy="cySubmitForm"]').click()
+    cy.get('[data-cy="cyAchternaam"]').should('have.class', 'is-valid')
+
   })
 })
 
 
-describe('username ingevoerd', () => {
-  it('wordt groen en je kan verder', () => {
+describe('geldig username ingevoerd', () => {
+  it('wordt groen geen', () => {
     cy.visit('/register')
     cy.get('[data-cy="cyUserName"]').type('mastercoacher')
     cy.get('[data-cy="cySubmitForm"]').click()
+    cy.get('[data-cy="cyUserName"]').should('have.class', 'is-valid')
+
   })
 })
 
@@ -50,6 +60,8 @@ describe('Email klopt niet', () => {
     cy.visit('/register')
     cy.get('[data-cy="cyEmail"]').type('kamdakdanjn@adadpa')
     cy.get('[data-cy="cySubmitForm"]').click()
+    cy.get('[data-cy="cyEmail"]').should('have.class', 'is-invalid')
+
   })
 })
 
@@ -58,6 +70,8 @@ describe('Email klopt', () => {
     cy.visit('/register')
     cy.get('[data-cy="cyEmail"]').type('kamdakdanjn@gmail.com')
     cy.get('[data-cy="cySubmitForm"]').click()
+    cy.get('[data-cy="cyEmail"]').should('have.class', 'is-valid')
+
   })
 })
 
@@ -67,6 +81,8 @@ describe('Voer ongeldig wachtwoord in', () => {
     cy.get('[data-cy="cyPassword"]').type('T222')
     cy.get('[data-cy="cyConfirmPassword"]').type('T222')
     cy.get('[data-cy="cySubmitForm"]').click()
+    cy.get('[data-cy="cyPassword"]').should('have.class', 'is-invalid')
+
   })
 })
 
@@ -77,6 +93,8 @@ describe('wachtwoorden komen niet overeen', () => {
     cy.get('[data-cy="cyPassword"]').type('Testing123!')
     cy.get('[data-cy="cyConfirmPassword"]').type('Testing123####')
     cy.get('[data-cy="cySubmitForm"]').click()
+    cy.get('[data-cy="cyPassword"]').should('have.class', 'is-invalid')
+
   })
 })
 
@@ -86,5 +104,7 @@ describe('wachtwoorden komen overeen en voldoen aan voorwaarden', () => {
     cy.get('[data-cy="cyPassword"]').type('Testing123!')
     cy.get('[data-cy="cyConfirmPassword"]').type('Testing123!')
     cy.get('[data-cy="cySubmitForm"]').click()
+    cy.get('[data-cy="cyPassword"]').should('have.class', 'is-valid')
+
   })
 })

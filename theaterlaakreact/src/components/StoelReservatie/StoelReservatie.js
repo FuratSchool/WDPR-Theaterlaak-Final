@@ -1,7 +1,7 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect } from "react";
 import Rang from "./Rang";
 import axios from "axios";
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { StoelReservatieContext } from "../stoelReservatieContext";
 import { Button } from "reactstrap";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
@@ -14,10 +14,8 @@ const StoelReservatie = () => {
 
   const navigate = useNavigate();
 
-
-
   let { voorstellingId } = useParams();
-  
+
   const authHeader = useAuthHeader();
 
   const jwtAuthenticationHeader = {
@@ -27,7 +25,6 @@ const StoelReservatie = () => {
   };
 
   useEffect(() => {
-
     const FetchBeschikbareStoelen = async () => {
       //get alle stoelen
       try {
@@ -85,40 +82,38 @@ const StoelReservatie = () => {
     };
     FetchLoggedUser();
     FetchVoorstellinginfo();
-    
+
     setInterval(() => {
-    FetchBeschikbareStoelen();
+      FetchBeschikbareStoelen();
     }, 500);
-    
   }, []);
 
-  const clearSelectedStoelen = () => {
-    setIdStoelen([])
-  }
-
-  const getStoelNummerById = () =>{
-      var x = null;
-  }
 
   const putUserInReservering = async () => {
-
     var ps = [];
 
-    idStoelen.forEach( e => {
-
-      var req = (axios.get("http://localhost:5044/toCart/" + String(voorstellingId) + "/"+String(e) +"/"+ String(user.id)))
-      .then(function (response) {
-        ps.push(req)
-        console.log(response);
-      }).catch(function (error) {
-        console.log(error);
-      });
+    idStoelen.forEach((e) => {
+      var req = axios
+        .get(
+          "http://localhost:5044/toCart/" +
+            String(voorstellingId) +
+            "/" +
+            String(e) +
+            "/" +
+            String(user.id)
+        )
+        .then(function (response) {
+          ps.push(req);
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     });
-    Promise.all(ps).then(console.log(ps)) 
+    await Promise.all(ps).then(console.log(ps));
+
     navigate("/Winkelwagen");
   };
-
-
 
   const stoelenLijst = stoelen.map((item, index) => (
     <div key={index}>
@@ -143,15 +138,16 @@ const StoelReservatie = () => {
               {/* <Button className="mt-2 col-12" color="success">
                 Bestelling afronden
               </Button> */}
-              <Button onClick={()=>putUserInReservering()} className="mt-2 mb-5 col-6" color="warning">
-                bestel tickets
+              <Button
+                onClick={() => putUserInReservering()}
+                className="mt-2 mb-5 col-6"
+                color="success"
+              >
+                Afrekenen
               </Button>
             </div>
           </div>
         </div>
-        {JSON.stringify(idStoelen)}
-        {JSON.stringify(stoelen)}
-    
       </StoelReservatieContext.Provider>
     </>
   );

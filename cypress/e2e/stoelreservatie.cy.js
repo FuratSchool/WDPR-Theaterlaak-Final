@@ -13,51 +13,11 @@ describe('weergeeft de juiste pagina van een voorstelling', () => {
 })
 
 describe('Weergave van mijn geselecteerde stoelen', ()=>{
-  it('kijkt of de tekst "mijn geselecteerde stoelen:" wordt toegevoegd aan de pagina wanneer je een stoel aanklikt', () => {
+  it('kijkt of de tekst "mijn geselecteerde stoelen:" wordt weergeven aan de pagina wanneer je een stoel aanklikt', () => {
     cy.visit('/stoelreservatie/1')
     cy.get('[data-cy="stoel20"]').click()
-    cy.contains('Mijn geselecteerde stoelen:')
+    cy.get('[data-cy="cyTekstSelectedStoelen"]').should('be.visible')
+
   })
 })
 
-
-
-
-// describe('template spec', () => {
-//   it('passes', () => {
-//     cy.visit('https://example.cypress.io')
-//   })
-// })
-
-// describe('My First Test', () => {
-//   it('Visits the Kitchen Sink', () => {
-//     cy.visit('https://example.cypress.io')
-//   })
-// })
-
-// describe('The Home Page', () => {
-//   it('laad succesvol', () =>{
-//     cy.visit('/')
-//   })
-// })
-
-// describe("My First Test", () => {
-
-//   it('zoekt naar type in de body', () =>{
-
-//     cy.visit('https://example.cypress.io')
-
-//     cy.contains('type')
-//   })
-// })
-
-// describe('tweede test', () =>{
-
-//   it('klik op de link "type"', () => {
-
-//     cy.visit('https://example.cypress.io')
-//     cy.contains('type').click()
-
-//     cy.url().should('include', '/commands/actions')
-//   })
-// })

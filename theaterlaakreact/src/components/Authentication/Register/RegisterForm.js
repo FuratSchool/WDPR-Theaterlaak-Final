@@ -193,7 +193,7 @@ export function RegisterForm() {
   return (
     <>
       <div className="Form">
-        <form id="registerForm" className="mb-3">
+        <form id="registerForm" className="mb-3" data-cy="cyForm">
 
           <div className="form-floating mb-3">
             <input

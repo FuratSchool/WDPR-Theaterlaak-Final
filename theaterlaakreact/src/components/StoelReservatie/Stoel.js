@@ -18,7 +18,7 @@ const Stoel = (props) => {
       }
     };
     tekstMijnGeselecteerdStoelen();
-  },[]);
+  });
 
   const checkBtnClick = (selected) => {
     const index = cSelected.indexOf(selected);
@@ -82,7 +82,7 @@ const Stoel = (props) => {
       </ButtonGroup>
 
       <div className="row p-0 mx-0 my-3">
-        <p className="my-1 mx-0 p-0">{tekstMijnGeselecteerdStoelen}</p>
+        <p className="my-1 mx-0 p-0" data-cy="cyTekstSelectedStoelen">{tekstMijnGeselecteerdStoelen}</p>
         <div className="p-0">{selectedStoelenPill}</div>
       </div>
     </>
