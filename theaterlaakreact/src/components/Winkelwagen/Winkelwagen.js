@@ -25,6 +25,21 @@ export const Winkelwagen = (args, { cart }) => {
     },
   }
 
+  useLayoutEffect(()=>{
+    const fetchWinkelwagen = async () => {
+      try {
+        const response = await axios.get(
+          `${API_BASE_URL}/getReservering/` + user
+        );
+        console.log(response);
+        setWinkelwagen(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchWinkelwagen()
+  })
+  
 
   useEffect(() => {
     const FetchLoggedUser = async () => {
@@ -39,19 +54,10 @@ export const Winkelwagen = (args, { cart }) => {
         console.error(err);
       }}
 
-      const fetchWinkelwagen = async () => {
-        try {
-          const response = await axios.get(
-            `${API_BASE_URL}/getReservering/` + user
-          );
-          console.log(response);
-          setWinkelwagen(response.data);
-        } catch (err) {
-          console.error(err);
-        }
-      };
+
       FetchLoggedUser();
-      fetchWinkelwagen();
+      
+      
 
 ;
   }, [user]);
