@@ -27,6 +27,9 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
             entity.HasData(
                 new IdentityRole { Name = "Donateur", NormalizedName = "Donateur".ToUpper() }
             );
+            entity.HasData(
+                new IdentityRole { Name = "Artiest", NormalizedName = "Donateur".ToUpper() }
+            );
         });
     }
 
