@@ -38,6 +38,20 @@ export class SideNav extends Component {
                 >
                   Bands
                 </Nav.Link>
+                <Nav.Link
+                  className="nav-item"
+                  id="Admin Management"
+                  href="/admin/management/AdminManagement"
+                >
+                  Admin Management
+                </Nav.Link>
+                <Nav.Link
+                  className="nav-item"
+                  id="Admin Management"
+                  href="/admin/management/MedewerkerManagement"
+                >
+                  Medewerker Management
+                </Nav.Link>
               </Nav>
             </div>
           </div>
