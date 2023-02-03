@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using TheaterLaakAPi.Models;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Net.Http.Headers;
+using System.Linq;
+using TheaterLaakAPi.ViewModels;
 
 namespace TheaterLaakAPi.Controllers
 {
@@ -26,6 +29,17 @@ namespace TheaterLaakAPi.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetAllUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            if (users == null)
+            {
+                return NotFound();
+            }
+            return Ok(users);
+        }
+
         // GET: api/User/username
         [HttpGet("Account")]
         [Authorize]
@@ -42,5 +56,30 @@ namespace TheaterLaakAPi.Controllers
             return Ok(result);
         }
 
+        [HttpPost("AddMedewerkerRole")]
+        public async Task<ActionResult<Groep>> GrantMedewerkerRole(RoleModelView viewModel)
+        {
+            var user = await _userManager.FindByEmailAsync(viewModel.Email);
+
+            await _userManager.AddToRoleAsync(user, viewModel.Role);
+
+            await _userManager.UpdateAsync(user);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost("AddArtiestRole")]
+        public async Task<ActionResult<Groep>> GrantArtiestRole(RoleModelView viewModel)
+        {
+            var user = await _userManager.FindByEmailAsync(viewModel.Email);
+
+            await _userManager.AddToRoleAsync(user, viewModel.Role);
+
+            await _userManager.UpdateAsync(user);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }

@@ -36,6 +36,10 @@ import { UserHome } from "./components/Accounts/User/UserHome";
 import { Navigate } from "react-router-dom";
 import { BandDetails } from "./components/Admin/Bands/Details/BandDetails";
 
+//Management
+import Admin from "./components/Admin/Management/Admin";
+import Medewerker from "./components/Admin/Management/Medewerker";
+
 const AppRoutes = [
   {
     index: true,
@@ -177,6 +181,23 @@ const AppRoutes = [
     element: (
       <RequireAuth loginPath={"/login"}>
         <AddToBand />
+      </RequireAuth>
+    ),
+  },
+
+  {
+    path: "/admin/management/AdminManagement",
+    element: (
+      <RequireAuth loginPath={"/login"}>
+        <Admin />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: "/admin/management/MedewerkerManagement",
+    element: (
+      <RequireAuth loginPath={"/login"}>
+        <Medewerker />
       </RequireAuth>
     ),
   },
