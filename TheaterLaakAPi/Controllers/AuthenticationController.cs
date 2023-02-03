@@ -73,7 +73,12 @@ namespace TheaterLaakAPi.Controllers
                     return Ok(new { Token = token });
                 }
             }
-            return BadRequest("Bad credentials");
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt");
+            }
+            return Ok();
+
         }
     }
 }

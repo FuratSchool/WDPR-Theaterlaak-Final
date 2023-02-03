@@ -2,11 +2,15 @@ import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
 import axios from "axios";
+import Alert from 'react-bootstrap/Alert';
+
 export function LoginForm() {
   const [Email, setEmail] = useState("");
   const [PassWord, setPassWord] = useState("");
   const navigate = useNavigate();
   const signIn = useSignIn();
+
+  const [show, setShow] = useState(true);
 
   async function LoginHandler(e) {
     e.preventDefault();
@@ -31,9 +35,9 @@ export function LoginForm() {
             authState: { Email: Email },
           });
           navigate("/userhome");
-          alert("gelukt");
+          
         } else {
-          alert("mislukt");
+          alert("Foutief wachtwoord/username");
         }
       });
   }
