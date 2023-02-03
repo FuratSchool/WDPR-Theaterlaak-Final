@@ -1,4 +1,6 @@
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../../apiConfig';
+
+
 
 function Verwijderfunctie(id){
     fetch(`${API_BASE_URL}/api/Groep/${id}`, {

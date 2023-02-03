@@ -1,7 +1,7 @@
 ﻿import React, { Component } from "react";
 import { SideNav } from "../../SideNav/SideNav";
 import { Link } from "react-router-dom";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../apiConfig';
 
 export class CreateZaal extends Component {
   constructor(props) {

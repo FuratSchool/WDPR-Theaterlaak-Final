@@ -4,7 +4,7 @@ import Table from "react-bootstrap/esm/Table";
 import { Button } from "reactstrap";
 import PaginationComponent from "../../Pagination";
 import { useNavigate } from "react-router-dom";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../apiConfig';
 
 function BandSchema() {
   const [succesdata, setsuccesdata] = useState([]);

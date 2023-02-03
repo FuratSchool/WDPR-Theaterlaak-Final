@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 import { Button } from "reactstrap";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../apiConfig';
 
 export function GetAllVoorstellingen() {
   const [voorstellingen, setVoorstellingen] = useState([]);

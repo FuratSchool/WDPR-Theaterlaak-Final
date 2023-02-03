@@ -4,7 +4,9 @@ import Button from "react-bootstrap/Button";
 import GetUserDetails from "../GetUserDetails";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../../apiConfig';
+
+
 
 
 export function BandsFormpagina() {
