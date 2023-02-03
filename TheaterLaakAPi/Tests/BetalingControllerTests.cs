@@ -10,7 +10,7 @@ public class BetalingControllerTests
     private readonly BetalingController _controller;
 
     [Fact]
-    public async Task Betaling_true()
+    public async Task test_betaling_true()
     {
         // Arrange
         var options = new DbContextOptionsBuilder<DatabaseContext>()
@@ -36,7 +36,7 @@ public class BetalingControllerTests
         }
     }
     [Fact]
-    public async Task Betaling_false()
+    public async Task test_betaling_false()
     {
         // Arrange
         var options = new DbContextOptionsBuilder<DatabaseContext>()
@@ -60,6 +60,17 @@ public class BetalingControllerTests
             var redirectResult = Assert.IsType<RedirectResult>(result);
             Assert.Equal("http://localhost:3000/Cancel", redirectResult.Url);
         }
+    }
+    [Fact]
+    public async Task test_betaling_notFound()
+    {
+        // Arrange
+
+        // Act
+        var result = await _controller.GetBetaling(1);
+
+        // Assert
+        Assert.IsType<NotFoundResult>(result.Result);
     }
 
 }
