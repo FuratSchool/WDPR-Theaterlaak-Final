@@ -94,6 +94,8 @@ namespace TheaterLaakAPi.Controllers
                 return Problem("Entity set 'DBContext.Voorstelling'  is null.");
             }
             Zaal zaal = _context.Zaal.Find(voorstellingModelView.ZaalId);
+            Groep groep = _context.Groepen.Find(voorstellingModelView.GroepId);
+
             Voorstelling voorstelling = new Voorstelling
             {
                 Title = voorstellingModelView.Title,
@@ -102,19 +104,22 @@ namespace TheaterLaakAPi.Controllers
                 Prijs = voorstellingModelView.Prijs,
                 Datum = voorstellingModelView.Datum, // Datum fixen
                 Tijd = voorstellingModelView.Tijd,
-                Zaal = zaal
+                Zaal = zaal,
+                Groep = groep
             };
 
             Console.Write(voorstellingModelView.Datum);
 
             _context.Voorstelling.Add(voorstelling);
             zaal.Voorstellingen.Add(voorstelling);
+            groep.Voorstellingen.Add(voorstelling);
 
             _context.Zaal.Update(zaal);
 
             await _context.SaveChangesAsync();
 
             Console.Write(zaal.Voorstellingen.First().VoorstellingId);
+            Console.Write(groep.Voorstellingen.First().Title);
 
             return CreatedAtAction(
                 nameof(GetVoorstelling),

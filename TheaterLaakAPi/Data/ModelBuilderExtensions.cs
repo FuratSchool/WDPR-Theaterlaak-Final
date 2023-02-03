@@ -14,7 +14,12 @@ public static class ModelBuilderExtensions
         builder
             .Entity<Zaal>()
             .HasData(new Zaal { ZaalId = 1, Title = "x" }, new Zaal { ZaalId = 2, Title = "x" });
-
+        builder
+            .Entity<Groep>()
+            .HasData(
+                new Groep { GroepId = 1, GroepNaam = "x" },
+                new Groep { GroepId = 2, GroepNaam = "x" }
+            );
         builder
             .Entity<Voorstelling>()
             .HasData(
@@ -27,7 +32,8 @@ public static class ModelBuilderExtensions
                     Description = "miauw",
                     Prijs = 15.00,
                     Datum = new DateTime(2023, 1, 1),
-                    ZaalId = 1
+                    ZaalId = 1,
+                    GroepId = 1
                 },
                 new Voorstelling
                 {
@@ -38,7 +44,8 @@ public static class ModelBuilderExtensions
                     Description = "woef",
                     Prijs = 15.00,
                     Datum = new DateTime(2023, 1, 1),
-                    ZaalId = 1
+                    ZaalId = 1,
+                    GroepId = 1
                 },
                 new Voorstelling
                 {
@@ -49,7 +56,8 @@ public static class ModelBuilderExtensions
                     Description = "growl",
                     Prijs = 15.00,
                     Datum = new DateTime(2023, 1, 1),
-                    ZaalId = 2
+                    ZaalId = 2,
+                    GroepId = 1
                 },
                 new Voorstelling
                 {
@@ -60,7 +68,8 @@ public static class ModelBuilderExtensions
                     Description = "xo",
                     Prijs = 15.00,
                     Datum = new DateTime(2023, 1, 1),
-                    ZaalId = 1
+                    ZaalId = 1,
+                    GroepId = 1
                 }
             );
 

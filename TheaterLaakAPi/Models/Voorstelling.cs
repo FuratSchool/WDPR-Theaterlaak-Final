@@ -25,4 +25,7 @@ public class Voorstelling
 
     public int ZaalId { get; set; }
     public Zaal Zaal { get; set; }
+
+    public int GroepId { get; set; }
+    public Groep Groep { get; set; }
 }

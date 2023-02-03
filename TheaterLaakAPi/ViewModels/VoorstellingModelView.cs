@@ -6,6 +6,8 @@ namespace TheaterLaakAPi.ViewModels
     public class VoorstellingModelView
     {
         public int ZaalId { get; set; }
+        public int GroepId { get; set; }
+
         public string Title { get; set; }
 
         [Required]

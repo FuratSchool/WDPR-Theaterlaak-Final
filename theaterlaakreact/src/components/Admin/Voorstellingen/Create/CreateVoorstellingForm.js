@@ -1,4 +1,5 @@
 import FetchZalen from "../FetchZalen";
+import FetchBand from "./FetchBand";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +11,7 @@ export function CreateVoorstellingForm() {
   const [Description, setDescription] = useState("");
   const [Date, setDate] = useState("");
   const [Zaal, setZaal] = useState("");
+  const [Groep, setGroep] = useState("");
   const [Tijd, setTijd] = useState("");
   const [Prijs, setPrijs] = useState("");
 
@@ -25,8 +27,9 @@ export function CreateVoorstellingForm() {
         Title: Title,
         Genre: Genre,
         Description: Description,
-        Datun: Date,
+        Datum: Date,
         ZaalId: Zaal,
+        GroepId: Groep,
         Tijd: Tijd,
         Prijs: Prijs,
       }),
@@ -118,6 +121,17 @@ export function CreateVoorstellingForm() {
           onChange={(e) => setZaal(e.target.value)}
         >
           <FetchZalen></FetchZalen>
+        </select>
+      </div>
+      <div className="mb-3">
+        <label htmlFor="Groep">Groep</label>
+        <select
+          className="form-select"
+          name="Groep"
+          aria-label="Groep"
+          onChange={(e) => setGroep(e.target.value)}
+        >
+          <FetchBand></FetchBand>
         </select>
       </div>
 
