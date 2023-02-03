@@ -10,7 +10,6 @@ public class Voorstelling
 
     public double? Prijs { get; set; }
 
-    [Required]
     public string? Genre { get; set; }
 
     [Required]

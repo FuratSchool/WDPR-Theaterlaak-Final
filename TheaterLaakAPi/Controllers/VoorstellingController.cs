@@ -99,6 +99,7 @@ namespace TheaterLaakAPi.Controllers
                 Title = voorstellingModelView.Title,
                 Genre = voorstellingModelView.Genre,
                 Description = voorstellingModelView.Description,
+                Prijs = voorstellingModelView.Prijs,
                 Datum = voorstellingModelView.Datum, // Datum fixen
                 Tijd = voorstellingModelView.Tijd,
                 Zaal = zaal

@@ -1,13 +1,12 @@
-import React from 'react'
-import { Succes } from '../Succes'
+import React from "react";
+import { Succes } from "../Succes";
 
 function TussenAfr() {
   const reserveringContext = createContext();
 
-  return (
-    <reserveringContext.Provider value 
-    <Succes/>
-  )
+  // return (
+  //   <reserveringContext.Provider value></reserveringContext.Provider><Succes/>
+  // )
 }
 
-export default TussenAfr
+export default TussenAfr;

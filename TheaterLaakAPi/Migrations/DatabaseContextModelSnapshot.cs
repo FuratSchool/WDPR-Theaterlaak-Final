@@ -16,21 +16,6 @@ namespace TheaterLaakAPi.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
 
-            modelBuilder.Entity("ArtiestGroep", b =>
-                {
-                    b.Property<string>("ArtiestenId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("GroepenGroepId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ArtiestenId", "GroepenGroepId");
-
-                    b.HasIndex("GroepenGroepId");
-
-                    b.ToTable("ArtiestGroep");
-                });
-
             modelBuilder.Entity("Bestelling", b =>
                 {
                     b.Property<int>("id")
@@ -67,21 +52,6 @@ namespace TheaterLaakAPi.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Betaling");
-                });
-
-            modelBuilder.Entity("GroepVoorstelling", b =>
-                {
-                    b.Property<int>("GroepenGroepId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("VoorstellingenVoorstellingId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("GroepenGroepId", "VoorstellingenVoorstellingId");
-
-                    b.HasIndex("VoorstellingenVoorstellingId");
-
-                    b.ToTable("GroepVoorstelling");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -131,78 +101,6 @@ namespace TheaterLaakAPi.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -284,22 +182,126 @@ namespace TheaterLaakAPi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("TheaterLaakAPi.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Achternaam")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("GroepId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Voornaam")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroepId");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("ApplicationUser");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.ArtiestGroep", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("GroepId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("UserId", "GroepId");
+
+                    b.HasIndex("GroepId");
+
+                    b.ToTable("ArtiestGroeps");
+                });
+
             modelBuilder.Entity("TheaterLaakAPi.Models.Groep", b =>
                 {
                     b.Property<int>("GroepId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ArtiestId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("BandWebsite")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GroepNaam")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LogoLink")
                         .HasColumnType("TEXT");
 
                     b.HasKey("GroepId");
+
+                    b.HasIndex("ArtiestId");
 
                     b.ToTable("Groepen");
                 });
@@ -947,30 +949,40 @@ namespace TheaterLaakAPi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Beschrijving")
+                    b.Property<DateTime>("Datum")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("EindDatum")
+                    b.Property<string>("Genre")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Prijs")
+                    b.Property<int?>("GroepId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ImageId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double?>("Prijs")
                         .HasColumnType("REAL");
 
-                    b.Property<DateTime>("StartDatum")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Tijd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Titel")
+                    b.Property<string>("Tijd")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ZaalId")
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ZaalId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("VoorstellingId");
+
+                    b.HasIndex("GroepId");
 
                     b.HasIndex("ZaalId");
 
@@ -980,45 +992,49 @@ namespace TheaterLaakAPi.Migrations
                         new
                         {
                             VoorstellingId = 1,
-                            Beschrijving = "miauw",
-                            EindDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Datum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "miauw",
+                            Genre = "Dans",
+                            ImageId = 0,
                             Prijs = 15.0,
-                            StartDatum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Tijd = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titel = "Les Miserables",
+                            Tijd = "2023, 3, 1",
+                            Title = "Les Miserables",
                             ZaalId = 1
                         },
                         new
                         {
                             VoorstellingId = 2,
-                            Beschrijving = "woef",
-                            EindDatum = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Datum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "woef",
+                            Genre = "Dans",
+                            ImageId = 0,
                             Prijs = 15.0,
-                            StartDatum = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Tijd = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titel = "Matilda the Musical",
+                            Tijd = "2023, 3, 1",
+                            Title = "Matilda the Musical",
                             ZaalId = 1
                         },
                         new
                         {
                             VoorstellingId = 3,
-                            Beschrijving = "growl",
-                            EindDatum = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Datum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "growl",
+                            Genre = "Dans",
+                            ImageId = 0,
                             Prijs = 15.0,
-                            StartDatum = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Tijd = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titel = "Wicked",
+                            Tijd = "2023, 3, 1",
+                            Title = "Wicked",
                             ZaalId = 2
                         },
                         new
                         {
                             VoorstellingId = 4,
-                            Beschrijving = "xo",
-                            EindDatum = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Datum = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "xo",
+                            Genre = "Dans",
+                            ImageId = 0,
                             Prijs = 15.0,
-                            StartDatum = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Tijd = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Titel = "Mama",
+                            Tijd = "2023, 3, 1",
+                            Title = "Mama",
                             ZaalId = 1
                         });
                 });
@@ -1048,19 +1064,6 @@ namespace TheaterLaakAPi.Migrations
                             ZaalId = 2,
                             Title = "x"
                         });
-                });
-
-            modelBuilder.Entity("TheaterLaakAPi.Models.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Achternaam")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Voornaam")
-                        .HasColumnType("TEXT");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Admin", b =>
@@ -1094,36 +1097,6 @@ namespace TheaterLaakAPi.Migrations
                     b.HasDiscriminator().HasValue("Medewerker");
                 });
 
-            modelBuilder.Entity("ArtiestGroep", b =>
-                {
-                    b.HasOne("TheaterLaakAPi.Models.Artiest", null)
-                        .WithMany()
-                        .HasForeignKey("ArtiestenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TheaterLaakAPi.Models.Groep", null)
-                        .WithMany()
-                        .HasForeignKey("GroepenGroepId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GroepVoorstelling", b =>
-                {
-                    b.HasOne("TheaterLaakAPi.Models.Groep", null)
-                        .WithMany()
-                        .HasForeignKey("GroepenGroepId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TheaterLaakAPi.Models.Voorstelling", null)
-                        .WithMany()
-                        .HasForeignKey("VoorstellingenVoorstellingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1135,7 +1108,7 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("TheaterLaakAPi.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1144,7 +1117,7 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("TheaterLaakAPi.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1159,7 +1132,7 @@ namespace TheaterLaakAPi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("TheaterLaakAPi.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1168,11 +1141,44 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("TheaterLaakAPi.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("TheaterLaakAPi.Models.Groep", null)
+                        .WithMany("Artiesten")
+                        .HasForeignKey("GroepId");
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.ArtiestGroep", b =>
+                {
+                    b.HasOne("TheaterLaakAPi.Models.Groep", "groep")
+                        .WithMany()
+                        .HasForeignKey("GroepId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TheaterLaakAPi.Models.ApplicationUser", "Artiest")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artiest");
+
+                    b.Navigation("groep");
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.Groep", b =>
+                {
+                    b.HasOne("TheaterLaakAPi.Models.Artiest", null)
+                        .WithMany("Groepen")
+                        .HasForeignKey("ArtiestId");
                 });
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Rang", b =>
@@ -1197,7 +1203,7 @@ namespace TheaterLaakAPi.Migrations
                         .HasForeignKey("StoelId");
 
                     b.HasOne("TheaterLaakAPi.Models.Voorstelling", "Voorstelling")
-                        .WithMany("Reserveringen")
+                        .WithMany()
                         .HasForeignKey("VoorstellingId");
 
                     b.Navigation("ApplicationUser");
@@ -1220,11 +1226,29 @@ namespace TheaterLaakAPi.Migrations
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Voorstelling", b =>
                 {
+                    b.HasOne("TheaterLaakAPi.Models.Groep", null)
+                        .WithMany("Voorstellingen")
+                        .HasForeignKey("GroepId");
+
                     b.HasOne("TheaterLaakAPi.Models.Zaal", "Zaal")
                         .WithMany("Voorstellingen")
-                        .HasForeignKey("ZaalId");
+                        .HasForeignKey("ZaalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Zaal");
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Reserveringen");
+                });
+
+            modelBuilder.Entity("TheaterLaakAPi.Models.Groep", b =>
+                {
+                    b.Navigation("Artiesten");
+
+                    b.Navigation("Voorstellingen");
                 });
 
             modelBuilder.Entity("TheaterLaakAPi.Models.Rang", b =>
@@ -1237,11 +1261,6 @@ namespace TheaterLaakAPi.Migrations
                     b.Navigation("Reserveringen");
                 });
 
-            modelBuilder.Entity("TheaterLaakAPi.Models.Voorstelling", b =>
-                {
-                    b.Navigation("Reserveringen");
-                });
-
             modelBuilder.Entity("TheaterLaakAPi.Models.Zaal", b =>
                 {
                     b.Navigation("Rangen");
@@ -1249,9 +1268,9 @@ namespace TheaterLaakAPi.Migrations
                     b.Navigation("Voorstellingen");
                 });
 
-            modelBuilder.Entity("TheaterLaakAPi.Models.ApplicationUser", b =>
+            modelBuilder.Entity("TheaterLaakAPi.Models.Artiest", b =>
                 {
-                    b.Navigation("Reserveringen");
+                    b.Navigation("Groepen");
                 });
 #pragma warning restore 612, 618
         }

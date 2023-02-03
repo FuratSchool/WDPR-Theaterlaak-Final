@@ -11,6 +11,8 @@ namespace TheaterLaakAPi.ViewModels
         [Required]
         public string Genre { get; set; }
 
+        public double? Prijs { get; set; }
+
         [Required]
         public string Description { get; set; }
 

@@ -75,9 +75,9 @@ const AppRoutes = [
     element: <Voorstelling />,
   },
   {
-    path: '/StoelReservatie/:voorstellingId',
-    element: <StoelReservatie/>
-},
+    path: "/StoelReservatie/:voorstellingId",
+    element: <StoelReservatie />,
+  },
   {
     path: "/GebruikersInterface",
     element: <GebruikersInterface />,
@@ -92,7 +92,11 @@ const AppRoutes = [
   },
   {
     path: "/Winkelwagen",
-    element: <Winkelwagen />,
+    element: (
+      <RequireAuth loginPath={"/login"}>
+        <Winkelwagen />
+      </RequireAuth>
+    ),
   },
   {
     path: "/Succes",
@@ -109,8 +113,6 @@ const AppRoutes = [
   {
     path: "/admin/voorstellingen",
     element: (
-      // <OverzichtVoorstellingen />
-
       <RequireAuth loginPath={"/login"}>
         <OverzichtVoorstellingen />
       </RequireAuth>
@@ -118,43 +120,60 @@ const AppRoutes = [
   },
   {
     path: "/admin/voorstellingen/:id",
-    element: <DetailsVoorstelling />,
+    element: (
+      <RequireAuth loginPath={"/login"}>
+        <DetailsVoorstelling />
+      </RequireAuth>
+    ),
   },
   {
     path: "/admin/voorstellingen/create",
-    element: <CreateVoorstelling />,
+    element: (
+      <RequireAuth loginPath={"/login"}>
+        <CreateVoorstelling />
+      </RequireAuth>
+    ),
   },
   {
     path: "/admin/zalen/create",
-    element: <CreateZaal />,
+    element: (
+      <RequireAuth loginPath={"/login"}>
+        <CreateZaal />
+      </RequireAuth>
+    ),
   },
-  {
-    path: "/admin/planning",
-    element: <PlanningsOverzicht />,
-  },
-  {
-    path: "/admin/planning/create",
-    element: <CreatePlanning />,
-  },
-  {
-    path: "/admin/planning/update",
-    element: <Plannen />,
-  },
+
   {
     path: "/admin/band/overzicht",
-    element: <Bandpagina />,
+    element: (
+      <RequireAuth loginPath={"/login"}>
+        <Bandpagina />
+      </RequireAuth>
+    ),
   },
   {
     path: "/admin/band/create",
-    element: <CreateBand />,
+    element: (
+      <RequireAuth loginPath={"/login"}>
+        <CreateBand />
+      </RequireAuth>
+    ),
   },
   {
     path: "/admin/band/update/:id",
-    element: <UpdateBand />,
+    element: (
+      <RequireAuth loginPath={"/login"}>
+        <UpdateBand />
+      </RequireAuth>
+    ),
   },
   {
     path: "/admin/band/addUser/:id",
-    element: <AddToBand />,
+    element: (
+      <RequireAuth loginPath={"/login"}>
+        <AddToBand />
+      </RequireAuth>
+    ),
   },
 ];
 

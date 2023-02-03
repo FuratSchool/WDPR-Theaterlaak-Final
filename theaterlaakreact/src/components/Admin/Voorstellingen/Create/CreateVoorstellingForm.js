@@ -11,6 +11,8 @@ export function CreateVoorstellingForm() {
   const [Date, setDate] = useState("");
   const [Zaal, setZaal] = useState("");
   const [Tijd, setTijd] = useState("");
+  const [Prijs, setPrijs] = useState("");
+
   const navigate = useNavigate();
 
   async function submitHandler(e) {
@@ -26,6 +28,7 @@ export function CreateVoorstellingForm() {
         Datun: Date,
         ZaalId: Zaal,
         Tijd: Tijd,
+        Prijs: Prijs,
       }),
     }).then((response) => {
       console.log(response);
@@ -71,7 +74,17 @@ export function CreateVoorstellingForm() {
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
       </div>
-
+      <div className="mb-3">
+        <label htmlFor="Prijs">Prijs</label>
+        <input
+          type="number"
+          className="form-control"
+          name="Prijs"
+          placeholder="Prijs"
+          id="Prijs"
+          onChange={(e) => setPrijs(e.target.value)}
+        ></input>
+      </div>
       <div className="row mb-3">
         <div className="col">
           <FormGroup controlid="dob">
