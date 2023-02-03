@@ -61,7 +61,7 @@ namespace TheaterLaakAPi.Controllers
         {
             var user = await _userManager.FindByEmailAsync(viewModel.Email);
 
-            await _userManager.AddToRoleAsync(user, viewModel.Role);
+            await _userManager.AddToRoleAsync(user, "Medewerker");
 
             await _userManager.UpdateAsync(user);
             await _context.SaveChangesAsync();
@@ -74,7 +74,7 @@ namespace TheaterLaakAPi.Controllers
         {
             var user = await _userManager.FindByEmailAsync(viewModel.Email);
 
-            await _userManager.AddToRoleAsync(user, viewModel.Role);
+            await _userManager.AddToRoleAsync(user, "Artiest");
 
             await _userManager.UpdateAsync(user);
             await _context.SaveChangesAsync();

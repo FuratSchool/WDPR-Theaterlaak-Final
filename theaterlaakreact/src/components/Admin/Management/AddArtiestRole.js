@@ -65,13 +65,13 @@ export function AddArtiestRole() {
           {succesdata.map((s) => (
             <option key={s.id}>{s.email}</option>
           ))}
+          <option></option>
         </FormSelect>
       </FormGroup>
       <FormGroup>
         <Label>Preferred Role</Label>
         <FormSelect onChange={(e) => setUserRole(e.target.value)}>
           <option>Artiest</option>
-          <option></option>
         </FormSelect>
       </FormGroup>
       <Button type="submit" className="btn btn-success">

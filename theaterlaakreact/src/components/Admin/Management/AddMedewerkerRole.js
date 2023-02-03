@@ -7,11 +7,10 @@ import { API_BASE_URL } from "../../../apiConfig";
 import { useNavigate } from "react-router-dom";
 
 export function AddMedewerkerRole() {
-  const [userEmail, setUserEmail] = useState();
-  const [userRole, setUserRole] = useState();
   const navigate = useNavigate();
   const [succesdata, setsuccesdata] = useState([]);
-
+  const [userEmail, setUserEmail] = useState("");
+  const [userRole, setUserRole] = useState("");
   const authHeader = useAuthHeader();
 
   const jwtAuthenticationHeader = {
@@ -65,13 +64,13 @@ export function AddMedewerkerRole() {
           {succesdata.map((s) => (
             <option key={s.id}>{s.email}</option>
           ))}
+          <option></option>
         </FormSelect>
       </FormGroup>
       <FormGroup>
         <Label>Preferred Role</Label>
         <FormSelect onChange={(e) => setUserRole(e.target.value)}>
-          <option>Medewerker</option>
-          <option></option>
+          <option value={"Medewerker"}>Medewerker</option>
         </FormSelect>
       </FormGroup>
       <Button type="submit" className="btn btn-success">
