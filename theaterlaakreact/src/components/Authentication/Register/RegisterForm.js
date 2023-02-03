@@ -256,7 +256,7 @@ export function RegisterForm() {
           <div className="form-floating mb-3">
             <input
               className={passwordForm}
-              // type="password"
+              type="password"
               htmlFor="Password"
               placeholder="password"
               data-cy="cyPassword"
@@ -271,7 +271,7 @@ export function RegisterForm() {
           <div className="form-floating mb-3">
             <input
               className={passwordForm}
-              // type="password"
+              type="password"
               htmlFor="ConfirmPassword"
               autoComplete="new-password"
               aria-required="true"

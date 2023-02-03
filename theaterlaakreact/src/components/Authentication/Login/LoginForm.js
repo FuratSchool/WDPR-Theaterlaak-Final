@@ -68,6 +68,7 @@ export function LoginForm() {
           asp-for="Input.Password"
           className="form-control"
           autoComplete="current-password"
+          type="password"
           aria-required="true"
           placeholder="password"
           onChange={(e) => setPassWord(e.target.value)}

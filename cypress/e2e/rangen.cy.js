@@ -13,7 +13,7 @@
   });
 
   describe('Vraag een rang die niet bestaat', () => {
-    it.only('Geeft errorcode 404 terug', () => {
+    it('Geeft errorcode 404 terug', () => {
       const nepId = 1231313;
       cy.request({
         method: 'GET',
