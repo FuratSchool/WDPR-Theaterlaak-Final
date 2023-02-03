@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthUser } from "react-auth-kit";
 import axios from "axios";
 import { Button } from "reactstrap";
+import { API_BASE_URL } from '../../../apiConfig';
 
 export function GetAllVoorstellingen() {
   const [voorstellingen, setVoorstellingen] = useState([]);
@@ -10,7 +11,7 @@ export function GetAllVoorstellingen() {
   async function DeleteVoorstellingById(id) {
     try {
       const res = await axios.delete(
-        `http://localhost:5044/api/Voorstelling/${id}`
+        `${API_BASE_URL}/api/Voorstelling/${id}`
       );
       console.log(res);
     } catch (error) {
@@ -18,7 +19,7 @@ export function GetAllVoorstellingen() {
     }
   }
   const fetchData = () => {
-    fetch("http://localhost:5044/api/voorstelling")
+    fetch(`${API_BASE_URL}/api/voorstelling`)
       .then((response) => {
         return response.json();
       })

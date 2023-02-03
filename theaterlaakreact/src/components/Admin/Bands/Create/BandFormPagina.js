@@ -4,6 +4,10 @@ import Button from "react-bootstrap/Button";
 import GetUserDetails from "../GetUserDetails";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from '../../../../apiConfig';
+
+
+
 
 export function BandsFormpagina() {
   const Artiesten = GetUserDetails();
@@ -16,7 +20,7 @@ export function BandsFormpagina() {
     // add entity - POST
     e.preventDefault();
     // creates entity
-    fetch("http://localhost:5044/api/Groep", {
+    fetch(`${API_BASE_URL}/api/Groep`, {
       method: "POST",
       headers: {
         Accept: "application/json",

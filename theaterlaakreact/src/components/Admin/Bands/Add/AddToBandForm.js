@@ -5,6 +5,8 @@ import GetUserDetails from "../GetUserDetails";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from '../../../../apiConfig';
+
 
 export function AddToBandForm() {
   const { id } = useParams();
@@ -16,7 +18,7 @@ export function AddToBandForm() {
     if (!id) return;
 
     try {
-      axios.get(`http://localhost:5044/api/Groep/${id}`).then((response) => {
+      axios.get(`${API_BASE_URL}/api/Groep/${id}`).then((response) => {
         setGroupTitle(response.data.groepNaam);
       });
     } catch (err) {

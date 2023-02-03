@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import { API_BASE_URL } from '../apiConfig';
 
 export function Cancel() {
 const [betalingdata,setbetalingdata] = useState([1])
 
 useEffect(() => {
-  axios.get('http://localhost:5044/api/Betaling')
+  axios.get(`${API_BASE_URL}/api/Betaling`)
 .then(response =>{
   console.log(response);
   setbetalingdata(response.data)

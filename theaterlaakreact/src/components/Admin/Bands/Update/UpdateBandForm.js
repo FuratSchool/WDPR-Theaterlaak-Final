@@ -4,6 +4,10 @@ import FetchBands from "../FetchBands";
 import GetUserDetails from "../GetUserDetails";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_BASE_URL } from '../../../../apiConfig';
+
+
+
 
 export function UpdateBandForm() {
   const { id } = useParams();
@@ -16,7 +20,7 @@ export function UpdateBandForm() {
   async function DeleteArtiestById(id) {
     try {
       const res = await axios.delete(
-        `http://localhost:5044/api/ArtiestGroup/${id}`
+        `${API_BASE_URL}/api/ArtiestGroup/${id}`
       );
       console.log(res);
     } catch (error) {
@@ -26,7 +30,7 @@ export function UpdateBandForm() {
 
   async function GetGroupbyId() {
     try {
-      axios.get(`http://localhost:5044/api/Groep/${id}`).then((response) => {
+      axios.get(`${API_BASE_URL}/api/Groep/${id}`).then((response) => {
         setGroupTitle(response.data.groepNaam);
         setGroupWebsite(response.data.bandWebsite);
         setGroupLogoLink(response.data.logoLink);
@@ -39,7 +43,7 @@ export function UpdateBandForm() {
   async function GetArtistGroup() {
     try {
       axios
-        .get(`http://localhost:5044/api/ArtiestGroup/${id}`)
+        .get(`${API_BASE_URL}/api/ArtiestGroup/${id}`)
         .then((response) => {
           setGroupLeden(response.data);
         });
@@ -57,7 +61,7 @@ export function UpdateBandForm() {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:5044/api/ArtiestGroup/${id}`,
+        `${API_BASE_URL}/api/ArtiestGroup/${id}`,
         {
           GroepNaam: groupTitle,
         }

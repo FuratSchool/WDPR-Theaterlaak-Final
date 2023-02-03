@@ -1,5 +1,9 @@
+import { API_BASE_URL } from '../../../../apiConfig';
+
+
+
 function Verwijderfunctie(id){
-    fetch('http://localhost:5044/api/Groep' + "/" + id, {
+    fetch(`${API_BASE_URL}/api/Groep/${id}`, {
       method: 'DELETE'
     }).then(() => {
        console.log('removed');

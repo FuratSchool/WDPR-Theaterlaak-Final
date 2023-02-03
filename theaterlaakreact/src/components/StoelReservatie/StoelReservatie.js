@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { StoelReservatieContext } from "../stoelReservatieContext";
 import { Button } from "reactstrap";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
-
+import { API_BASE_URL } from '../../apiConfig';
 const StoelReservatie = () => {
   const [stoelen, setStoelen] = useState([]);
   const [idStoelen, setIdStoelen] = useState([]);
@@ -28,7 +28,7 @@ const StoelReservatie = () => {
     const maakReserveringenAan = async () => {
       try {
         await axios.get(
-          "http://localhost:5044/maakReserveringBijVoorstelling/" +
+          `${API_BASE_URL}/maakReserveringBijVoorstelling/` +
             voorstellingId
         );
       } catch (err) {
@@ -43,7 +43,7 @@ const StoelReservatie = () => {
       //get alle stoelen
       try {
         const response = await axios.get(
-          "http://localhost:5044/beschikbarestoelen/" + voorstellingId
+          `${API_BASE_URL}/beschikbarestoelen/` + voorstellingId
         );
         var rangen = [];
         for (let i = 0; i < response.data.length; i++) {
@@ -71,7 +71,7 @@ const StoelReservatie = () => {
     const FetchVoorstellinginfo = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5044/voorstellinginfo/" + voorstellingId
+          `${API_BASE_URL}/voorstellinginfo/${voorstellingId}`
         );
         console.log(response.data);
         setVoorstellingTitel(String(response.data.map((item) => item.titel)));
@@ -84,7 +84,7 @@ const StoelReservatie = () => {
     const FetchLoggedUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5044/api/User/Account",
+          `${API_BASE_URL}/api/User/Account`,
           jwtAuthenticationHeader
         );
         console.log(response);
@@ -109,7 +109,7 @@ const StoelReservatie = () => {
     idStoelen.forEach((e) => {
       var req = axios
         .get(
-          "http://localhost:5044/toCart/" +
+          `${API_BASE_URL}/toCart/` +
             String(voorstellingId) +
             "/" +
             String(e) +
