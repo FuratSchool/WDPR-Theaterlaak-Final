@@ -16,6 +16,18 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
         base.OnModelCreating(builder);
         builder.Seed();
         builder.Entity<ArtiestGroep>().HasKey(a => new { a.UserId, a.GroepId });
+        builder.Entity<IdentityRole>(entity =>
+        {
+            entity.ToTable(name: "AspNetRoles");
+            entity.HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
+            entity.HasData(
+                new IdentityRole { Name = "Medewerker", NormalizedName = "Medewerker".ToUpper() }
+            );
+            entity.HasData(new IdentityRole { Name = "Klant", NormalizedName = "Klant".ToUpper() });
+            entity.HasData(
+                new IdentityRole { Name = "Donateur", NormalizedName = "Donateur".ToUpper() }
+            );
+        });
     }
 
     public DbSet<TheaterLaakAPi.Models.Voorstelling> Voorstelling { get; set; }

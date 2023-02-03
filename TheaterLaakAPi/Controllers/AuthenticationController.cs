@@ -48,6 +48,8 @@ namespace TheaterLaakAPi.Controllers
                     Achternaam = userRegister.Achternaam,
                 };
                 var result = await _userManager.CreateAsync(user, user.PasswordHash);
+                await _userManager.AddToRoleAsync(user, "Klant");
+
                 return result.Succeeded ? StatusCode(201) : new BadRequestObjectResult(result);
             }
             return BadRequest("Bad credentials");
