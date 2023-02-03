@@ -10,7 +10,7 @@ describe('GET api/Stoel/:id', () => {
 });
 
 
-describe('Vraag een rang die niet bestaat', () => {
+describe('Vraag een stoel die niet bestaat', () => {
   it.only('Geeft errorcode 404 terug', () => {
     const nepId = 67;
     cy.request({
