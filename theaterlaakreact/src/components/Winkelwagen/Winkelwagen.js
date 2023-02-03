@@ -1,4 +1,9 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useEffect,
+  useState,
+  useLayoutEffect,
+} from "react";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Reserveren } from "./Reserveren";
@@ -13,12 +18,12 @@ export const Winkelwagen = (args, { cart }) => {
   const [winkelwagen, setWinkelwagen] = useState([]);
   const [Totaalprijs, setTotaalprijs] = useState(0);
 
-
   const jwtAuthenticationHeader = {
     headers: {
       Authorization: authHeader(),
     },
-  };
+  }
+
 
   useEffect(() => {
     const FetchLoggedUser = async () => {
@@ -29,24 +34,27 @@ export const Winkelwagen = (args, { cart }) => {
         );
         console.log(response);
         setUser(response.data.id);
-        const fetchWinkelwagen = async () => {
-          try {
-            const response = await axios.get(
-              "http://localhost:5044/getReservering/" + user
-            );
-            console.log(response);
-            setWinkelwagen(response.data);
-          } catch (err) {
-            console.error(err);
-          }
-        };
-        fetchWinkelwagen();
       } catch (err) {
         console.error(err);
-      }
-    };
-    FetchLoggedUser();
+      }}
+
+      const fetchWinkelwagen = async () => {
+        try {
+          const response = await axios.get(
+            "http://localhost:5044/getReservering/" + user
+          );
+          console.log(response);
+          setWinkelwagen(response.data);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      FetchLoggedUser();
+      fetchWinkelwagen();
+
+;
   }, [user]);
+
   useEffect(() => {
     setTotaalprijs(winkelwagen.reduce((acc, item) => acc + item.prijs, 0));
   }, [winkelwagen]);
@@ -75,6 +83,7 @@ export const Winkelwagen = (args, { cart }) => {
       <Afrekenen propPrijs={Totaalprijs} />
     </>
   );
-};
+}
+
 
 export default Winkelwagen;
