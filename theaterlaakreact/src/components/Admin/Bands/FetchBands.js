@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Dropdown } from "bootstrap";
 import { DropdownItem } from "reactstrap";
+import { API_BASE_URL } from './apiConfig';
+
 function FetchBands() {
   const [succesdata, setsuccesdata] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5044/api/Groep")
+      .get(`${API_BASE_URL}/api/Groep`)
       .then((response) => {
         console.log(response);
         setsuccesdata(response.data);

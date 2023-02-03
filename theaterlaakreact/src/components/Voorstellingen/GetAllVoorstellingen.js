@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PaginationComponent from "../Pagination";
+import { API_BASE_URL } from './apiConfig';
 
 export function GetAllVoorstellingen() {
   const [voorstellingen, setVoorstellingen] = useState([]);
@@ -11,7 +12,7 @@ export function GetAllVoorstellingen() {
   const currentVoorstellingen = voorstellingen.slice(startIndex, endIndex);
 
   const fetchData = () => {
-    fetch("http://localhost:5044/api/voorstelling")
+    fetch(`${API_BASE_URL}/api/voorstelling`)
       .then((response) => {
         return response.json();
       })

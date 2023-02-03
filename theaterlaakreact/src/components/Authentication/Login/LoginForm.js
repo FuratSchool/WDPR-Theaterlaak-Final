@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
 import axios from "axios";
 import Alert from "react-bootstrap/Alert";
+import { API_BASE_URL } from './apiConfig';
 
 export function LoginForm() {
   const [Email, setEmail] = useState("");
@@ -16,7 +17,7 @@ export function LoginForm() {
     e.preventDefault();
 
     await axios
-      .post("http://localhost:5044/api/Authentication/Login/", {
+      .post(`${API_BASE_URL}/api/Authentication/Login/`, {
         Email: Email,
         PassWord: PassWord,
       })

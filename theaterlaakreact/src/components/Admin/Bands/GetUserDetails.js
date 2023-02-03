@@ -1,6 +1,7 @@
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { API_BASE_URL } from './apiConfig';
 
 function GetUserDetails() {
   const [UID, setUID] = useState();
@@ -14,7 +15,7 @@ function GetUserDetails() {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:5044/api/User/Account", jwtAuthenticationHeader)
+      .get(`${API_BASE_URL}/api/User/Account`, jwtAuthenticationHeader)
       .catch((err) => {
         console.log(err);
       })

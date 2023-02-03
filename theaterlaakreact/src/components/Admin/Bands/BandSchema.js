@@ -4,6 +4,7 @@ import Table from "react-bootstrap/esm/Table";
 import { Button } from "reactstrap";
 import PaginationComponent from "../../Pagination";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from './apiConfig';
 
 function BandSchema() {
   const [succesdata, setsuccesdata] = useState([]);
@@ -17,7 +18,8 @@ function BandSchema() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5044/api/Groep")
+      .get(`${API_BASE_URL}/api/Groep`)
+
       .then((response) => {
         console.log(response);
         setsuccesdata(response.data);

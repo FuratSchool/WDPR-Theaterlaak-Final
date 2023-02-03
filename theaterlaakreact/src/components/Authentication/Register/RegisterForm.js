@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from './apiConfig';
 
 export function RegisterForm() {
   const [Email, setEmail] = useState("");
@@ -26,7 +27,7 @@ export function RegisterForm() {
   const navigate = useNavigate();
 
   function Register(e) {
-    fetch("http://localhost:5044/api/Authentication/Register", {
+    fetch(`${API_BASE_URL}/api/Authentication/Register`, {
       method: "POST",
       headers: {
         Accept: "application/json",

@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 import { SideNav } from "../../SideNav/SideNav";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
+import { API_BASE_URL } from './apiConfig';
 
 export function UserHome() {
   const [user, setUser] = useState({});
@@ -20,7 +21,7 @@ export function UserHome() {
   useEffect(() => {
     console.log(Email);
     axios
-      .get("http://localhost:5044/api/User/Account", jwtAuthenticationHeader)
+      .get(`${API_BASE_URL}/api/User/Account`, jwtAuthenticationHeader)
       .catch((err) => {
         console.log(err);
       })

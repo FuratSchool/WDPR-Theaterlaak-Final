@@ -11,6 +11,7 @@ import Ww from "./ww";
 import axios from "axios";
 import { useAuthHeader } from "react-auth-kit";
 import Afrekenen from "../Afrekenen";
+import { API_BASE_URL } from './apiConfig';
 
 export const Winkelwagen = (args, { cart }) => {
   const [user, setUser] = useState([]);
@@ -29,7 +30,7 @@ export const Winkelwagen = (args, { cart }) => {
     const FetchLoggedUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5044/api/User/Account",
+          `${API_BASE_URL}/api/User/Account`,
           jwtAuthenticationHeader
         );
         console.log(response);
@@ -41,7 +42,7 @@ export const Winkelwagen = (args, { cart }) => {
       const fetchWinkelwagen = async () => {
         try {
           const response = await axios.get(
-            "http://localhost:5044/getReservering/" + user
+            `${API_BASE_URL}/getReservering/` + user
           );
           console.log(response);
           setWinkelwagen(response.data);

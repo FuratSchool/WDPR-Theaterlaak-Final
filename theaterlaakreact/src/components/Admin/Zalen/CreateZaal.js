@@ -1,6 +1,7 @@
 ﻿import React, { Component } from "react";
 import { SideNav } from "../../SideNav/SideNav";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from './apiConfig';
 
 export class CreateZaal extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ export class CreateZaal extends Component {
     // add entity - POST
     e.preventDefault();
     // creates entity
-    fetch("http://localhost:5044/api/Zaal/CreateZaal", {
+    fetch(`${API_BASE_URL}/api/Zaal/CreateZaal`, {
       method: "POST",
       headers: {
         Accept: "application/json",
