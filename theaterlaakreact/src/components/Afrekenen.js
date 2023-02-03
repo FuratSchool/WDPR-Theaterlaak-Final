@@ -4,7 +4,7 @@ import { Button, FormGroup, Modal } from "reactstrap";
 import { v4 as uuid } from "uuid";
 import Voorstelling, { MyReservering } from "./Voorstelling";
 import AfrekenenModal from "./AfrekenenModal";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../apiConfig';
 
 export function Afrekenen(props) {
   const referenceGenerated = uuid();

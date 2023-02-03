@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Dropdown } from "bootstrap";
 import { DropdownItem } from "reactstrap";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../apiConfig';
+
 
 function FetchBands() {
   const [succesdata, setsuccesdata] = useState([]);

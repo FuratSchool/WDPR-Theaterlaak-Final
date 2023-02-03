@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Form, Input, FormGroup, Label, ButtonDropdown } from "reactstrap";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../../apiConfig';
 
 export function CreateVoorstellingForm() {
   const [Title, setTitle] = useState("");

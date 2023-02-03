@@ -1,7 +1,8 @@
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../apiConfig';
+
 
 function GetUserDetails() {
   const [UID, setUID] = useState();

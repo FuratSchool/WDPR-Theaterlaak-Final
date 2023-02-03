@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PaginationComponent from "../Pagination";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../apiConfig';
 
 export function GetAllVoorstellingen() {
   const [voorstellingen, setVoorstellingen] = useState([]);

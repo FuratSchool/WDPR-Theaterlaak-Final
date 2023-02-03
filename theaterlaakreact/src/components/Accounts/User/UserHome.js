@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 import { SideNav } from "../../SideNav/SideNav";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../apiConfig';
 
 export function UserHome() {
   const [user, setUser] = useState({});

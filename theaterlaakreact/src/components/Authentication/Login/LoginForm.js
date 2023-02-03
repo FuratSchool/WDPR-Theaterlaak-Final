@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
 import axios from "axios";
 import Alert from "react-bootstrap/Alert";
-import { API_BASE_URL } from './apiConfig';
+import { API_BASE_URL } from '../../../apiConfig';
 
 export function LoginForm() {
   const [Email, setEmail] = useState("");
