@@ -52,6 +52,7 @@ export function LoginForm() {
           className="form-control"
           autoComplete="username"
           aria-required="true"
+          data-cy= "LoginEmail"
           placeholder="name@example.com"
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -66,6 +67,7 @@ export function LoginForm() {
           className="form-control"
           autoComplete="current-password"
           aria-required="true"
+          data-cy= "LoginWW"
           placeholder="password"
           onChange={(e) => setPassWord(e.target.value)}
         />
@@ -82,6 +84,7 @@ export function LoginForm() {
           id="submit"
           type="submit"
           className="w-100 btn btn-lg btn btn-info btn-purple text-white"
+          data-cy="cySubmitForm"
         >
           Log in
         </button>
