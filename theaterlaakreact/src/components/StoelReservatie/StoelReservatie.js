@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { StoelReservatieContext } from "../stoelReservatieContext";
 import { Button } from "reactstrap";
 import { useAuthHeader, useAuthUser } from "react-auth-kit";
-import { API_BASE_URL } from '../../../apiConfig';
+import { API_BASE_URL } from '../../apiConfig';
 const StoelReservatie = () => {
   const [stoelen, setStoelen] = useState([]);
   const [idStoelen, setIdStoelen] = useState([]);

@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.95c622ac.css",
+    "main.js": "/static/js/main.71bdbb3e.js",
+    "static/media/donatebanner_01.png": "/static/media/donatebanner_01.d4a9b3177bc217304870.png",
+    "static/media/theaterside_01.png": "/static/media/theaterside_01.aebcb2c59018ab27563b.png",
+    "service-worker.js": "/service-worker.js",
+    "index.html": "/index.html",
+    "main.95c622ac.css.map": "/static/css/main.95c622ac.css.map",
+    "main.71bdbb3e.js.map": "/static/js/main.71bdbb3e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.95c622ac.css",
+    "static/js/main.71bdbb3e.js"
+  ]
+}

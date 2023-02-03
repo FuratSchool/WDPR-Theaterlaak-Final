@@ -11,7 +11,7 @@ import Ww from "./ww";
 import axios from "axios";
 import { useAuthHeader } from "react-auth-kit";
 import Afrekenen from "../Afrekenen";
-import { API_BASE_URL } from '../../../apiConfig';
+import { API_BASE_URL } from '../../apiConfig';
 
 export const Winkelwagen = (args, { cart }) => {
   const [user, setUser] = useState([]);
