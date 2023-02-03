@@ -34,6 +34,7 @@ import { RequireAuth } from "react-auth-kit";
 //UserHomes
 import { UserHome } from "./components/Accounts/User/UserHome";
 import { Navigate } from "react-router-dom";
+import { BandDetails } from "./components/Admin/Bands/Details/BandDetails";
 
 const AppRoutes = [
   {
@@ -158,6 +159,10 @@ const AppRoutes = [
         <CreateBand />
       </RequireAuth>
     ),
+  },
+  {
+    path: "/band/details/:id",
+    element: <BandDetails />,
   },
   {
     path: "/admin/band/update/:id",
