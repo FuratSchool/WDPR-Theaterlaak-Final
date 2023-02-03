@@ -24,20 +24,19 @@ const StoelReservatie = () => {
     },
   };
 
-  useLayoutEffect(()=>{
-
+  useLayoutEffect(() => {
     const maakReserveringenAan = async () => {
       try {
-        await axios.get("http://localhost:5044/maakReserveringBijVoorstelling/" + voorstellingId
+        await axios.get(
+          "http://localhost:5044/maakReserveringBijVoorstelling/" +
+            voorstellingId
         );
       } catch (err) {
-        
         console.error("reserveringen zijn al gemaakt");
-      } 
-  }
-  maakReserveringenAan();
-
-  },[])
+      }
+    };
+    maakReserveringenAan();
+  }, []);
 
   useEffect(() => {
     const FetchBeschikbareStoelen = async () => {
@@ -101,7 +100,7 @@ const StoelReservatie = () => {
 
     setInterval(() => {
       FetchBeschikbareStoelen();
-    }, 500);
+    }, 1500);
   }, []);
 
   const putUserInReservering = async () => {
@@ -125,12 +124,8 @@ const StoelReservatie = () => {
           console.log(error);
         });
     });
-    await Promise.all(ps).then(console.log(ps));
-
-    const naarWW = () => {
-      navigate("/Winkelwagen");
-    }
-    setTimeout(naarWW,250)
+    Promise.all(ps).then(console.log(ps));
+    navigate("/Winkelwagen");
   };
 
   const stoelenLijst = stoelen.map((item, index) => (
